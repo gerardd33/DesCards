@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+  server:
+    build: ./
+    volumes:
+      - ./:/usr/src/app
+    networks:
+      - front_net
+    stop_signal: SIGINT
+    command: "python /usr/src/app/main.py"
+
+networks:
+  front_net:
+    external: true
