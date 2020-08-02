@@ -3,9 +3,9 @@ version: "3"
 services:
 
   server:
-    build: ./
+    build: ./users_server
     volumes:
-      - ./:/usr/src/app
+      - ./users_server:/usr/src/app
 #    networks:
 #      - front_net
     stop_signal: SIGINT
@@ -14,9 +14,20 @@ services:
   database:
     build: ./database/
     restart: always # ???
-    environment: 
-      POSTGRES_PASSWORD: example
+    environment: [POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_DB]
 
-        # networks:
-        #   front_net:
-        #     external: true
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  tests:
+    build: ./tests
+    volumes:
+      - ./tests:/tests
+    environment: [POSTGRES_DB]
+
+# networks:
+#   front_net:
+#     external: true
