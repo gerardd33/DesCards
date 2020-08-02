@@ -4,3 +4,4 @@ RUN pip install flask
 RUN pip install pyjwt
 RUN pip install psycopg2-binary
 
+# TODO copy code instead of using volume
