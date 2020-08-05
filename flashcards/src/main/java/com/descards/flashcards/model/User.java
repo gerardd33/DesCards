@@ -10,18 +10,14 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-public class Deck {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String name;
+	String name;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
-
-	@OneToMany(mappedBy = "deck")
-	private Set<Flashcard> cards = new HashSet<>();
+	@OneToMany(mappedBy = "user")
+	Set<Deck> decks = new HashSet<>();
 }
