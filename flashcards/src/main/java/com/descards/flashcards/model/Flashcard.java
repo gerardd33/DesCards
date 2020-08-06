@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.Duration;
 
 @Entity
 @Data
@@ -21,13 +22,13 @@ public class Flashcard {
 	private String front;
 
 	private String back;
-//
-//	private Period interval;
 
-	public Flashcard(Deck deck, String front, String back) {
+	private Duration repetitionInterval;
+
+	public Flashcard(Deck deck, String front, String back, Duration repetitionInterval) {
 		this.deck = deck;
 		this.front = front;
 		this.back = back;
-//		this.interval = interval;
+		this.repetitionInterval = repetitionInterval;
 	}
 }

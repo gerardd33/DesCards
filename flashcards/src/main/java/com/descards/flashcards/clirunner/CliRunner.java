@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,10 +34,10 @@ public class CliRunner implements CommandLineRunner {
 		User gerard = new User("Gerard");
 		Deck historyDeck = new Deck("History", gerard);
 
-		Flashcard fact1 = new Flashcard(historyDeck, "battle of waterloo", "1815");
-		Flashcard fact2 = new Flashcard(historyDeck, "xx", "2");
-		Flashcard fact3 = new Flashcard(historyDeck, "yy", "3");
-		Flashcard fact4 = new Flashcard(historyDeck, "zz", "4");
+		Flashcard fact1 = new Flashcard(historyDeck, "battle of waterloo", "1815", Duration.ofDays(2));
+		Flashcard fact2 = new Flashcard(historyDeck, "xx", "2", Duration.ofDays(3));
+		Flashcard fact3 = new Flashcard(historyDeck, "yy", "3", Duration.ofDays(4));
+		Flashcard fact4 = new Flashcard(historyDeck, "zz", "4", Duration.ofDays(5));
 
 		Set<Flashcard> facts = new HashSet<>();
 		facts.add(fact1);
