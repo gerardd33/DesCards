@@ -4,4 +4,10 @@ CREATE TABLE users (
     password VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE session (
+    id INTEGER PRIMARY KEY,
+    login VARCHAR(50) UNIQUE,
+    expires TIMESTAMP NOT NULL
+);
+
 INSERT INTO users (username, password) VALUES ('admin', 'admin');
