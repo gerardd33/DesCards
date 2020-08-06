@@ -5,11 +5,13 @@ services:
   server:
     build: ./users_server
     volumes:
-      - ./users_server:/usr/src/app
+      - ./users_server:/usr/src/app/users_server
+    ports:
+      - 5000:5000
 #    networks:
 #      - front_net
+    environment: [FLASK_APP]
     stop_signal: SIGINT
-    command: "python /usr/src/app/main.py"
 
   database:
     build: ./database/
@@ -20,13 +22,13 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 10000:8080
 
-  tests:
-    build: ./tests
-    volumes:
-      - ./tests:/tests
-    environment: [POSTGRES_DB]
+# tests:
+#   build: ./tests
+#   volumes:
+#     - ./tests:/tests
+#   environment: [POSTGRES_DB]
 
 # networks:
 #   front_net:
