@@ -1,5 +1,4 @@
-from flask import Flask, jsonify
-import jwt
+from flask import Flask
 
 
 def create_app():
@@ -8,12 +7,11 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.bp)
 
-    return app
+    # register close db
+    from . import db
+    app.teardown_appcontext(db.close_db)
 
-# Authentciate user. returns access token
-# @app.route('/auth')
-# def hello_world():
-#     return "{'access':'ok'}"  # TODO Export algorithm to config
+    return app
 
 
 if __name__ == '__main__':
