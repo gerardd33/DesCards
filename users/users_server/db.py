@@ -25,26 +25,31 @@ class Database():
         cur = self.conn.cursor()
         password = password.encode('utf-8')
         password = bcrypt.hashpw(password, bcrypt.gensalt())
-        cur.execute("INSERT INTO user (username, password) VALUES (%s, %s)",
+        cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)",
                     (username, password))
         self.conn.commit()
 
     def delete_user(self, username):
         cur = self.conn.cursor()
-        cur.execute("DELETE FROM user WHERE username = %s", (username,))
+        cur.execute("DELETE FROM users WHERE username = %s", (username,))
         self.conn.commit()
 
     def validate_user(self, username, password):
         cur = self.conn.cursor()
-        cur.execute("SELECT * FROM user WHERE username = %s", (username,))
+        cur.execute("SELECT username, password FROM users WHERE username = %s",
+                    (username,))
+
         user = cur.fetchone()
-        print(user)
-        pass
+        # if not PyMemoryView_Check(hashed_passwd):
+        #    return None
+#        hashed_passwd = PyMemoryView_GET_BUFFER(hashed_passwd)
+
+        return bcrypt.checkpw(password.encode('utf-8'), user[1].tobytes())
 
     def create_session(self, username):
         cur = self.conn.cursor()
-        cur.execute("INSERT INTO session (username, expires)",
-                    (username, datetime.now() + SESSION_VALID_TIME))
+        cur.execute("INSERT INTO sessions (username, expires) VALUES (%s, %s)",
+                    (username, datetime.datetime.now() + SESSION_VALID_TIME))
         self.conn.commit()
 
     def validate_session(self, username):

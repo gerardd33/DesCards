@@ -1,7 +1,7 @@
 
 CREATE TABLE users (
     username VARCHAR(50) PRIMARY KEY,
-    password VARCHAR(50) NOT NULL
+    password BYTEA NOT NULL
 );
 
 CREATE TABLE sessions (
