@@ -40,9 +40,6 @@ class Database():
                     (username,))
 
         user = cur.fetchone()
-        # if not PyMemoryView_Check(hashed_passwd):
-        #    return None
-#        hashed_passwd = PyMemoryView_GET_BUFFER(hashed_passwd)
 
         return bcrypt.checkpw(password.encode('utf-8'), user[1].tobytes())
 
@@ -58,12 +55,8 @@ class Database():
                     (username,))
         session = cur.fetchone()
 
-#        print("before None")
-
         if session is None:
             return False
-
-#        print(session[1], datetime.datetime.now(), session[1] < datetime.datetime.now())
 
         if session[1] < datetime.datetime.now():
             return False
@@ -80,7 +73,7 @@ class Database():
             self.conn.close()
 
 
-def get_db(db_name="db"):
+def get_db(db_name=DATABASE_NAME):
     if 'db' not in g:
         g.db = Database(db_name)
 

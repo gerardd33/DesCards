@@ -3,16 +3,23 @@ from .. import db
 import psycopg2
 
 
+def wait_for_db():
+    database = None
+    while True:
+        try:
+            database = db.Database("develop")
+            break
+        except psycopg2.OperationalError:
+            pass
+
+    return database
+
+
 class TestDatabase(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        while True:
-            try:
-                self.database = db.Database("develop")
-                break
-            except psycopg2.OperationalError:
-                pass
+        self.database = wait_for_db()
 
     def test_create_delete_user(self):
         self.database.create_user("test", "test")
