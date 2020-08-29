@@ -53,10 +53,27 @@ class Database():
         self.conn.commit()
 
     def validate_session(self, username):
-        pass
+        cur = self.conn.cursor()
+        cur.execute("SELECT * FROM sessions WHERE username = %s",
+                    (username,))
+        session = cur.fetchone()
+
+#        print("before None")
+
+        if session is None:
+            return False
+
+#        print(session[1], datetime.datetime.now(), session[1] < datetime.datetime.now())
+
+        if session[1] < datetime.datetime.now():
+            return False
+
+        return True
 
     def delete_session(self, username):
-        pass
+        cur = self.conn.cursor()
+        cur.execute("DELETE FROM sessions WHERE username = %s", (username,))
+        self.conn.commit()
 
     def __del__(self):
         if hasattr(self, 'conn'):

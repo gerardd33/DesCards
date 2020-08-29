@@ -47,9 +47,9 @@ class TestDatabase(unittest.TestCase):
         self.database.create_session("test")
 
         result = self.database.validate_session("test")
-        self.assertTrue("test")
+        self.assertTrue(result)
 
         self.database.delete_session("test")
 
         result = self.database.validate_session("test")
-        self.assertFalse("test")
+        self.assertFalse(result)
