@@ -1,16 +1,18 @@
-version: "3"
+version: "3.4"
 
 services:
 
   server:
-    build: ./users_server
+    build:
+      context: ./users_server
+      target: test
     volumes:
       - ./users_server:/usr/src/app/users_server
     ports:
       - 5000:5000
 #    networks:
 #      - front_net
-    environment: [FLASK_APP]
+    environment: [FLASK_APP, POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_DB]
     stop_signal: SIGINT
 
   database:
