@@ -4,9 +4,8 @@ CREATE TABLE users (
     password VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE session (
-    id INTEGER PRIMARY KEY,
-    login VARCHAR(50) UNIQUE,
+CREATE TABLE sessions (
+    username VARCHAR(50) PRIMARY KEY,
     expires TIMESTAMP NOT NULL
 );
 
