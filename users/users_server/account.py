@@ -1,7 +1,7 @@
 # import functools
-from flask import Blueprint, request
+from flask import Blueprint, request, current_app
 from . import db
-from cerberus import Validator
+from . import verify
 
 
 bp = Blueprint('account', __name__, url_prefix='/account')
@@ -11,13 +11,13 @@ bp = Blueprint('account', __name__, url_prefix='/account')
 def register():
     schema = {'username': {'type': 'string'},
               'password': {'type': 'string'}}
-    val = Validator(schema)
+    data = verify.validate(request.json, schema)
 
-    if request.json is None or not val.validate(request.json):
+    if data is None:
         return 'Incorrect data', 400
 
-    username = request.json['username']
-    password = request.json['password']
+    username = data['username']
+    password = data['password']
 
     database = db.get_db()
 
@@ -31,13 +31,19 @@ def register():
 
 @bp.route('/delete', methods=['POST'])
 def delete():
-    schema = {'username': {'type': 'string'}}
-    val = Validator(schema)
+    schema = {'token': {'type': 'string'}}
+    data = verify.validate(request.json, schema)
 
-    if request.json is None or not val.validate(request.json):
+    if data is None:
         return 'Incorrect data', 400
 
-    username = request.json['username']
+    # validate token
+    token = data['token']
+    json = verify.jwt_decode(token,
+                             current_app.config['JWT_SECRET'],
+                             current_app.config['JWT_ALGORITHM'])
+
+    username = json['username']
 
     database = db.get_db()
 

@@ -4,6 +4,11 @@ from flask import Flask
 def create_app():
     app = Flask(__name__)
 
+    app.config.from_mapping(
+        JWT_SECRET='secret',  # TODO make it better
+        JWT_ALGORITHM='HS256',
+    )
+
     from . import auth
     app.register_blueprint(auth.bp)
 

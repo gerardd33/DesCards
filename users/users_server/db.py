@@ -41,6 +41,9 @@ class Database():
 
         user = cur.fetchone()
 
+        if user is None:
+            return False
+
         return bcrypt.checkpw(password.encode('utf-8'), user[1].tobytes())
 
     def create_session(self, username):
