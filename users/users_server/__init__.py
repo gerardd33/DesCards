@@ -7,6 +7,9 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.bp)
 
+    from . import account
+    app.register_blueprint(account.bp)
+
     # register close db
     from . import db
     app.teardown_appcontext(db.close_db)
