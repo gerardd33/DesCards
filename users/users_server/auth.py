@@ -6,8 +6,6 @@ from . import verify
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-# TODO test falied database queries
-
 
 @bp.route('/login', methods=['POST'])
 def login():

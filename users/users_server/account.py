@@ -47,7 +47,9 @@ def delete():
 
     database = db.get_db()
 
+    # Do logout here
     try:
+        database.delete_session(username)
         database.delete_user(username)
     except Exception:  # TODO use correct type of exception
         return 'Failed to delete an account', 409
