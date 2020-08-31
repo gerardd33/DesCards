@@ -57,5 +57,19 @@ class TestAuth(unittest.TestCase):
 
             self.assertEqual(r.status_code, 403)
 
+    def test_double_logout(self):
+        with self.app.test_client() as client:
+            creds = {'username': 'admin',
+                     'password': 'admin'}
+            r = client.post('/auth/login', json=creds)
+            self.assertEqual(r.status_code, 200)
+            token = r.json['token']
+
+            r = client.post('/auth/logout', json={'token': token})
+            self.assertEqual(r.status_code, 200)
+
+            r = client.post('/auth/logout', json={'token': token})
+            self.assertEqual(r.status_code, 200)
+
     def tearDown(self):
         pass
