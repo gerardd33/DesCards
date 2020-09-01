@@ -3,15 +3,15 @@ version: "3"
 services:
 
   server:
-    build: ./
+    build: ./front_server/
     volumes:
-      - ./:/usr/src/app
+      - ./:/usr/src/app/
     ports:
       - 5000:5000
     networks:
       - net
     stop_signal: SIGINT
-    command: "python /usr/src/app/main.py"
+    environment: [FLASK_APP]
 
 networks:
   net:
