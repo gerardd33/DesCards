@@ -1,0 +1,37 @@
+version: "3.4"
+
+services:
+
+  server:
+    build:
+      context: ./users_server
+      target: test
+    volumes:
+      - ./users_server:/usr/src/app/users_server
+    ports:
+      - 5000:5000
+#    networks:
+#      - front_net
+    environment: [FLASK_APP, POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_DB]
+    stop_signal: SIGINT
+
+  database:
+    build: ./database/
+    restart: always # ???
+    environment: [POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_DB]
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10000:8080
+
+# tests:
+#   build: ./tests
+#   volumes:
+#     - ./tests:/tests
+#   environment: [POSTGRES_DB]
+
+# networks:
+#   front_net:
+#     external: true
