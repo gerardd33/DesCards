@@ -1,14 +1,14 @@
-from flask import Flask, render_template
-import requests
+from flask import Flask
 
 
 def create_app():
     app = Flask(__name__)
 
-    @app.route('/')
-    def hello_world():
-        token = requests.get('http://users_server_1:5000/auth').text
-        return render_template('index.html', token=token)
+    from . import index
+    app.register_blueprint(index.bp)
+
+    from . import api
+    app.register_blueprint(api.bp)
 
     return app
 
