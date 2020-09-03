@@ -1,3 +1,3 @@
 # DesCards
 
-The project vision is available in DesCards.pptx.
+The project vision is available in DesCards.pdf.
