@@ -6,5 +6,5 @@ import java.util.Set;
 
 public interface DeckFacade {
 
-	Set<Flashcard> getFlashcardPortion(long deckId);
+	Set<Flashcard> getCardPortion(long deckId);
 }

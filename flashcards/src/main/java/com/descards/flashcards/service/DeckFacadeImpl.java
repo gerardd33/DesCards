@@ -17,7 +17,7 @@ public class DeckFacadeImpl implements DeckFacade {
 	Deck dummyDeck;
 
 	@Override
-	public Set<Flashcard> getFlashcardPortion(long deckId) {
+	public Set<Flashcard> getCardPortion(long deckId) {
 //		System.out.println(dummyDeck.getCards());
 //		return new HashSet<>();
 		return dummyDeck.getCards();
