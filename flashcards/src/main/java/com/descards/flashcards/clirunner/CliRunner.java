@@ -53,5 +53,6 @@ public class CliRunner implements CommandLineRunner {
 		flashcardRepository.saveAll(facts);
 
 		System.out.println("Number of flashcards: " + flashcardRepository.count());
+		System.out.println(historyDeck.getId());
 	}
 }

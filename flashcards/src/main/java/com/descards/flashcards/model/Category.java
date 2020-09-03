@@ -3,11 +3,9 @@ package com.descards.flashcards.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,5 +18,10 @@ public class Category {
 
 	private String name;
 
-	private List<String> specialFields;
+	@ElementCollection
+	private Set<String> specialFields = new HashSet<>();
+
+	public Category(String name) {
+		this.name = name;
+	}
 }
