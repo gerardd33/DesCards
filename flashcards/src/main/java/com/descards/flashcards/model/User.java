@@ -1,8 +1,10 @@
 package com.descards.flashcards.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -20,6 +22,8 @@ public class User {
 	String name;
 
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	Set<Deck> decks = new HashSet<>();
 

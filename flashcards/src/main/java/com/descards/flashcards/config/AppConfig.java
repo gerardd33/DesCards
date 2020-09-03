@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,19 +27,22 @@ public class AppConfig {
 	}
 
 	@Bean
-	public Collection<Flashcard> dummyFlashcardCollection() {
+	public Set<Flashcard> dummyFlashcardCollection() {
 		return Stream.of(
 			new Flashcard(null, "Battle of Waterloo", "1815", Duration.ofDays(6)),
-			new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
-			new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
-			new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
-			new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10)),
-			new Flashcard(null, "Octavian became emperor (named Augustus by the Senate)", "27 BC", Duration.ofDays(15))
+			//new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
+			//new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
+			//new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
+			//new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10)),
+			new Flashcard(null, "Octavian became emperor, named Augustus by the Senate", "27 BC", Duration.ofDays(15))
 		).collect(Collectors.toSet());
 	}
 
 	@Bean
-	public Deck dummyDeck(User user, Collection<Flashcard> flashcardCollection) {
+	public Deck dummyDeck() {
+		User user = dummyUser();
+		Set<Flashcard> flashcardCollection = dummyFlashcardCollection();
+
 		Deck dummyDeck = new Deck("History deck", user);
 		flashcardCollection.forEach(card -> card.setDeck(dummyDeck));
 		dummyDeck.getCards().addAll(flashcardCollection);
@@ -55,7 +58,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	public DeckFacade deckFacade(Deck deck) {
-		return new DeckFacadeImpl(deck);
+	public DeckFacade deckFacade() {
+		return new DeckFacadeImpl(dummyDeck());
 	}
 }
