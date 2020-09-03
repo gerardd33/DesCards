@@ -4,8 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,7 +19,7 @@ public class Category {
 	private String name;
 
 	@ElementCollection
-	private Set<String> specialFields = new HashSet<>();
+	private List<String> specialFields = new ArrayList<>();
 
 	public Category(String name) {
 		this.name = name;
