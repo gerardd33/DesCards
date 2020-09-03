@@ -25,7 +25,7 @@ public class UserDecksController {
 		return ResponseEntity.ok().build();
 	}
 
-	@PostMapping("/{userId}/remove-deck/{deckId}")
+	@PostMapping("/{userId}/remove-deck/{deckIdToRemove}")
 	ResponseEntity<?> removeDeck(@PathVariable long userId, @PathVariable long deckIdToRemove) {
 		return ResponseEntity.ok().build();
 	}

@@ -29,12 +29,10 @@ public class AppConfig {
 	@Bean
 	public Set<Flashcard> dummyFlashcardCollection() {
 		return Stream.of(
-			new Flashcard(null, "Battle of Waterloo", "1815", Duration.ofDays(6)),
-			//new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
-			//new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
-			//new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
-			//new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10)),
-			new Flashcard(null, "Octavian became emperor, named Augustus by the Senate", "27 BC", Duration.ofDays(15))
+			new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
+			new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
+			new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
+			new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10))
 		).collect(Collectors.toSet());
 	}
 

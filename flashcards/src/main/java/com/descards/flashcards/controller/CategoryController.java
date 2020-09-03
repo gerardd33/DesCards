@@ -20,7 +20,7 @@ public class CategoryController {
 		return categoryFacade.getAllCategories();
 	}
 
-	@GetMapping("/category/{category_id}")
+	@GetMapping("/category/{categoryId}")
 	List<String> getSpecialFields(@PathVariable long categoryId) {
 		return categoryFacade.getSpecialFields(categoryId);
 	}

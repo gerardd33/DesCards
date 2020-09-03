@@ -25,8 +25,8 @@ public class DeckController {
 		return ResponseEntity.ok().build();
 	}
 
-	@PostMapping("/{deckId}/remove-card/{cardId}")
-	ResponseEntity<?> removeCard(@PathVariable long deckId, @PathVariable long cardIdToRemove) {
+	@PostMapping("/{deckId}/remove-card/{cardIdToRemove}")
+	ResponseEntity<?> removeCard(@PathVariable long deckId, @PathVariable() long cardIdToRemove) {
 		return ResponseEntity.ok().build();
 	}
 
