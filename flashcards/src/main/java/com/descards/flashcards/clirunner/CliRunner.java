@@ -8,13 +8,12 @@ import com.descards.flashcards.repository.FlashcardRepository;
 import com.descards.flashcards.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
-@Component
+//@Component
 @AllArgsConstructor
 public class CliRunner implements CommandLineRunner {
 
@@ -34,10 +33,10 @@ public class CliRunner implements CommandLineRunner {
 		User gerard = new User("Gerard");
 		Deck historyDeck = new Deck("History", gerard);
 
-		Flashcard fact1 = new Flashcard(historyDeck, "battle of waterloo", "1815", Duration.ofDays(2));
-		Flashcard fact2 = new Flashcard(historyDeck, "xx", "2", Duration.ofDays(3));
-		Flashcard fact3 = new Flashcard(historyDeck, "yy", "3", Duration.ofDays(4));
-		Flashcard fact4 = new Flashcard(historyDeck, "zz", "4", Duration.ofDays(5));
+		Flashcard fact1 = new Flashcard(null, "Battle of Waterloo", "1815", Duration.ofDays(6));
+		Flashcard fact2 = new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8));
+		Flashcard fact3 = new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2));
+		Flashcard fact4 = new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3));
 
 		Set<Flashcard> facts = new HashSet<>();
 		facts.add(fact1);

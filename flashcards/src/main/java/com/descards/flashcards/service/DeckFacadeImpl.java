@@ -1,8 +1,8 @@
 package com.descards.flashcards.service;
 
 import com.descards.flashcards.facade.DeckFacade;
+import com.descards.flashcards.model.Deck;
 import com.descards.flashcards.model.Flashcard;
-import com.descards.flashcards.repository.DeckRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class DeckFacadeImpl implements DeckFacade {
 
-	DeckRepository deckRepository;
+	Deck dummyDeck;
 
 	@Override
 	public Set<Flashcard> getFlashcardPortion(long deckId) {
