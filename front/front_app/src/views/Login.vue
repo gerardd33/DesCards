@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <login-form v-on:login="login()" v-bind:message="message"/>
+    <login-form v-on:login="login" v-bind:message="message"/>
   </div>
 </template>
 
@@ -21,21 +21,29 @@ export default {
     'login-form': LoginForm
   },
   methods: {
-    login: function() {
+    login: function(username, password) {
       var vm = this
       // get access token from server
       axios.post('/api/login', 
-                {username: 'admin',
-                 password: 'admin'})
+                {username,
+                 password})
       .then(function (response) {
-        if (response.status === 200) {
-          // redirect to main page
-        } else {
-          vm.message = 'Niepoprawny login lub hasło'
-        }
+          if (response.status === 200) {
+            vm.$router.push('/decks')
+          } else {
+            vm.message = 'Logowanie nie powiodło się'
+          }
       })
       .catch(function (error){
-        console.log(error)
+        if (error.response) {
+          if (error.response.status === 403) {
+            vm.message = 'Niepoprawny login lub hasło'
+          } else {
+            vm.message = 'Logowanie nie powiodło się'
+          }
+        } else {
+          vm.message = 'Logowanie nie powiodło się'
+        }
       })
     }
   }
