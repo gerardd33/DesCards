@@ -1,12 +1,15 @@
 <template>
   <div class="login-container">
-    <login-form v-on:login="login" v-bind:message="message"/>
+    <login-form v-on:login="login"
+      v-bind:message="message"
+      v-bind:title="title"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/LoginForm.vue'
+import { loginTitle, wrongCredentials, loginError } from '@/consts/messages.js'
 import axios from 'axios'
 
 export default {
@@ -14,7 +17,8 @@ export default {
   data: function() {
     return {
       test: 0,
-      message: ''
+      message: '',
+      title: loginTitle
     }
   },
   components: {
@@ -31,18 +35,18 @@ export default {
           if (response.status === 200) {
             vm.$router.push('/decks')
           } else {
-            vm.message = 'Logowanie nie powiodło się'
+            vm.message = loginError
           }
       })
       .catch(function (error){
         if (error.response) {
           if (error.response.status === 403) {
-            vm.message = 'Niepoprawny login lub hasło'
+            vm.message = wrongCredentials
           } else {
-            vm.message = 'Logowanie nie powiodło się'
+            vm.message = loginError
           }
         } else {
-          vm.message = 'Logowanie nie powiodło się'
+          vm.message = loginError
         }
       })
     }
