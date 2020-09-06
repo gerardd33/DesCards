@@ -1,7 +1,6 @@
 <template>
   <div class="login-container">
-    <login-form v-on:login='login()'/>
-    {{ test }}
+    <login-form v-on:login="login()" v-bind:message="message"/>
   </div>
 </template>
 
@@ -14,7 +13,8 @@ export default {
   name: 'Home',
   data: function() {
     return {
-      test: 0
+      test: 0,
+      message: ''
     }
   },
   components: {
@@ -22,13 +22,17 @@ export default {
   },
   methods: {
     login: function() {
-      // var vm = this
+      var vm = this
       // get access token from server
       axios.post('/api/login', 
                 {username: 'admin',
                  password: 'admin'})
       .then(function (response) {
-        console.log(response.data.test)
+        if (response.status === 200) {
+          // redirect to main page
+        } else {
+          vm.message = 'Niepoprawny login lub hasło'
+        }
       })
       .catch(function (error){
         console.log(error)
