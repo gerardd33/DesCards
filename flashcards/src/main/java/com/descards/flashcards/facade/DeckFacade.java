@@ -1,10 +1,10 @@
 package com.descards.flashcards.facade;
 
-import com.descards.flashcards.model.Flashcard;
+import com.descards.flashcards.dto.FlashcardDto;
 
 import java.util.Set;
 
 public interface DeckFacade {
 
-	Set<Flashcard> getCardPortion(long deckId);
+	Set<FlashcardDto> getCardPortion(long deckId);
 }

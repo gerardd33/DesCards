@@ -1,5 +1,6 @@
 package com.descards.flashcards.controller;
 
+import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.model.Flashcard;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class DeckController {
 	DeckFacade deckFacade;
 
 	@GetMapping("/{deckId}")
-	Set<Flashcard> getCardPortion(@PathVariable long deckId) {
+	Set<FlashcardDto> getCardPortion(@PathVariable long deckId) {
 		return deckFacade.getCardPortion(deckId);
 	}
 
@@ -36,12 +37,12 @@ public class DeckController {
 	}
 
 	@PostMapping("/{deckId}/add-card")
-	ResponseEntity<?> addCard(@PathVariable long deckId, @RequestBody Flashcard cardToAdd) {
+	ResponseEntity<?> addCard(@PathVariable long deckId, @RequestBody FlashcardDto cardToAdd) {
 		return ResponseEntity.ok().build();
 	}
 
 	@PostMapping("/{deckId}/add-cards")
-	ResponseEntity<?> addCard(@PathVariable long deckId, @RequestBody Set<Flashcard> cardsToAdd) {
+	ResponseEntity<?> addCard(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToAdd) {
 		return ResponseEntity.ok().build();
 	}
 }
