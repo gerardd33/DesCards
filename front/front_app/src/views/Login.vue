@@ -3,6 +3,7 @@
     <login-form v-on:login="login"
       v-bind:message="message"
       v-bind:title="title"/>
+    <router-link to="/register">Załóż konto</router-link>
   </div>
 </template>
 
