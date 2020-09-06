@@ -1,7 +1,7 @@
 package com.descards.flashcards.controller;
 
+import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.facade.UserDecksFacade;
-import com.descards.flashcards.model.Deck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +16,12 @@ public class UserDecksController {
 	UserDecksFacade userDecksFacade;
 
 	@GetMapping("/{userId}")
-	List<Deck> getDeckList(@PathVariable long userId) {
+	List<DeckDto> getDeckList(@PathVariable long userId) {
 		return userDecksFacade.getDeckList(userId);
 	}
 
 	@PostMapping("/{userId}")
-	ResponseEntity<?> createDeck(@PathVariable long userId, @RequestBody Deck newDeck) {
+	ResponseEntity<?> createDeck(@PathVariable long userId, @RequestBody DeckDto newDeck) {
 		return ResponseEntity.ok().build();
 	}
 

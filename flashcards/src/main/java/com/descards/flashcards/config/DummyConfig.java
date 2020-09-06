@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @EnableJpaRepositories(basePackages = {
 	"com.descards.flashcards.repository"
 })
-public class AppConfig {
+public class DummyConfig {
 	@Bean
 	public User dummyUser() {
 		return new User("Tomasz Kowalski");
@@ -45,6 +45,7 @@ public class AppConfig {
 		flashcardCollection.forEach(card -> card.setDeck(dummyDeck));
 		dummyDeck.getCards().addAll(flashcardCollection);
 		dummyDeck.setUser(user);
+
 		return dummyDeck;
 	}
 
