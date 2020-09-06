@@ -1,5 +1,7 @@
 package com.descards.flashcards.service;
 
+import com.descards.flashcards.dto.CategoryDto;
+import com.descards.flashcards.dto.converter.CategoryDtoConverter;
 import com.descards.flashcards.facade.CategoryFacade;
 import com.descards.flashcards.model.Category;
 import lombok.AllArgsConstructor;
@@ -15,8 +17,8 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	Category dummyCategory;
 
 	@Override
-	public List<Category> getAllCategories() {
-		return Collections.singletonList(dummyCategory);
+	public List<CategoryDto> getAllCategories() {
+		return Collections.singletonList(CategoryDtoConverter.convertToDto(dummyCategory));
 	}
 
 	@Override

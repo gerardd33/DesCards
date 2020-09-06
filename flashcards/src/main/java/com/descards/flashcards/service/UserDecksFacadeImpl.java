@@ -1,5 +1,7 @@
 package com.descards.flashcards.service;
 
+import com.descards.flashcards.dto.DeckDto;
+import com.descards.flashcards.dto.converter.DeckDtoConverter;
 import com.descards.flashcards.facade.UserDecksFacade;
 import com.descards.flashcards.model.Deck;
 import lombok.AllArgsConstructor;
@@ -15,7 +17,7 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 	Deck dummyDeck;
 
 	@Override
-	public List<Deck> getDeckList(long userId) {
-		return Collections.singletonList(dummyDeck);
+	public List<DeckDto> getDeckList(long userId) {
+		return Collections.singletonList(DeckDtoConverter.convertToDto(dummyDeck));
 	}
 }

@@ -1,10 +1,10 @@
 package com.descards.flashcards.facade;
 
-import com.descards.flashcards.model.Deck;
+import com.descards.flashcards.dto.DeckDto;
 
 import java.util.List;
 
 public interface UserDecksFacade {
 
-	List<Deck> getDeckList(long userId);
+	List<DeckDto> getDeckList(long userId);
 }

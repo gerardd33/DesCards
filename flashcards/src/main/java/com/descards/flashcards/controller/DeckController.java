@@ -2,7 +2,6 @@ package com.descards.flashcards.controller;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.facade.DeckFacade;
-import com.descards.flashcards.model.Flashcard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,7 @@ public class DeckController {
 	}
 
 	@PostMapping("/{deckId}/update-cards")
-	ResponseEntity<?> updateCards(@PathVariable long deckId, @RequestBody Set<Flashcard> cardsToUpdate) {
+	ResponseEntity<?> updateCards(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToUpdate) {
 		return ResponseEntity.ok().build();
 	}
 
