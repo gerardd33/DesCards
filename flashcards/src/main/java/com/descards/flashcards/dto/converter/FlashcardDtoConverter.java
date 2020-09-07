@@ -9,11 +9,11 @@ public class FlashcardDtoConverter {
 
 	public FlashcardDto convertToDto(Flashcard flashcard) {
 		return FlashcardDto.builder()
-			.id(flashcard.getId())
-			.front(flashcard.getFront())
-			.back(flashcard.getBack())
-			.interval(flashcard.getRepetitionInterval())
-			.deckId(flashcard.getDeck().getId())
-			.build();
+				.id(flashcard.getId())
+				.front(flashcard.getFront())
+				.back(flashcard.getBack())
+				.interval(flashcard.getRepetitionInterval())
+				.deckId(flashcard.getDeck().getId())
+				.build();
 	}
 }

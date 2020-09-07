@@ -9,9 +9,9 @@ public class DeckDtoConverter {
 
 	public DeckDto convertToDto(Deck deck) {
 		return DeckDto.builder()
-			.id(deck.getId())
-			.name(deck.getName())
-			.userId(deck.getUser().getId())
-			.build();
+				.id(deck.getId())
+				.name(deck.getName())
+				.userId(deck.getUser().getId())
+				.build();
 	}
 }

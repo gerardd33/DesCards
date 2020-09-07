@@ -9,8 +9,8 @@ public class CategoryDtoConverter {
 
 	public CategoryDto convertToDto(Category category) {
 		return CategoryDto.builder()
-			.id(category.getId())
-			.name(category.getName())
-			.build();
+				.id(category.getId())
+				.name(category.getName())
+				.build();
 	}
 }

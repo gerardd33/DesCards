@@ -18,9 +18,8 @@ public class DeckFacadeImpl implements DeckFacade {
 
 	@Override
 	public Set<FlashcardDto> getCardPortion(long deckId) {
-		// TODO get only N = 20 cards
 		return dummyDeck.getCards().stream()
-			.map(FlashcardDtoConverter::convertToDto)
-			.collect(Collectors.toSet());
+				.map(FlashcardDtoConverter::convertToDto)
+				.collect(Collectors.toSet());
 	}
 }

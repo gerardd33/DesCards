@@ -9,8 +9,8 @@ public class ApplicationUserDtoConverter {
 
 	public ApplicationUserDto convertToDto(ApplicationUser user) {
 		return ApplicationUserDto.builder()
-			.id(user.getId())
-			.name(user.getName())
-			.build();
+				.id(user.getId())
+				.name(user.getName())
+				.build();
 	}
 }

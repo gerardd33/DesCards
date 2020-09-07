@@ -1,10 +1,10 @@
 package com.descards.flashcards.config;
 
 import com.descards.flashcards.facade.DeckFacade;
+import com.descards.flashcards.model.ApplicationUser;
 import com.descards.flashcards.model.Category;
 import com.descards.flashcards.model.Deck;
 import com.descards.flashcards.model.Flashcard;
-import com.descards.flashcards.model.ApplicationUser;
 import com.descards.flashcards.service.DeckFacadeImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {
-	"com.descards.flashcards.repository"
+		"com.descards.flashcards.repository"
 })
 public class DummyConfig {
 	@Bean
@@ -29,10 +29,10 @@ public class DummyConfig {
 	@Bean
 	public Set<Flashcard> dummyFlashcardCollection() {
 		return Stream.of(
-			new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
-			new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
-			new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
-			new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10))
+				new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
+				new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
+				new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
+				new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10))
 		).collect(Collectors.toSet());
 	}
 

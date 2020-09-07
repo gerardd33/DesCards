@@ -18,7 +18,7 @@ public class HttpGuard {
 		}
 	}
 
-	public static ResponseEntity<?> getResponse(Callable function) {
+	public static ResponseEntity<?> getResponse(Callable<?> function) {
 		try {
 			var result = function.call();
 			return ResponseEntity.ok(result);
