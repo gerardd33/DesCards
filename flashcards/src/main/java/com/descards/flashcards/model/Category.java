@@ -1,6 +1,7 @@
 package com.descards.flashcards.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Category {
 	private String name;
 
 	@ElementCollection
+	@EqualsAndHashCode.Exclude
 	private List<String> specialFields = new ArrayList<>();
 
 	public Category(String name) {

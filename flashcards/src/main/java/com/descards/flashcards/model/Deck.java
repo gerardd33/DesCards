@@ -27,7 +27,6 @@ public class Deck {
 
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@JsonIgnore
 	@OneToMany(mappedBy = "deck")
 	private Set<Flashcard> cards = new HashSet<>();
 

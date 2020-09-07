@@ -1,6 +1,7 @@
 package com.descards.flashcards.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -21,8 +22,10 @@ public class Flashcard {
 
 	private String front;
 
+	@EqualsAndHashCode.Exclude
 	private String back;
 
+	@EqualsAndHashCode.Exclude
 	private Duration repetitionInterval;
 
 	public Flashcard(Deck deck, String front, String back, Duration repetitionInterval) {

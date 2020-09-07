@@ -23,7 +23,6 @@ public class ApplicationUser {
 
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	Set<Deck> decks = new HashSet<>();
 
