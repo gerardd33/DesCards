@@ -2,11 +2,37 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">
+        <span @click="logout">Logout</span>
+      </router-link> |
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+// import axios from 'axios'
+
+export default {
+  name: 'App',
+  methods: {
+    logout: function () {
+      console.log('xD')
+//      axios.post('/api/logout')
+//      .then(function (response) {
+//        if (response.status === 200) {
+//          // pomyślnie wylogowano
+//        } else {
+//          // nie udało się wylogować
+//        }
+//      })
+//      .catch(function () {
+//        // nie udało się wylogować
+//      })
+    }
+  }
+}
+</script>
 
 <style>
 #app {
