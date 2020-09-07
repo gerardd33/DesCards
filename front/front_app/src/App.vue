@@ -11,24 +11,24 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   name: 'App',
   methods: {
     logout: function () {
       console.log('xD')
-//      axios.post('/api/logout')
-//      .then(function (response) {
-//        if (response.status === 200) {
-//          // pomyślnie wylogowano
-//        } else {
-//          // nie udało się wylogować
-//        }
-//      })
-//      .catch(function () {
-//        // nie udało się wylogować
-//      })
+      axios.post('/api/logout')
+      .then(function (response) {
+        if (response.status === 200) {
+          // pomyślnie wylogowano
+        } else {
+          // nie udało się wylogować
+        }
+      })
+      .catch(function () {
+        // nie udało się wylogować
+      })
     }
   }
 }
