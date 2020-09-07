@@ -30,6 +30,23 @@ export default {
         // nie udało się wylogować
       })
     }
+  },
+  watch: {
+    $route: function(to) {
+      var vm = this
+      if (to.path !== '/' && to.path !== '/register') {
+        // validate token
+        axios.get('/api/validate')
+        .then(function (response) {
+          if (response.status !== 200 || !response.data.is_valid) {
+            vm.$router.push('/')
+          } 
+        })
+        .catch(function () {
+          vm.$router.push('/')
+        })
+      }
+    }
   }
 }
 </script>

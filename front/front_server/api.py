@@ -80,7 +80,7 @@ def verify():
     if token is None:
         return 'Invalid token', 403
 
-    res = requests.post(USERS_HOST + '/auth/validate',
+    res = requests.get(USERS_HOST + '/auth/validate',
                         json={'token': token})
 
     return res.content, res.status_code
