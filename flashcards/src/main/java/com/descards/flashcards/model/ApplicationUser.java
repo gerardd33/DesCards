@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-public class User {
+public class ApplicationUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +27,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	Set<Deck> decks = new HashSet<>();
 
-	public User(String name) {
+	public ApplicationUser(String name) {
 		this.name = name;
 	}
 }

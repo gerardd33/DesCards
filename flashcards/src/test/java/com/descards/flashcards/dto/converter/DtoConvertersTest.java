@@ -3,11 +3,11 @@ package com.descards.flashcards.dto.converter;
 import com.descards.flashcards.dto.CategoryDto;
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.dto.FlashcardDto;
-import com.descards.flashcards.dto.UserDto;
+import com.descards.flashcards.dto.ApplicationUserDto;
 import com.descards.flashcards.model.Category;
 import com.descards.flashcards.model.Deck;
 import com.descards.flashcards.model.Flashcard;
-import com.descards.flashcards.model.User;
+import com.descards.flashcards.model.ApplicationUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,11 +28,11 @@ class DtoConvertersTest {
 
 	private Flashcard flashcard;
 
-	private User user;
+	private ApplicationUser user;
 
 	@BeforeEach
 	void setUp() {
-		user = new User("Tomasz Kowalski");
+		user = new ApplicationUser("Tomasz Kowalski");
 		deck = new Deck("History deck", user);
 		category = new Category("Historical event");
 		category.setSpecialFields(Arrays.asList("Date", "Who"));
@@ -48,7 +48,7 @@ class DtoConvertersTest {
 
 	@Test
 	void shouldConvertUserEntityToDto() {
-		UserDto userDto = UserDtoConverter.convertToDto(user);
+		ApplicationUserDto userDto = ApplicationUserDtoConverter.convertToDto(user);
 		assertEquals(user.getId(), userDto.getId());
 		assertEquals(user.getName(), userDto.getName());
 	}

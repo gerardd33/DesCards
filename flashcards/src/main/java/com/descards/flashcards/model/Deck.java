@@ -23,7 +23,7 @@ public class Deck {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	private ApplicationUser user;
 
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
@@ -31,7 +31,7 @@ public class Deck {
 	@OneToMany(mappedBy = "deck")
 	private Set<Flashcard> cards = new HashSet<>();
 
-	public Deck(String name, User user) {
+	public Deck(String name, ApplicationUser user) {
 		this.name = name;
 		this.user = user;
 	}

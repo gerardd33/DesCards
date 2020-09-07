@@ -4,7 +4,7 @@ import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.model.Category;
 import com.descards.flashcards.model.Deck;
 import com.descards.flashcards.model.Flashcard;
-import com.descards.flashcards.model.User;
+import com.descards.flashcards.model.ApplicationUser;
 import com.descards.flashcards.service.DeckFacadeImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +22,8 @@ import java.util.stream.Stream;
 })
 public class DummyConfig {
 	@Bean
-	public User dummyUser() {
-		return new User("Tomasz Kowalski");
+	public ApplicationUser dummyUser() {
+		return new ApplicationUser("Tomasz Kowalski");
 	}
 
 	@Bean
@@ -38,7 +38,7 @@ public class DummyConfig {
 
 	@Bean
 	public Deck dummyDeck() {
-		User user = dummyUser();
+		ApplicationUser user = dummyUser();
 		Set<Flashcard> flashcardCollection = dummyFlashcardCollection();
 
 		Deck dummyDeck = new Deck("History deck", user);
