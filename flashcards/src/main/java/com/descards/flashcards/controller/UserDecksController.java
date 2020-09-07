@@ -2,6 +2,8 @@ package com.descards.flashcards.controller;
 
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.facade.UserDecksFacade;
+import com.descards.flashcards.model.ApplicationUser;
+import com.descards.flashcards.repository.ApplicationUserRepository;
 import com.descards.flashcards.util.HttpGuard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
