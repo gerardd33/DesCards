@@ -2,11 +2,10 @@ package com.descards.flashcards.controller;
 
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.facade.UserDecksFacade;
+import com.descards.flashcards.util.HttpGuard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user-decks")
@@ -16,8 +15,8 @@ public class UserDecksController {
 	UserDecksFacade userDecksFacade;
 
 	@GetMapping("/{userId}")
-	List<DeckDto> getDeckList(@PathVariable long userId) {
-		return userDecksFacade.getDeckList(userId);
+	ResponseEntity<?> getDeckList(@PathVariable long userId) {
+		return HttpGuard.getResponse(() -> userDecksFacade.getDeckList(userId));
 	}
 
 	@PostMapping("/{userId}")

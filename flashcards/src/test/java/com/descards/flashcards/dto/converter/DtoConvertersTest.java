@@ -10,7 +10,6 @@ import com.descards.flashcards.model.Flashcard;
 import com.descards.flashcards.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -21,7 +20,6 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Component
 class DtoConvertersTest {
 
 	private Deck deck;
@@ -39,18 +37,12 @@ class DtoConvertersTest {
 		category = new Category("Historical event");
 		category.setSpecialFields(Arrays.asList("Date", "Who"));
 
-		Set<Flashcard> flashcards = Stream.of(
-			new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
-			new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
-			new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
-			new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10))
-		).collect(Collectors.toSet());
+		Set<Flashcard> flashcards = Stream.of(new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)), new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)), new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)), new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10))).collect(Collectors.toSet());
 
 		flashcards.forEach(card -> card.setDeck(deck));
 
 		deck.setCards(flashcards);
-		flashcard = deck.getCards().stream()
-			.findAny().orElseThrow(NoSuchElementException::new);
+		flashcard = deck.getCards().stream().findAny().orElseThrow(NoSuchElementException::new);
 		user = deck.getUser();
 	}
 
@@ -58,7 +50,7 @@ class DtoConvertersTest {
 	void shouldConvertUserEntityToDto() {
 		UserDto userDto = UserDtoConverter.convertToDto(user);
 		assertEquals(user.getId(), userDto.getId());
-		assertEquals(user.getName(), userDto.getName());;
+		assertEquals(user.getName(), userDto.getName());
 	}
 
 	@Test

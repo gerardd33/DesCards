@@ -2,6 +2,7 @@ package com.descards.flashcards.controller;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.facade.DeckFacade;
+import com.descards.flashcards.util.HttpGuard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,8 @@ public class DeckController {
 	DeckFacade deckFacade;
 
 	@GetMapping("/{deckId}")
-	Set<FlashcardDto> getCardPortion(@PathVariable long deckId) {
-		return deckFacade.getCardPortion(deckId);
+	ResponseEntity<?> getCardPortion(@PathVariable long deckId) {
+		return HttpGuard.getResponse(() -> deckFacade.getCardPortion(deckId));
 	}
 
 	@PostMapping("/{deckId}/update-cards")
