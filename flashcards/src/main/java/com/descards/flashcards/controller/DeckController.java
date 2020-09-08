@@ -3,6 +3,7 @@ package com.descards.flashcards.controller;
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.util.HttpGuard;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/deck")
 public class DeckController {
 
-	@Autowired
 	DeckFacade deckFacade;
 
 	@GetMapping("/{deckId}")

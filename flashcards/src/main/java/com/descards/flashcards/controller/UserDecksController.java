@@ -3,15 +3,16 @@ package com.descards.flashcards.controller;
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.facade.UserDecksFacade;
 import com.descards.flashcards.util.HttpGuard;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/user-decks")
 public class UserDecksController {
 
-	@Autowired
 	UserDecksFacade userDecksFacade;
 
 	@GetMapping("/{userId}")
