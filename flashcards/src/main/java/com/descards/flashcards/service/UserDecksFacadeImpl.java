@@ -3,7 +3,7 @@ package com.descards.flashcards.service;
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.dto.converter.DeckDtoConverter;
 import com.descards.flashcards.facade.UserDecksFacade;
-import com.descards.flashcards.model.Deck;
+import com.descards.flashcards.model.entity.Deck;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

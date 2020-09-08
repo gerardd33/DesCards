@@ -1,9 +1,9 @@
 package com.descards.flashcards.config;
 
-import com.descards.flashcards.model.ApplicationUser;
-import com.descards.flashcards.model.Category;
-import com.descards.flashcards.model.Deck;
-import com.descards.flashcards.model.Flashcard;
+import com.descards.flashcards.model.entity.ApplicationUser;
+import com.descards.flashcards.model.entity.Category;
+import com.descards.flashcards.model.entity.Deck;
+import com.descards.flashcards.model.entity.Flashcard;
 import com.descards.flashcards.repository.ApplicationUserRepository;
 import com.descards.flashcards.repository.CategoryRepository;
 import com.descards.flashcards.repository.DeckRepository;

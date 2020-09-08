@@ -1,10 +1,11 @@
 package com.descards.flashcards.config;
 
 import com.descards.flashcards.facade.DeckFacade;
-import com.descards.flashcards.model.ApplicationUser;
-import com.descards.flashcards.model.Category;
-import com.descards.flashcards.model.Deck;
-import com.descards.flashcards.model.Flashcard;
+import com.descards.flashcards.model.entity.ApplicationUser;
+import com.descards.flashcards.model.entity.Category;
+import com.descards.flashcards.model.entity.Deck;
+import com.descards.flashcards.model.entity.Flashcard;
+import com.descards.flashcards.repository.FlashcardRepository;
 import com.descards.flashcards.service.DeckFacadeImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,7 +58,7 @@ public class DummyConfig {
 	}
 
 	@Bean
-	public DeckFacade deckFacade() {
-		return new DeckFacadeImpl(dummyDeck());
+	public DeckFacade deckFacade(FlashcardRepository flashcardRepository) {
+		return new DeckFacadeImpl(flashcardRepository);
 	}
 }

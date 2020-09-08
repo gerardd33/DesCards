@@ -1,7 +1,7 @@
 package com.descards.flashcards.dto.converter;
 
 import com.descards.flashcards.dto.CategoryDto;
-import com.descards.flashcards.model.Category;
+import com.descards.flashcards.model.entity.Category;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

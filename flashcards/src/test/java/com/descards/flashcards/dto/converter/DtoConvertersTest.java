@@ -4,10 +4,10 @@ import com.descards.flashcards.dto.CategoryDto;
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.dto.ApplicationUserDto;
-import com.descards.flashcards.model.Category;
-import com.descards.flashcards.model.Deck;
-import com.descards.flashcards.model.Flashcard;
-import com.descards.flashcards.model.ApplicationUser;
+import com.descards.flashcards.model.entity.Category;
+import com.descards.flashcards.model.entity.Deck;
+import com.descards.flashcards.model.entity.Flashcard;
+import com.descards.flashcards.model.entity.ApplicationUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
