@@ -33,8 +33,8 @@ public class DataLoader implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) {
-		clearDatabase();
-		initialiseDatabase();
+//		clearDatabase();
+//		initialiseDatabase();
 //		loadNewData();
 	}
 
@@ -70,11 +70,13 @@ public class DataLoader implements ApplicationRunner {
 		Flashcard card2 = new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(50));
 		Flashcard card3 = new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofMinutes(15));
 		Flashcard card4 = new Flashcard(null, "American Civil War", "1861-1865", Duration.ofHours(3));
+		Flashcard card5 = new Flashcard(null, "Julius Caesar Death", "44 BC", Duration.ofHours(3));
+		Flashcard card6 = new Flashcard(null, "Irish War of Independence", "1919-1921", Duration.ofHours(3));
 
 		ApplicationUser user = new ApplicationUser("Moshe Engelbaum");
 		Deck historyDeck = new Deck("History deck", user);
 
-		Collection<Flashcard> flashcards = Stream.of(card1, card2, card3, card4).collect(Collectors.toSet());
+		Collection<Flashcard> flashcards = Stream.of(card1, card2, card3, card4, card5, card6).collect(Collectors.toSet());
 		historyDeck.getCards().addAll(flashcards);
 		historyDeck.getCards().forEach(card -> card.setDeck(historyDeck));
 		historyDeck.setUser(user);

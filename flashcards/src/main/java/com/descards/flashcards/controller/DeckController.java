@@ -1,6 +1,7 @@
 package com.descards.flashcards.controller;
 
 import com.descards.flashcards.dto.FlashcardDto;
+import com.descards.flashcards.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.util.HttpGuard;
 import lombok.AllArgsConstructor;
@@ -18,8 +19,9 @@ public class DeckController {
 	DeckFacade deckFacade;
 
 	@GetMapping("/{deckId}")
-	ResponseEntity<?> getCardPortion(@PathVariable long deckId) {
-		return HttpGuard.getResponse(() -> deckFacade.getCardPortion(deckId));
+	ResponseEntity<?> getCardPortion(@PathVariable long deckId, @RequestBody FlashcardPortionRequestDto requestDto) {
+		System.out.println(requestDto);
+		return HttpGuard.getResponse(() -> deckFacade.getCardPortion(deckId, requestDto));
 	}
 
 	@PostMapping("/{deckId}/update-cards")

@@ -1,20 +1,18 @@
 package com.descards.flashcards.dto.converter;
 
-import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
-import com.descards.flashcards.model.entity.Flashcard;
 import com.descards.flashcards.model.nonpersistent.FlashcardPortionRequest;
 import com.descards.flashcards.model.nonpersistent.SortingDirection;
 import com.descards.flashcards.model.nonpersistent.SortingField;
 import lombok.experimental.UtilityClass;
-import net.bytebuddy.TypeCache;
 
 @UtilityClass
 public class FlashcardPortionRequestDtoConverter {
 
 	public FlashcardPortionRequest convertFromDto(FlashcardPortionRequestDto requestDto) {
-		SortingField sortBy = SortingField.INTERVAL;
+		SortingField sortBy;
 		switch (requestDto.getSortBy()) {
+			default:
 			case "interval":
 				sortBy = SortingField.INTERVAL;
 				break;
@@ -27,13 +25,11 @@ public class FlashcardPortionRequestDtoConverter {
 			case "back":
 				sortBy = SortingField.BACK;
 				break;
-			case "deckName":
-				sortBy = SortingField.DECK_NAME;
-				break;
 		}
 
-		SortingDirection sortingDirection = SortingDirection.ASCENDING;
+		SortingDirection sortingDirection;
 		switch (requestDto.getDirection()) {
+			default:
 			case "asc":
 				sortingDirection = SortingDirection.ASCENDING;
 				break;

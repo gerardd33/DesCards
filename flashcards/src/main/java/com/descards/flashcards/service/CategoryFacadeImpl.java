@@ -17,8 +17,6 @@ import java.util.stream.StreamSupport;
 @AllArgsConstructor
 public class CategoryFacadeImpl implements CategoryFacade {
 
-	Category dummyCategory;
-
 	CategoryRepository categoryRepository;
 
 	@Override
