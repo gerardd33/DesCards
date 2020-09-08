@@ -16,6 +16,7 @@ export default {
     choose: function () {
       console.log('set cookie')
       setCookie('deck', this.entry.name)
+      this.$router.push('/deck')
     }
   }
 }
