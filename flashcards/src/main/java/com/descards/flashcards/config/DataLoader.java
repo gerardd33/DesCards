@@ -33,8 +33,13 @@ public class DataLoader implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) {
-//		clearDatabase();
-//		initialiseDatabase();
+		clearDatabase();
+		initialiseDatabase();
+//		loadNewData();
+	}
+
+	private void loadNewData() {
+//		Deck deck = deckRepository.findById(5L).get();
 	}
 
 	private void clearDatabase() {
@@ -62,9 +67,9 @@ public class DataLoader implements ApplicationRunner {
 
 	private void loadDummyData() {
 		Flashcard card1 = new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8));
-		Flashcard card2 = new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2));
-		Flashcard card3 = new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3));
-		Flashcard card4 = new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10));
+		Flashcard card2 = new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(50));
+		Flashcard card3 = new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofMinutes(15));
+		Flashcard card4 = new Flashcard(null, "American Civil War", "1861-1865", Duration.ofHours(3));
 
 		ApplicationUser user = new ApplicationUser("Moshe Engelbaum");
 		Deck historyDeck = new Deck("History deck", user);

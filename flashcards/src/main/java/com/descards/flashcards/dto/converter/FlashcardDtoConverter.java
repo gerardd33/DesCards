@@ -13,6 +13,7 @@ public class FlashcardDtoConverter {
 				.front(flashcard.getFront())
 				.back(flashcard.getBack())
 				.interval(flashcard.getRepetitionInterval())
+				.created(flashcard.getCreatedDate())
 				.deckId(flashcard.getDeck().getId())
 				.build();
 	}

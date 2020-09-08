@@ -30,9 +30,9 @@ public class DummyConfig {
 	public Set<Flashcard> dummyFlashcardCollection() {
 		return Stream.of(
 				new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)),
-				new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)),
-				new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)),
-				new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10))
+				new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(50)),
+				new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofHours(3)),
+				new Flashcard(null, "American Civil War", "1861-1865", Duration.ofMinutes(15))
 		).collect(Collectors.toSet());
 	}
 
