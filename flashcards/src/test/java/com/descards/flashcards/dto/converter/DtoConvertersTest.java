@@ -3,7 +3,6 @@ package com.descards.flashcards.dto.converter;
 import com.descards.flashcards.dto.CategoryDto;
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.dto.FlashcardDto;
-import com.descards.flashcards.dto.ApplicationUserDto;
 import com.descards.flashcards.model.entity.Category;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;
@@ -32,7 +31,7 @@ class DtoConvertersTest {
 
 	@BeforeEach
 	void setUp() {
-		user = new ApplicationUser("Tomasz Kowalski");
+		user = new ApplicationUser();
 		deck = new Deck("History deck", user);
 		category = new Category("Historical event");
 		category.setSpecialFields(Arrays.asList("Date", "Who"));
@@ -44,13 +43,6 @@ class DtoConvertersTest {
 		deck.setCards(flashcards);
 		flashcard = deck.getCards().stream().findAny().orElseThrow(NoSuchElementException::new);
 		user = deck.getUser();
-	}
-
-	@Test
-	void shouldConvertUserEntityToDto() {
-		ApplicationUserDto userDto = ApplicationUserDtoConverter.convertToDto(user);
-		assertEquals(user.getId(), userDto.getId());
-		assertEquals(user.getName(), userDto.getName());
 	}
 
 	@Test

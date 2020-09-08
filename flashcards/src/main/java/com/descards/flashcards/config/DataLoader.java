@@ -73,7 +73,7 @@ public class DataLoader implements ApplicationRunner {
 		Flashcard card5 = new Flashcard(null, "Julius Caesar Death", "44 BC", Duration.ofHours(3));
 		Flashcard card6 = new Flashcard(null, "Irish War of Independence", "1919-1921", Duration.ofHours(3));
 
-		ApplicationUser user = new ApplicationUser("Moshe Engelbaum");
+		ApplicationUser user = new ApplicationUser();
 		Deck historyDeck = new Deck("History deck", user);
 
 		Collection<Flashcard> flashcards = Stream.of(card1, card2, card3, card4, card5, card6).collect(Collectors.toSet());

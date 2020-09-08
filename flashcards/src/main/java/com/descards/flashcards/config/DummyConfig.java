@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class DummyConfig {
 	@Bean
 	public ApplicationUser dummyUser() {
-		return new ApplicationUser("Tomasz Kowalski");
+		return new ApplicationUser();
 	}
 
 	@Bean

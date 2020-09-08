@@ -18,14 +18,8 @@ public class ApplicationUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	String name;
-
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@OneToMany(mappedBy = "user")
 	Set<Deck> decks = new HashSet<>();
-
-	public ApplicationUser(String name) {
-		this.name = name;
-	}
 }
