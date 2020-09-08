@@ -10,32 +10,34 @@ import lombok.experimental.UtilityClass;
 public class FlashcardPortionRequestDtoConverter {
 
 	public FlashcardPortionRequest convertFromDto(FlashcardPortionRequestDto requestDto) {
-		SortingField sortBy;
-		switch (requestDto.getSortBy()) {
-			default:
-			case "interval":
-				sortBy = SortingField.INTERVAL;
-				break;
-			case "created":
-				sortBy = SortingField.CREATED;
-				break;
-			case "front":
-				sortBy = SortingField.FRONT;
-				break;
-			case "back":
-				sortBy = SortingField.BACK;
-				break;
+		SortingField sortBy = SortingField.INTERVAL;
+		if (requestDto.getSortBy() != null) {
+			switch (requestDto.getSortBy()) {
+				case "interval":
+					sortBy = SortingField.INTERVAL;
+					break;
+				case "created":
+					sortBy = SortingField.CREATED;
+					break;
+				case "front":
+					sortBy = SortingField.FRONT;
+					break;
+				case "back":
+					sortBy = SortingField.BACK;
+					break;
+			}
 		}
 
-		SortingDirection sortingDirection;
-		switch (requestDto.getDirection()) {
-			default:
-			case "asc":
-				sortingDirection = SortingDirection.ASCENDING;
-				break;
-			case "desc":
-				sortingDirection = SortingDirection.DESCENDING;
-				break;
+		SortingDirection sortingDirection = SortingDirection.ASCENDING;
+		if (requestDto.getDirection() != null) {
+			switch (requestDto.getDirection()) {
+				case "asc":
+					sortingDirection = SortingDirection.ASCENDING;
+					break;
+				case "desc":
+					sortingDirection = SortingDirection.DESCENDING;
+					break;
+			}
 		}
 
 		return FlashcardPortionRequest.builder()

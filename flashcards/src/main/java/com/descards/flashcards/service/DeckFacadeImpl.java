@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,11 +28,10 @@ public class DeckFacadeImpl implements DeckFacade {
 	FlashcardRepository flashcardRepository;
 
 	@Override
-	public Set<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto) {
+	public List<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto) {
 		FlashcardPortionRequest request = FlashcardPortionRequestDtoConverter.convertFromDto(requestDto);
 
-		System.out.println(request);
-
+		System.out.println(request.getSortBy().getAttributeName());
 		Pageable criteria;
 		if (request.getSortingDirection() == SortingDirection.DESCENDING) {
 			criteria = PageRequest.of(request.getOffset(), request.getLimit(),
@@ -42,6 +42,6 @@ public class DeckFacadeImpl implements DeckFacade {
 		}
 
 		Collection<Flashcard> cardPortion = flashcardRepository.findAllByDeckId(deckId, criteria);
-		return cardPortion.stream().map(FlashcardDtoConverter::convertToDto).collect(Collectors.toSet());
+		return cardPortion.stream().map(FlashcardDtoConverter::convertToDto).collect(Collectors.toList());
 	}
 }

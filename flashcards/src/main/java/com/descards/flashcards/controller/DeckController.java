@@ -20,7 +20,6 @@ public class DeckController {
 
 	@GetMapping("/{deckId}")
 	ResponseEntity<?> getCardPortion(@PathVariable long deckId, @RequestBody FlashcardPortionRequestDto requestDto) {
-		System.out.println(requestDto);
 		return HttpGuard.getResponse(() -> deckFacade.getCardPortion(deckId, requestDto));
 	}
 
