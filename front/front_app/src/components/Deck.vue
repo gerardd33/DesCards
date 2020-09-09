@@ -7,15 +7,13 @@
 </template>
 
 <script>
-import { setCookie } from '@/utils/cookies.js'
-
 export default {
   name: 'Deck',
   props: ['entry'],
   methods: {
     choose: function () {
-      console.log('set cookie')
-      setCookie('deck', this.entry.name)
+      window.localStorage.setItem('deck', this.entry.name)
+      window.localStorage.setItem('deckId', this.entry.id)
       this.$router.push('/deck')
     }
   }

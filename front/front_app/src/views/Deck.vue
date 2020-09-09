@@ -12,7 +12,7 @@
 // @ is an alias to /src
 import List from '@/components/List.vue'
 import Deck from '@/components/Deck.vue'
-import  { getCookie } from '@/utils/cookies.js'
+//import  { getCookie } from '@/utils/cookies.js'
 import axios from 'axios'
 
 export default {
@@ -42,7 +42,7 @@ export default {
   methods: {
     getFlashcards: function () {
       var vm = this
-      var deckId = 1 // TODO read from local storage
+      var deckId = window.localStorage.getItem('deckId')
       axios.get('/api/deck', {params: {
         deckId,
         offset: vm.offset,
@@ -61,7 +61,6 @@ export default {
       })
     },
     next: function () {
-      // TODO check last
       if (!this.last_page) {
           this.page++
           this.getFlashcards()
@@ -76,7 +75,7 @@ export default {
   },
   created: function () {
     this.getFlashcards()
-    this.deck_name = getCookie('deck')
+    this.deck_name = window.localStorage.getItem('deck')
   }
 }
 </script>
