@@ -66,4 +66,24 @@ public class DeckFacadeImpl implements DeckFacade {
 		flashcardRepository.saveAll(cardsToAdd);
 		deckRepository.save(deck);
 	}
+
+	@Override
+	public void removeCard(long deckId, long cardToRemoveId) {
+		removeCards(deckId, Collections.singleton(cardToRemoveId));
+	}
+
+	@Override
+	public void removeCards(long deckId, Set<Long> cardsToRemoveIds) {
+		if (!deckRepository.existsById(deckId)) {
+			throw new NoSuchElementException();
+		}
+
+		Set<Flashcard> cardsToRemove = cardsToRemoveIds.stream()
+				.map(cardId -> flashcardRepository.findById(cardId))
+				.filter(card -> card.isPresent() && card.get().getDeck().getId() == deckId)
+				.map(Optional::get)
+				.collect(Collectors.toSet());
+
+		flashcardRepository.deleteAll(cardsToRemove);
+	}
 }

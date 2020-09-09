@@ -30,12 +30,12 @@ public class DeckController {
 
 	@PostMapping("/{deckId}/remove-card/{cardToRemoveId}")
 	ResponseEntity<?> removeCard(@PathVariable long deckId, @PathVariable() long cardToRemoveId) {
-		return ResponseEntity.ok().build();
+		return HttpGuard.getResponse(() -> deckFacade.removeCard(deckId, cardToRemoveId));
 	}
 
 	@PostMapping("/{deckId}/remove-cards")
 	ResponseEntity<?> removeCards(@PathVariable long deckId, @RequestBody Set<Long> cardsToRemoveIds) {
-		return ResponseEntity.ok().build();
+		return HttpGuard.getResponse(() -> deckFacade.removeCards(deckId, cardsToRemoveIds));
 	}
 
 	@PostMapping("/{deckId}/add-card")

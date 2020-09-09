@@ -13,4 +13,8 @@ public interface DeckFacade {
 	void addCard(long deckId, FlashcardDto cardToAddDto);
 
 	void addCards(long deckId, Set<FlashcardDto> cardsToAddDtos);
+
+	void removeCard(long deckId, long cardToRemoveId);
+
+	void removeCards(long deckId, Set<Long> cardsToRemoveIds);
 }
