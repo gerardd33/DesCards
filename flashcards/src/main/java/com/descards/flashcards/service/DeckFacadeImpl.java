@@ -61,6 +61,7 @@ public class DeckFacadeImpl implements DeckFacade {
 				.map(FlashcardDtoConverter::convertFromDto)
 				.collect(Collectors.toSet());
 
+		cardsToAdd.forEach(card -> card.setDeck(deck));
 		deck.getCards().addAll(cardsToAdd);
 
 		flashcardRepository.saveAll(cardsToAdd);
@@ -78,10 +79,9 @@ public class DeckFacadeImpl implements DeckFacade {
 			throw new NoSuchElementException();
 		}
 
-		Set<Flashcard> cardsToRemove = cardsToRemoveIds.stream()
-				.map(cardId -> flashcardRepository.findById(cardId))
-				.filter(card -> card.isPresent() && card.get().getDeck().getId() == deckId)
-				.map(Optional::get)
+		Set<Flashcard> cardsToRemove = flashcardRepository
+				.findAllById(cardsToRemoveIds).stream()
+				.filter(card -> card.getDeck().getId() == deckId)
 				.collect(Collectors.toSet());
 
 		flashcardRepository.deleteAll(cardsToRemove);
@@ -89,10 +89,23 @@ public class DeckFacadeImpl implements DeckFacade {
 
 	@Override
 	public void updateCards(long deckId, Set<FlashcardDto> cardsToUpdateDtos) {
-		Deck deck = deckRepository.findById(deckId).orElseThrow(NoSuchElementException::new);
+		if (!deckRepository.existsById(deckId)) {
+			throw new NoSuchElementException();
+		}
 
-		Set<Flashcard> cardsToUpdate = cardsToUpdateDtos.stream()
-				.map(FlashcardDtoConverter::convertFromDto)
-				.collect(Collectors.toSet());
+		cardsToUpdateDtos.forEach(cardDto -> {
+			Flashcard card = flashcardRepository.findById(cardDto.getId())
+					.orElseThrow(NoSuchElementException::new);
+
+			card.setFront(cardDto.getFront());
+			card.setBack(cardDto.getBack());
+
+			if (cardDto.getDeckId() != null) {
+				card.setDeck(deckRepository.findById(cardDto.getDeckId())
+						.orElseThrow(NoSuchElementException::new));
+			}
+
+			flashcardRepository.save(card);
+		});
 	}
 }

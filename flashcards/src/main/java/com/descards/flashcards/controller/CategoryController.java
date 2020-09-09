@@ -18,9 +18,4 @@ public class CategoryController {
 	ResponseEntity<?> getAllCategories() {
 		return HttpGuard.getResponse(() -> categoryFacade.getAllCategories());
 	}
-
-	@GetMapping("/category/{categoryId}")
-	ResponseEntity<?> getSpecialFields(@PathVariable long categoryId) {
-		return HttpGuard.getResponse(() -> categoryFacade.getSpecialFields(categoryId));
-	}
 }

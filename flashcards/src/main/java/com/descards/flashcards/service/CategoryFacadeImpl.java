@@ -25,11 +25,4 @@ public class CategoryFacadeImpl implements CategoryFacade {
 				.map(CategoryDtoConverter::convertToDto)
 				.collect(Collectors.toList());
 	}
-
-	@Override
-	public List<String> getSpecialFields(long categoryId) {
-		Category category = categoryRepository.findById(categoryId)
-				.orElseThrow(NoSuchElementException::new);
-		return category.getSpecialFields();
-	}
 }
