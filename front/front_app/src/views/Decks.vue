@@ -8,7 +8,7 @@
 // @ is an alias to /src
 import List from '@/components/List.vue'
 import Deck from '@/components/Deck.vue'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   name: 'Decks',
@@ -25,7 +25,15 @@ export default {
   components: {
     List
   },
-  methods: {
+  created: function () {
+    var vm = this
+    axios.get('/api/user_decks')
+    .then(function (response) {
+      if (response.status === 200) {
+        console.log(response)
+        vm.decks = response.data
+      }
+    })
   }
 }
 </script>
