@@ -16,8 +16,6 @@ public class DeckDtoConverter {
 	}
 
 	public static Deck convertFromDto(DeckDto deckToCreateDto) {
-		return Deck.builder()
-				.name(deckToCreateDto.getName())
-				.build();
+		return new Deck(deckToCreateDto.getName());
 	}
 }

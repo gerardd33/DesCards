@@ -36,7 +36,11 @@ class DtoConvertersTest {
 		category = new Category("Historical event");
 		category.setSpecialFields(Arrays.asList("Date", "Who"));
 
-		Set<Flashcard> flashcards = Stream.of(new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8)), new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(2)), new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofDays(3)), new Flashcard(null, "American Civil War", "1861-1865", Duration.ofDays(10))).collect(Collectors.toSet());
+		Set<Flashcard> flashcards = Stream.of(
+				new Flashcard("Muslim invasion of Spain", "711"),
+				new Flashcard("Building of the Suez Canal", "1859"),
+				new Flashcard("American Civil War", "1861-1865")
+		).collect(Collectors.toSet());
 
 		flashcards.forEach(card -> card.setDeck(deck));
 
@@ -52,7 +56,7 @@ class DtoConvertersTest {
 		assertEquals(flashcard.getFront(), flashcardDto.getFront());
 		assertEquals(flashcard.getBack(), flashcardDto.getBack());
 		assertEquals(deck.getId(), flashcardDto.getDeckId());
-		assertEquals(flashcard.getRepetitionInterval(), flashcardDto.getInterval());
+		assertEquals(flashcard.getRepetitionInterval().toMinutes(), flashcardDto.getInterval());
 	}
 
 	@Test

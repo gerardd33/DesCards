@@ -5,7 +5,6 @@ import com.descards.flashcards.dto.converter.DeckDtoConverter;
 import com.descards.flashcards.facade.UserDecksFacade;
 import com.descards.flashcards.model.entity.ApplicationUser;
 import com.descards.flashcards.model.entity.Deck;
-import com.descards.flashcards.model.entity.Flashcard;
 import com.descards.flashcards.repository.ApplicationUserRepository;
 import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
@@ -28,7 +27,8 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 
 	@Override
 	public List<DeckDto> getDeckList(long userId) {
-		ApplicationUser user = applicationUserRepository.findById(userId).orElseThrow(NoSuchElementException::new);
+		ApplicationUser user = applicationUserRepository.findById(userId)
+				.orElseThrow(NoSuchElementException::new);
 		return user.getDecks().stream()
 				.map(DeckDtoConverter::convertToDto)
 				.collect(Collectors.toList());
@@ -36,7 +36,8 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 
 	@Override
 	public void createDeck(long userId, DeckDto deckToCreateDto) {
-		ApplicationUser user = applicationUserRepository.findById(userId).orElseThrow(NoSuchElementException::new);
+		ApplicationUser user = applicationUserRepository.findById(userId)
+				.orElseThrow(NoSuchElementException::new);
 		Deck deckToAdd = DeckDtoConverter.convertFromDto(deckToCreateDto);
 
 		deckToAdd.setUser(user);
@@ -45,8 +46,10 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 
 	@Override
 	public void removeDeck(long userId, long deckToRemoveId) {
-		ApplicationUser user = applicationUserRepository.findById(userId).orElseThrow(NoSuchElementException::new);
-		Deck deck = deckRepository.findById(deckToRemoveId).orElseThrow(NoSuchElementException::new);
+		ApplicationUser user = applicationUserRepository.findById(userId)
+				.orElseThrow(NoSuchElementException::new);
+		Deck deck = deckRepository.findById(deckToRemoveId)
+				.orElseThrow(NoSuchElementException::new);
 
 		user.getDecks().remove(deck);
 

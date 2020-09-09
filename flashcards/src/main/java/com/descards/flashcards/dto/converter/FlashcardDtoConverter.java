@@ -4,10 +4,6 @@ import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.model.entity.Flashcard;
 import lombok.experimental.UtilityClass;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-
 @UtilityClass
 public class FlashcardDtoConverter {
 
@@ -23,11 +19,6 @@ public class FlashcardDtoConverter {
 	}
 
 	public Flashcard convertFromDto(FlashcardDto flashcardDto) {
-		return Flashcard.builder()
-				.front(flashcardDto.getFront())
-				.back(flashcardDto.getBack())
-				.repetitionInterval(Duration.ofMinutes(flashcardDto.getInterval()))
-				.createdTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
-				.build();
+		return new Flashcard(flashcardDto.getFront(), flashcardDto.getBack());
 	}
 }

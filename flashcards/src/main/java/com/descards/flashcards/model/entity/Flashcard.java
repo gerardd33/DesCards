@@ -1,7 +1,9 @@
 package com.descards.flashcards.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -10,9 +12,7 @@ import java.time.temporal.ChronoUnit;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Flashcard {
 
@@ -35,11 +35,15 @@ public class Flashcard {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime createdTime;
 
-	public Flashcard(Deck deck, String front, String back, Duration repetitionInterval) {
-		this.deck = deck;
+	public Flashcard(String front, String back) {
 		this.front = front;
 		this.back = back;
-		this.repetitionInterval = repetitionInterval;
+		this.repetitionInterval = Duration.ZERO; // TODO constant from algorithm
 		this.createdTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+	}
+
+	public Flashcard(Deck deck, String front, String back) {
+		this(front, back);
+		this.deck = deck;
 	}
 }

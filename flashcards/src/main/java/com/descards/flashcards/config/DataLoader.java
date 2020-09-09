@@ -61,12 +61,12 @@ public class DataLoader implements ApplicationRunner {
 	}
 
 	private void loadDummyData() {
-		Flashcard card1 = new Flashcard(null, "Death of Socrates", "399 BC", Duration.ofDays(8));
-		Flashcard card2 = new Flashcard(null, "Muslim invasion of Spain", "711", Duration.ofDays(50));
-		Flashcard card3 = new Flashcard(null, "Building of the Suez Canal", "1859", Duration.ofMinutes(15));
-		Flashcard card4 = new Flashcard(null, "American Civil War", "1861-1865", Duration.ofHours(3));
-		Flashcard card5 = new Flashcard(null, "Julius Caesar Death", "44 BC", Duration.ofHours(3));
-		Flashcard card6 = new Flashcard(null, "Irish War of Independence", "1919-1921", Duration.ofHours(3));
+		Flashcard card1 = new Flashcard("Death of Socrates", "399 BC");
+		Flashcard card2 = new Flashcard("Muslim invasion of Spain", "711");
+		Flashcard card3 = new Flashcard("Building of the Suez Canal", "1859");
+		Flashcard card4 = new Flashcard("American Civil War", "1861-1865");
+		Flashcard card5 = new Flashcard("Julius Caesar Death", "44 BC");
+		Flashcard card6 = new Flashcard("Irish War of Independence", "1919-1921");
 
 		ApplicationUser user = new ApplicationUser();
 		Deck historyDeck = new Deck("History deck", user);

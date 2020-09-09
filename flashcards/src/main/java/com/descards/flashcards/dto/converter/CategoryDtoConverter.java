@@ -11,6 +11,7 @@ public class CategoryDtoConverter {
 		return CategoryDto.builder()
 				.id(category.getId())
 				.name(category.getName())
+				.specialFields(category.getSpecialFields())
 				.build();
 	}
 }

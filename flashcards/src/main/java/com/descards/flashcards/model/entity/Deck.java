@@ -1,6 +1,9 @@
 package com.descards.flashcards.model.entity;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,9 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Deck {
 
@@ -30,8 +31,12 @@ public class Deck {
 	@OneToMany(mappedBy = "deck")
 	private Set<Flashcard> cards = new HashSet<>();
 
-	public Deck(String name, ApplicationUser user) {
+	public Deck(String name) {
 		this.name = name;
+	}
+
+	public Deck(String name, ApplicationUser user) {
+		this(name);
 		this.user = user;
 	}
 }

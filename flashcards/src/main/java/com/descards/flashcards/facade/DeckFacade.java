@@ -17,4 +17,6 @@ public interface DeckFacade {
 	void removeCard(long deckId, long cardToRemoveId);
 
 	void removeCards(long deckId, Set<Long> cardsToRemoveIds);
+
+	void updateCards(long deckId, Set<FlashcardDto> cardsToUpdateDtos);
 }

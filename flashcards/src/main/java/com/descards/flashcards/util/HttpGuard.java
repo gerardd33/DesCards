@@ -3,7 +3,6 @@ package com.descards.flashcards.util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
-import java.awt.*;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Callable;
 
@@ -25,7 +24,7 @@ public class HttpGuard {
 
 	public static ResponseEntity<?> getResponse(Callable<?> function) {
 		try {
-			var result = function.call();
+			Object result = function.call();
 			return ResponseEntity.ok(result);
 		} catch (NoSuchElementException exception) {
 			log.info("Thrown " + exception.getClass().getName(), exception.getMessage());

@@ -22,9 +22,14 @@ public class DeckController {
 		return HttpGuard.getResponse(() -> deckFacade.getCardPortion(deckId, requestDto));
 	}
 
-	@PostMapping("/{deckId}/update-cards")
-	ResponseEntity<?> updateCards(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToUpdateDtos) {
-		return ResponseEntity.ok().build();
+	@PostMapping("/{deckId}/add-card")
+	ResponseEntity<?> addCard(@PathVariable long deckId, @RequestBody FlashcardDto cardToAddDto) {
+		return HttpGuard.getResponse(() -> deckFacade.addCard(deckId, cardToAddDto));
+	}
+
+	@PostMapping("/{deckId}/add-cards")
+	ResponseEntity<?> addCards(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToAddDtos) {
+		return HttpGuard.getResponse(() -> deckFacade.addCards(deckId, cardsToAddDtos));
 	}
 
 	@PostMapping("/{deckId}/remove-card/{cardToRemoveId}")
@@ -37,13 +42,8 @@ public class DeckController {
 		return HttpGuard.getResponse(() -> deckFacade.removeCards(deckId, cardsToRemoveIds));
 	}
 
-	@PostMapping("/{deckId}/add-card")
-	ResponseEntity<?> addCard(@PathVariable long deckId, @RequestBody FlashcardDto cardToAddDto) {
-		return HttpGuard.getResponse(() -> deckFacade.addCard(deckId, cardToAddDto));
-	}
-
-	@PostMapping("/{deckId}/add-cards")
-	ResponseEntity<?> addCards(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToAddDtos) {
-		return HttpGuard.getResponse(() -> deckFacade.addCards(deckId, cardsToAddDtos));
+	@PostMapping("/{deckId}/update-cards")
+	ResponseEntity<?> updateCards(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToUpdateDtos) {
+		return HttpGuard.getResponse(() -> deckFacade.updateCards(deckId, cardsToUpdateDtos));
 	}
 }

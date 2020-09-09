@@ -8,10 +8,9 @@ import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;
 import com.descards.flashcards.model.nonpersistent.FlashcardPortionRequest;
+import com.descards.flashcards.model.nonpersistent.SortingDirection;
 import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
-import com.descards.flashcards.model.nonpersistent.SortingField;
-import com.descards.flashcards.model.nonpersistent.SortingDirection;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +32,6 @@ public class DeckFacadeImpl implements DeckFacade {
 	public List<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto) {
 		FlashcardPortionRequest request = FlashcardPortionRequestDtoConverter.convertFromDto(requestDto);
 
-		System.out.println(request.getSortBy().getAttributeName());
 		Pageable criteria;
 		if (request.getSortingDirection() == SortingDirection.DESCENDING) {
 			criteria = PageRequest.of(request.getOffset(), request.getLimit(),
@@ -44,7 +42,9 @@ public class DeckFacadeImpl implements DeckFacade {
 		}
 
 		Collection<Flashcard> cardPortion = flashcardRepository.findAllByDeckId(deckId, criteria);
-		return cardPortion.stream().map(FlashcardDtoConverter::convertToDto).collect(Collectors.toList());
+		return cardPortion.stream()
+				.map(FlashcardDtoConverter::convertToDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -54,11 +54,11 @@ public class DeckFacadeImpl implements DeckFacade {
 
 	@Override
 	public void addCards(long deckId, Set<FlashcardDto> cardsToAddDtos) {
-		Deck deck = deckRepository.findById(deckId).orElseThrow(NoSuchElementException::new);
+		Deck deck = deckRepository.findById(deckId)
+				.orElseThrow(NoSuchElementException::new);
 
 		Set<Flashcard> cardsToAdd = cardsToAddDtos.stream()
 				.map(FlashcardDtoConverter::convertFromDto)
-				.peek(card -> card.setDeck(deck))
 				.collect(Collectors.toSet());
 
 		deck.getCards().addAll(cardsToAdd);
@@ -85,5 +85,14 @@ public class DeckFacadeImpl implements DeckFacade {
 				.collect(Collectors.toSet());
 
 		flashcardRepository.deleteAll(cardsToRemove);
+	}
+
+	@Override
+	public void updateCards(long deckId, Set<FlashcardDto> cardsToUpdateDtos) {
+		Deck deck = deckRepository.findById(deckId).orElseThrow(NoSuchElementException::new);
+
+		Set<Flashcard> cardsToUpdate = cardsToUpdateDtos.stream()
+				.map(FlashcardDtoConverter::convertFromDto)
+				.collect(Collectors.toSet());
 	}
 }
