@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum SortingField {
 
 	INTERVAL("repetitionInterval"),
-	CREATED("createdDate"),
+	CREATED("createdTime"),
 	FRONT("front"),
 	BACK("back");
 

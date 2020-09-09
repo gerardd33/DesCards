@@ -9,4 +9,8 @@ import java.util.Set;
 public interface DeckFacade {
 
 	List<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto);
+
+	void addCard(long deckId, FlashcardDto cardToAddDto);
+
+	void addCards(long deckId, Set<FlashcardDto> cardsToAddDtos);
 }

@@ -5,6 +5,7 @@ import com.descards.flashcards.model.entity.ApplicationUser;
 import com.descards.flashcards.model.entity.Category;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;
+import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
 import com.descards.flashcards.service.DeckFacadeImpl;
 import org.springframework.context.annotation.Bean;
@@ -58,7 +59,7 @@ public class DummyConfig {
 	}
 
 	@Bean
-	public DeckFacade deckFacade(FlashcardRepository flashcardRepository) {
-		return new DeckFacadeImpl(flashcardRepository);
+	public DeckFacade deckFacade(DeckRepository deckRepository, FlashcardRepository flashcardRepository) {
+		return new DeckFacadeImpl(deckRepository, flashcardRepository);
 	}
 }

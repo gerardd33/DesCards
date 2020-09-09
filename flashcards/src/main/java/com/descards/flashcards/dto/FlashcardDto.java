@@ -20,7 +20,7 @@ public class FlashcardDto {
 	private String back;
 
 	@EqualsAndHashCode.Exclude
-	private Duration interval;
+	private Long interval;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	@EqualsAndHashCode.Exclude

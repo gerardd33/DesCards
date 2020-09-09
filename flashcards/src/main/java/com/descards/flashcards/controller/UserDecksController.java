@@ -21,12 +21,12 @@ public class UserDecksController {
 	}
 
 	@PostMapping("/{userId}")
-	ResponseEntity<?> createDeck(@PathVariable long userId, @RequestBody DeckDto newDeck) {
+	ResponseEntity<?> createDeck(@PathVariable long userId, @RequestBody DeckDto deckToCreateDto) {
 		return ResponseEntity.ok().build();
 	}
 
-	@PostMapping("/{userId}/remove-deck/{deckIdToRemove}")
-	ResponseEntity<?> removeDeck(@PathVariable long userId, @PathVariable long deckIdToRemove) {
+	@PostMapping("/{userId}/remove-deck/{deckToRemoveId}")
+	ResponseEntity<?> removeDeck(@PathVariable long userId, @PathVariable long deckToRemoveId) {
 		return ResponseEntity.ok().build();
 	}
 }
