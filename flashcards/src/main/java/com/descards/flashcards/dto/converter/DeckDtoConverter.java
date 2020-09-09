@@ -14,4 +14,10 @@ public class DeckDtoConverter {
 				.userId(deck.getUser().getId())
 				.build();
 	}
+
+	public static Deck convertFromDto(DeckDto deckToCreateDto) {
+		return Deck.builder()
+				.name(deckToCreateDto.getName())
+				.build();
+	}
 }

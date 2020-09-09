@@ -22,11 +22,11 @@ public class UserDecksController {
 
 	@PostMapping("/{userId}")
 	ResponseEntity<?> createDeck(@PathVariable long userId, @RequestBody DeckDto deckToCreateDto) {
-		return ResponseEntity.ok().build();
+		return HttpGuard.getResponse(() -> userDecksFacade.createDeck(userId, deckToCreateDto));
 	}
 
 	@PostMapping("/{userId}/remove-deck/{deckToRemoveId}")
 	ResponseEntity<?> removeDeck(@PathVariable long userId, @PathVariable long deckToRemoveId) {
-		return ResponseEntity.ok().build();
+		return HttpGuard.getResponse(() -> userDecksFacade.removeDeck(userId, deckToRemoveId));
 	}
 }

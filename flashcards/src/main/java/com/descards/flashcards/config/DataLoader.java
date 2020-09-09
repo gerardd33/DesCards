@@ -35,11 +35,6 @@ public class DataLoader implements ApplicationRunner {
 	public void run(ApplicationArguments args) {
 		clearDatabase();
 		initialiseDatabase();
-//		loadNewData();
-	}
-
-	private void loadNewData() {
-//		Deck deck = deckRepository.findById(5L).get();
 	}
 
 	private void clearDatabase() {
