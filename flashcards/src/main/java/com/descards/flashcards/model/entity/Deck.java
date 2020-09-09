@@ -12,19 +12,21 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Deck {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@EqualsAndHashCode.Include
 	private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
+	@EqualsAndHashCode.Include
 	private ApplicationUser user;
 
-	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@OneToMany(mappedBy = "deck")
 	private Set<Flashcard> cards = new HashSet<>();

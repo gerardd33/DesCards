@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Flashcard {
 
 	@Id
@@ -21,17 +22,16 @@ public class Flashcard {
 
 	@ManyToOne
 	@JoinColumn(name = "deck_id", nullable = false)
+	@EqualsAndHashCode.Include
 	private Deck deck;
 
+	@EqualsAndHashCode.Include
 	private String front;
 
-	@EqualsAndHashCode.Exclude
 	private String back;
 
-	@EqualsAndHashCode.Exclude
 	private Duration repetitionInterval;
 
-	@EqualsAndHashCode.Exclude
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime createdTime;
 
