@@ -19,13 +19,13 @@ public class Deck {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@EqualsAndHashCode.Include
-	private String name;
-
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	@EqualsAndHashCode.Include
 	private ApplicationUser user;
+
+	@EqualsAndHashCode.Include
+	private String name;
 
 	@ToString.Exclude
 	@OneToMany(mappedBy = "deck")

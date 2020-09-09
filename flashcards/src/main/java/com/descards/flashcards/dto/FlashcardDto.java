@@ -9,22 +9,21 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class FlashcardDto {
 
 	private Long id;
 
+	@EqualsAndHashCode.Include
+	private Long deckId;
+
+	@EqualsAndHashCode.Include
 	private String front;
 
-	@EqualsAndHashCode.Exclude
 	private String back;
 
-	@EqualsAndHashCode.Exclude
 	private Long interval;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	@EqualsAndHashCode.Exclude
 	private LocalDateTime created;
-
-	@EqualsAndHashCode.Exclude
-	private Long deckId;
 }
