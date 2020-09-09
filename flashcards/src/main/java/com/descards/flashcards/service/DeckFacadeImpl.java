@@ -2,8 +2,8 @@ package com.descards.flashcards.service;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
-import com.descards.flashcards.dto.converter.FlashcardDtoConverter;
-import com.descards.flashcards.dto.converter.FlashcardPortionRequestDtoConverter;
+import com.descards.flashcards.test.converter.FlashcardDtoConverter;
+import com.descards.flashcards.test.converter.FlashcardPortionRequestDtoConverter;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;

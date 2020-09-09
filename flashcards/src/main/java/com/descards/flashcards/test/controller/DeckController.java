@@ -1,4 +1,4 @@
-package com.descards.flashcards.controller;
+package com.descards.flashcards.test.controller;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
