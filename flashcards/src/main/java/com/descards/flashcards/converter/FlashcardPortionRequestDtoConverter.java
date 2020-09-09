@@ -1,4 +1,4 @@
-package com.descards.flashcards.test.converter;
+package com.descards.flashcards.converter;
 
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.model.nonpersistent.FlashcardPortionRequest;

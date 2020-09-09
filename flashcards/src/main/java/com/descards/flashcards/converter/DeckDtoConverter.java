@@ -1,4 +1,4 @@
-package com.descards.flashcards.test.converter;
+package com.descards.flashcards.converter;
 
 import com.descards.flashcards.dto.DeckDto;
 import com.descards.flashcards.model.entity.Deck;

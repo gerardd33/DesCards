@@ -1,4 +1,4 @@
-package com.descards.flashcards.test.controller;
+package com.descards.flashcards.controller;
 
 import com.descards.flashcards.facade.CategoryFacade;
 import com.descards.flashcards.util.HttpGuard;
