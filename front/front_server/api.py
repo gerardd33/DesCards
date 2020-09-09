@@ -1,11 +1,19 @@
 from flask import Blueprint, jsonify, request
 from cerberus import Validator
 import requests
+from random import randint, random
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 USERS_HOST = 'http://users_server_1:5000'  # TODO read from .env
+FLASHCARDS_HOST = 'http://users_server_1:5000'  # TODO read from .env
 # TODO make https
+
+flashcards = [
+    {'id': i, 'back': randint(1, 9999), 'front': random(), 'deckId': 1,
+     'created': '1:2:3', 'interval': randint(1, 8400000)}
+    for i in range(100)
+]
 
 
 def validate(dictionary, schema):
@@ -81,7 +89,7 @@ def verify():
         return 'Invalid token', 403
 
     res = requests.get(USERS_HOST + '/auth/validate',
-                        json={'token': token})
+                       json={'token': token})
 
     return res.content, res.status_code
 
@@ -93,8 +101,6 @@ def register():
               'password': {'type': 'string'}}
     data = validate(request.json, schema)
 
-    print(data, flush=True)
-
     if data is None:
         return 'Incorrect data', 400
 
@@ -105,3 +111,45 @@ def register():
 
     except requests.exceptions.ConnectionError:
         return 'Users service not available', 500
+
+
+@bp.route('/user_decks', methods=['GET'])
+def decks():
+    # weryfikacja poprawności requesta
+    schema = {'userid': {'type': 'integer'}}
+    data = validate(request.json, schema)
+
+    if data is None:
+        return 'Incorrect data', 400
+
+    decks = [
+        {'id': 1, 'name': 'Talia 1', 'user': 'admin'},
+        {'id': 2, 'name': 'Talia 2', 'user': 'admin'},
+        {'id': 3, 'name': 'Talin 3', 'user': 'admin'},
+        {'id': 4, 'name': 'Historia', 'user': 'admin'},
+        {'id': 5, 'name': 'Angielski', 'user': 'admin'},
+    ]
+
+    return jsonify(decks), 200
+
+
+@bp.route('/deck', methods=['GET'])
+def deck():
+    schema = {'deckid': {'type': 'integer'},
+              'offset': {'type': 'integer'},
+              'limit': {'type': 'integer'},
+              'sortBy': {'type': 'string',
+                         'allowed': ['interval', 'created', 'front', 'back']},
+              'direction': {'type': 'string',
+                            'allowed': ['asc', 'desc']},
+              }
+
+    data = validate(request.json, schema)
+
+    if data is None:
+        return 'Incorrect data', 400
+
+    first = data['offset']
+    after_last = first + data['limit']
+
+    return jsonify(flashcards[first:after_last]), 200
