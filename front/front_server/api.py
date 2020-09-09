@@ -116,11 +116,13 @@ def register():
 @bp.route('/user_decks', methods=['GET'])
 def decks():
     # weryfikacja poprawności requesta
-    schema = {'userid': {'type': 'integer'}}
-    data = validate(request.json, schema)
+    # schema = {'userid': {'type': 'integer'}}
+    # data = validate(request.json, schema)
 
-    if data is None:
-        return 'Incorrect data', 400
+    # print(request.json, flush=True)
+
+    # if data is None:
+    #     return 'Incorrect data', 400
 
     decks = [
         {'id': 1, 'name': 'Talia 1', 'user': 'admin'},
@@ -135,21 +137,23 @@ def decks():
 
 @bp.route('/deck', methods=['GET'])
 def deck():
-    schema = {'deckid': {'type': 'integer'},
-              'offset': {'type': 'integer'},
-              'limit': {'type': 'integer'},
+    schema = {'deckId': {'type': 'string'},
+              'offset': {'type': 'string'},
+              'limit': {'type': 'string'},
               'sortBy': {'type': 'string',
                          'allowed': ['interval', 'created', 'front', 'back']},
               'direction': {'type': 'string',
                             'allowed': ['asc', 'desc']},
               }
 
-    data = validate(request.json, schema)
+    json = request.args.to_dict()
+    print(json, flush=True)
+    data = validate(json, schema)
 
     if data is None:
         return 'Incorrect data', 400
 
-    first = data['offset']
-    after_last = first + data['limit']
+    first = int(data['offset'])
 
     return jsonify(flashcards[first:after_last]), 200
+after_last = first + int(data['limit'])
