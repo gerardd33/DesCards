@@ -15,10 +15,12 @@ public class HttpGuard {
 			function.run();
 			return ResponseEntity.ok().build();
 		} catch (NoSuchElementException exception) {
-			log.info("Thrown " + exception.getClass().getName(), exception.getMessage());
+			log.info("Handled exception");
+			log.error(exception.getMessage(), exception);
 			return ResponseEntity.notFound().build();
 		} catch (Exception exception) {
-			log.info(exception.getClass().getName(), exception.getMessage());
+			log.info("Handled exception");
+			log.error(exception.getMessage(), exception);
 			return ResponseEntity.badRequest().body(exception.getMessage());
 		}
 	}
@@ -28,11 +30,12 @@ public class HttpGuard {
 			Object result = function.call();
 			return ResponseEntity.ok(result);
 		} catch (NoSuchElementException exception) {
-			log.info("Thrown " + exception.getClass().getName(), exception.getMessage());
+			log.info("Handled exception");
+			log.error(exception.getMessage(), exception);
 			return ResponseEntity.notFound().build();
 		} catch (Exception exception) {
+			log.info("Handled exception");
 			log.error(exception.getMessage(), exception);
-			log.info("Thrown " + exception.getClass().getName(), exception.getMessage());
 			return ResponseEntity.badRequest().body(exception.getMessage());
 		}
 	}

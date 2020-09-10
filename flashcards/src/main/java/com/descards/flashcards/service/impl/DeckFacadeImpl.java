@@ -1,4 +1,4 @@
-package com.descards.flashcards.service;
+package com.descards.flashcards.service.impl;
 
 import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
@@ -94,6 +94,11 @@ public class DeckFacadeImpl implements DeckFacade {
 	}
 
 	@Override
+	public void updateCard(long deckId, FlashcardDto cardToUpdateDto) {
+		updateCards(deckId, Collections.singleton(cardToUpdateDto));
+	}
+
+	@Override
 	public void updateCards(long deckId, Set<FlashcardDto> cardsToUpdateDtos) {
 		if (!deckRepository.existsById(deckId)) {
 			throw new NoSuchElementException();
@@ -119,6 +124,11 @@ public class DeckFacadeImpl implements DeckFacade {
 	}
 
 	@Override
+	public void updateInterval(long deckId, RepetitionIntervalUpdateRequestDto requestDto) {
+		updateIntervals(deckId, Collections.singleton(requestDto));
+	}
+
+	@Override
 	public void updateIntervals(long deckId, Set<RepetitionIntervalUpdateRequestDto> requestDtos) {
 		if (!deckRepository.existsById(deckId)) {
 			throw new NoSuchElementException();
@@ -132,6 +142,7 @@ public class DeckFacadeImpl implements DeckFacade {
 					throw new IllegalArgumentException();
 				}
 
+				card.getInterval().setFromStrength(request.getCardStrength());
 				flashcardRepository.save(card);
 			});
 		}

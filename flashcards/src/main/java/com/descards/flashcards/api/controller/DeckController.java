@@ -43,9 +43,19 @@ public class DeckController {
 		return HttpGuard.getResponse(() -> deckFacade.removeCards(deckId, cardsToRemoveIds));
 	}
 
+	@PostMapping("/{deckId}/update-card")
+	ResponseEntity<?> updateCards(@PathVariable long deckId, @RequestBody FlashcardDto cardToUpdateDto) {
+		return HttpGuard.getResponse(() -> deckFacade.updateCard(deckId, cardToUpdateDto));
+	}
+
 	@PostMapping("/{deckId}/update-cards")
 	ResponseEntity<?> updateCards(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToUpdateDtos) {
 		return HttpGuard.getResponse(() -> deckFacade.updateCards(deckId, cardsToUpdateDtos));
+	}
+
+	@PostMapping("/{deckId}/update-interval")
+	ResponseEntity<?> updateIntervals(@PathVariable long deckId, @RequestBody RepetitionIntervalUpdateRequestDto requestDto) {
+		return HttpGuard.getResponse(() -> deckFacade.updateInterval(deckId, requestDto));
 	}
 
 	@PostMapping("/{deckId}/update-intervals")
