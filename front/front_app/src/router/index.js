@@ -3,6 +3,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Decks from '../views/Decks.vue'
 import Deck from '../views/Deck.vue'
+import Study from '../views/Study.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/deck',
     name: 'Deck',
     component: Deck
+  },
+  {
+    path: '/study',
+    name: 'Study',
+    component: Study
   }
 ]
 
