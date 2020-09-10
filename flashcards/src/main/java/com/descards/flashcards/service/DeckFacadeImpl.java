@@ -3,6 +3,7 @@ package com.descards.flashcards.service;
 import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
+import com.descards.flashcards.model.nonentity.RepetitionIntervalUpdateRequest;
 import com.descards.flashcards.util.mapper.FlashcardDtoMapper;
 import com.descards.flashcards.util.mapper.FlashcardPortionRequestDtoMapper;
 import com.descards.flashcards.util.mapper.RepetitionIntervalUpdateRequestDtoMapper;
@@ -98,24 +99,23 @@ public class DeckFacadeImpl implements DeckFacade {
 			throw new NoSuchElementException();
 		}
 
-		cardsToUpdateDtos.forEach(cardDto -> {
-			Flashcard card = flashcardRepository.findById(cardDto.getId())
-					.orElseThrow(NoSuchElementException::new);
+		for (FlashcardDto cardDto : cardsToUpdateDtos) {
+			flashcardRepository.findById(cardDto.getId()).ifPresent(card -> {
+				if (card.getDeck().getId() != deckId) {
+					throw new IllegalArgumentException();
+				}
 
-			if (card.getDeck().getId() != deckId) {
-				throw new IllegalArgumentException();
-			}
+				card.setFront(cardDto.getFront());
+				card.setBack(cardDto.getBack());
 
-			card.setFront(cardDto.getFront());
-			card.setBack(cardDto.getBack());
+				if (cardDto.getDeckId() != null) {
+					card.setDeck(deckRepository.findById(cardDto.getDeckId())
+							.orElseThrow(NoSuchElementException::new));
+				}
 
-			if (cardDto.getDeckId() != null) {
-				card.setDeck(deckRepository.findById(cardDto.getDeckId())
-						.orElseThrow(NoSuchElementException::new));
-			}
-
-			flashcardRepository.save(card);
-		});
+				flashcardRepository.save(card);
+			});
+		}
 	}
 
 	@Override
@@ -124,18 +124,16 @@ public class DeckFacadeImpl implements DeckFacade {
 			throw new NoSuchElementException();
 		}
 
-		requestDtos.stream()
-				.map(RepetitionIntervalUpdateRequestDtoMapper::convertFromDto)
-				.forEach(request -> {
-					Flashcard card = flashcardRepository.findById(request.getCardId())
-							.orElseThrow(NoSuchElementException::new);
+		for (RepetitionIntervalUpdateRequestDto requestDto : requestDtos) {
+			RepetitionIntervalUpdateRequest request =
+					RepetitionIntervalUpdateRequestDtoMapper.convertFromDto(requestDto);
+			flashcardRepository.findById(request.getCardId()).ifPresent(card -> {
+				if (card.getDeck().getId() != deckId) {
+					throw new IllegalArgumentException();
+				}
 
-					if (card.getDeck().getId() != deckId) {
-						throw new IllegalArgumentException();
-					}
-
-
-					flashcardRepository.save(card);
-				});
+				flashcardRepository.save(card);
+			});
+		}
 	}
 }
