@@ -1,9 +1,9 @@
 package com.descards.flashcards.converter;
 
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
-import com.descards.flashcards.model.nonpersistent.FlashcardPortionRequest;
-import com.descards.flashcards.model.nonpersistent.SortingDirection;
-import com.descards.flashcards.model.nonpersistent.SortingField;
+import com.descards.flashcards.model.nonentity.FlashcardPortionRequest;
+import com.descards.flashcards.model.nonentity.SortingDirection;
+import com.descards.flashcards.model.nonentity.SortingField;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

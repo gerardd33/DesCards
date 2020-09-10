@@ -1,4 +1,4 @@
-package com.descards.flashcards.model.nonpersistent;
+package com.descards.flashcards.model.nonentity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
