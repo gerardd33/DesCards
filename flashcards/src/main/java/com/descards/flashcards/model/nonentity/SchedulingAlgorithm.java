@@ -1,7 +1,5 @@
 package com.descards.flashcards.model.nonentity;
 
-import com.descards.flashcards.model.nonentity.RepetitionInterval;
-
 import java.time.Duration;
 
 public interface SchedulingAlgorithm {

@@ -2,8 +2,10 @@ package com.descards.flashcards.service;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
+import com.descards.flashcards.dto.RepetitionIntervalUpdateRequestDto;
 import com.descards.flashcards.dto.converter.FlashcardDtoConverter;
 import com.descards.flashcards.dto.converter.FlashcardPortionRequestDtoConverter;
+import com.descards.flashcards.dto.converter.RepetitionIntervalUpdateRequestDtoConverter;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;
@@ -11,6 +13,7 @@ import com.descards.flashcards.model.nonentity.FlashcardPortionRequest;
 import com.descards.flashcards.model.nonentity.SortingDirection;
 import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
+import com.google.common.base.CaseFormat;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,11 +37,13 @@ public class DeckFacadeImpl implements DeckFacade {
 
 		Pageable criteria;
 		if (request.getSortingDirection() == SortingDirection.DESCENDING) {
-			criteria = PageRequest.of(request.getOffset(), request.getLimit(),
-					Sort.by(request.getSortBy().getAttributeName()).descending());
+			criteria = PageRequest.of(request.getOffset(), request.getLimit(), Sort.by(
+					CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, request.getSortBy().name()))
+					.descending());
 		} else {
-			criteria = PageRequest.of(request.getOffset(), request.getLimit(),
-					Sort.by(request.getSortBy().getAttributeName()).ascending());
+			criteria = PageRequest.of(request.getOffset(), request.getLimit(), Sort.by(
+					CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, request.getSortBy().name()))
+					.ascending());
 		}
 
 		Collection<Flashcard> cardPortion = flashcardRepository.findAllByDeckId(deckId, criteria);
@@ -97,6 +102,10 @@ public class DeckFacadeImpl implements DeckFacade {
 			Flashcard card = flashcardRepository.findById(cardDto.getId())
 					.orElseThrow(NoSuchElementException::new);
 
+			if (card.getDeck().getId() != deckId) {
+				throw new IllegalArgumentException();
+			}
+
 			card.setFront(cardDto.getFront());
 			card.setBack(cardDto.getBack());
 
@@ -107,5 +116,26 @@ public class DeckFacadeImpl implements DeckFacade {
 
 			flashcardRepository.save(card);
 		});
+	}
+
+	@Override
+	public void updateIntervals(long deckId, Set<RepetitionIntervalUpdateRequestDto> requestDtos) {
+		if (!deckRepository.existsById(deckId)) {
+			throw new NoSuchElementException();
+		}
+
+		requestDtos.stream()
+				.map(RepetitionIntervalUpdateRequestDtoConverter::convertFromDto)
+				.forEach(request -> {
+					Flashcard card = flashcardRepository.findById(request.getCardId())
+							.orElseThrow(NoSuchElementException::new);
+
+					if (card.getDeck().getId() != deckId) {
+						throw new IllegalArgumentException();
+					}
+
+
+					flashcardRepository.save(card);
+				});
 	}
 }

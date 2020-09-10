@@ -32,19 +32,20 @@ public class RepetitionInterval {
 		return algorithm.getEasyFor(this.current);
 	}
 
-	public void setAgain() {
-		this.current = getAgain();
-	}
-
-	public void setHard() {
-		this.current = getHard();
-	}
-
-	public void setOk() {
-		this.current = getOk();
-	}
-
-	public void setEasy() {
-		this.current = getEasy();
+	public void setAs(FlashcardStrength strength) {
+		switch (strength) {
+			case AGAIN:
+				this.current = getAgain();
+				break;
+			case HARD:
+				this.current = getHard();
+				break;
+			case OK:
+				this.current = getOk();
+				break;
+			case EASY:
+				this.current = getEasy();
+				break;
+		}
 	}
 }

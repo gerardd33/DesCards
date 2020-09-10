@@ -8,10 +8,9 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.Callable;
 
 @Slf4j
-@UtilityClass
 public class HttpGuard {
 
-	public ResponseEntity<?> getResponse(Runnable function) {
+	public static ResponseEntity<?> getResponse(Runnable function) {
 		try {
 			function.run();
 			return ResponseEntity.ok().build();
@@ -24,7 +23,7 @@ public class HttpGuard {
 		}
 	}
 
-	public ResponseEntity<?> getResponse(Callable<?> function) {
+	public static ResponseEntity<?> getResponse(Callable<?> function) {
 		try {
 			Object result = function.call();
 			return ResponseEntity.ok(result);

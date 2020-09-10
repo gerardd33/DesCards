@@ -15,8 +15,6 @@ import java.time.temporal.ChronoUnit;
 
 @Entity
 @Data
-@NoArgsConstructor
-@Component
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Flashcard {
 
@@ -34,20 +32,22 @@ public class Flashcard {
 
 	private String back;
 
-	@Setter(AccessLevel.NONE)
 	private RepetitionInterval interval;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime createdTime;
 
-	public Flashcard(String front, String back) {
-		this.front = front;
-		this.back = back;
+	public Flashcard() {
 		this.createdTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 	}
 
-	@Autowired
-	public void setRepetitionInterval(RepetitionInterval interval) {
+	public Flashcard(RepetitionInterval interval) {
 		this.interval = interval;
+	}
+
+	public Flashcard(RepetitionInterval interval, String front, String back) {
+		this(interval);
+		this.front = front;
+		this.back = back;
 	}
 }

@@ -2,6 +2,7 @@ package com.descards.flashcards.facade;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
+import com.descards.flashcards.dto.RepetitionIntervalUpdateRequestDto;
 
 import java.util.List;
 import java.util.Set;
@@ -19,4 +20,6 @@ public interface DeckFacade {
 	void removeCards(long deckId, Set<Long> cardsToRemoveIds);
 
 	void updateCards(long deckId, Set<FlashcardDto> cardsToUpdateDtos);
+
+	void updateIntervals(long deckId, Set<RepetitionIntervalUpdateRequestDto> requestDtos);
 }

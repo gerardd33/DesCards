@@ -7,15 +7,17 @@ import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
-public enum SortingDirection {
+public enum FlashcardStrength {
 
-	ASCENDING("asc"),
-	DESCENDING("desc");
+	AGAIN("again"),
+	HARD("hard"),
+	OK("ok"),
+	EASY("easy");
 
 	private final String apiName;
 
-	public static SortingDirection parseApiName(String apiName) {
-		return Arrays.stream(SortingDirection.values())
+	public static FlashcardStrength parseApiName(String apiName) {
+		return Arrays.stream(FlashcardStrength.values())
 				.filter(value -> value.getApiName().equals(apiName))
 				.findAny()
 				.orElseThrow(IllegalArgumentException::new);

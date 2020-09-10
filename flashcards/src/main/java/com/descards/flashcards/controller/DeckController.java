@@ -2,6 +2,7 @@ package com.descards.flashcards.controller;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.dto.FlashcardPortionRequestDto;
+import com.descards.flashcards.dto.RepetitionIntervalUpdateRequestDto;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.util.HttpGuard;
 import lombok.AllArgsConstructor;
@@ -45,5 +46,10 @@ public class DeckController {
 	@PostMapping("/{deckId}/update-cards")
 	ResponseEntity<?> updateCards(@PathVariable long deckId, @RequestBody Set<FlashcardDto> cardsToUpdateDtos) {
 		return HttpGuard.getResponse(() -> deckFacade.updateCards(deckId, cardsToUpdateDtos));
+	}
+
+	@PostMapping("/{deckId}/update-intervals")
+	ResponseEntity<?> updateIntervals(@PathVariable long deckId, @RequestBody Set<RepetitionIntervalUpdateRequestDto> requestDtos) {
+		return HttpGuard.getResponse(() -> deckFacade.updateIntervals(deckId, requestDtos));
 	}
 }

@@ -1,8 +1,6 @@
 package com.descards.flashcards.config;
 
-import com.descards.flashcards.model.nonentity.RepetitionInterval;
-import com.descards.flashcards.model.nonentity.SchedulingAlgorithm;
-import com.descards.flashcards.model.nonentity.SpacedRepetitionAlgorithm;
+import com.descards.flashcards.model.nonentity.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,5 +15,10 @@ public class ApplicationConfig {
 	@Bean
 	public RepetitionInterval getRepetitionInterval() {
 		return new RepetitionInterval(getSchedulingAlgorithm());
+	}
+
+	@Bean
+	public FlashcardFactory getFlashcardFactory() {
+		return new FlashcardFactory();
 	}
 }

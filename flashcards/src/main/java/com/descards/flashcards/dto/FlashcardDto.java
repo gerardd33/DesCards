@@ -22,7 +22,7 @@ public class FlashcardDto {
 
 	private String back;
 
-	private Long interval;
+	private RepetitionIntervalDto interval;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime created;
