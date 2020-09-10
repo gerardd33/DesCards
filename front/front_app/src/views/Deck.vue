@@ -5,7 +5,7 @@
     <list :list="flashcards"
       :component="flashcard_componenet"
       @edit="edit"
-      >
+      @delete="remove">
     </list>
     <button @click="prev">Poprzedni</button>
     <button @click="next">Następny</button>
@@ -38,7 +38,9 @@ export default {
       page: 0,
       limit: 20,
       last_page: false,
-      edited_key: 0
+      edited_key: 0,
+      removed_indexes: [],
+      edited_indexes: [],
     }
   },
   computed: {
@@ -57,6 +59,11 @@ export default {
     },
     edit: function (key) {
       this.edited_key = key
+      this.edited_key.push(key)
+    },
+    remove: function (key) {
+      this.removed_indexes.push(key)
+      // console.log(this.removed_indexes)
     },
     getFlashcards: function () {
       var vm = this
@@ -78,13 +85,52 @@ export default {
         }
       })
     },
+    applyChanges: function () {
+      // powinno być wykonane przy:
+      // - next/prev
+      // - unmount/destroy?
+      // - apply changes
+
+      var deckId = window.localStorage.getItem('deckId')
+      var removed = this.removed_indexes.map((index) => this.flashcards[index].id)
+      this.removed_indexes = []
+
+      var mapForUpdate = function (index) {
+        return {
+          front: this.flashcards[index].front,
+          back: this.flashcards[index].back,
+          deckId: this.flashcards[index].deckId
+        }
+      }
+      var updated = this.edited_indexes.map(mapForUpdate)
+      this.edited_indexes = []
+
+      axios.post('/api/remove_cards', {
+        deckId, 
+        removed
+      })
+      .then(function () {
+        return axios('/api/update_cards', {
+          deckId,
+          updated
+        })}
+      )
+      .then(function () {console.log('zapisano zmiany')})
+      .catch(function () {
+        // some error message,
+        console.log('nie udało się zapisać zmian')
+      })
+      
+    },
     next: function () {
+      this.applyChanges()
       if (!this.last_page) {
           this.page++
           this.getFlashcards()
       }
     },
     prev: function () {
+      this.applyChanges()
       if (this.offset > 0) {
         this.page--
         this.getFlashcards()
