@@ -1,8 +1,8 @@
 package com.descards.flashcards.service;
 
 import com.descards.flashcards.api.dto.DeckDto;
-import com.descards.flashcards.api.converter.DeckDtoMapper;
-import com.descards.flashcards.facade.UserDecksFacade;
+import com.descards.flashcards.util.mapper.DeckDtoMapper;
+import com.descards.flashcards.service.facade.UserDecksFacade;
 import com.descards.flashcards.model.entity.ApplicationUser;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.repository.ApplicationUserRepository;

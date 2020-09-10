@@ -1,7 +1,7 @@
-package com.descards.flashcards.controller;
+package com.descards.flashcards.api.controller;
 
 import com.descards.flashcards.api.dto.DeckDto;
-import com.descards.flashcards.facade.UserDecksFacade;
+import com.descards.flashcards.service.facade.UserDecksFacade;
 import com.descards.flashcards.util.HttpGuard;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

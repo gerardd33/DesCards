@@ -1,4 +1,4 @@
-package com.descards.flashcards.api.converter;
+package com.descards.flashcards.util.mapper;
 
 import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
 import com.descards.flashcards.model.nonentity.FlashcardStrength;

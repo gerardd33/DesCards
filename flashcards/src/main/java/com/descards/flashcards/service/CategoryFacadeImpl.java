@@ -1,8 +1,8 @@
 package com.descards.flashcards.service;
 
 import com.descards.flashcards.api.dto.CategoryDto;
-import com.descards.flashcards.api.converter.CategoryDtoMapper;
-import com.descards.flashcards.facade.CategoryFacade;
+import com.descards.flashcards.util.mapper.CategoryDtoMapper;
+import com.descards.flashcards.service.facade.CategoryFacade;
 import com.descards.flashcards.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

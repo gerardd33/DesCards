@@ -3,6 +3,7 @@ package com.descards.flashcards.model.entity;
 import com.descards.flashcards.model.nonentity.RepetitionInterval;
 import com.descards.flashcards.model.nonentity.SchedulingAlgorithm;
 import com.descards.flashcards.model.nonentity.SpacedRepetitionAlgorithm;
+import com.descards.flashcards.util.database.converter.RepetitionIntervalConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class Flashcard {
 
 	private String back;
 
+	@Convert(converter = RepetitionIntervalConverter.class)
 	private RepetitionInterval interval;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
@@ -42,6 +44,7 @@ public class Flashcard {
 	}
 
 	public Flashcard(RepetitionInterval interval) {
+		this();
 		this.interval = interval;
 	}
 

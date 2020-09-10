@@ -1,4 +1,4 @@
-package com.descards.flashcards.facade;
+package com.descards.flashcards.service.facade;
 
 import com.descards.flashcards.api.dto.CategoryDto;
 
