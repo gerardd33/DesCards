@@ -1,83 +1,85 @@
 <template>
-  <div class="flashcards-container">
-    {{ deck_name }}<br>
-    {{ page }}
-    <list :list="flashcards" :component="flashcard_componenet"></list>
-    <button @click="prev">Poprzedni</button>
-    <button @click="next">Następny</button>
-    <button>Dodaj</button>
-    <router-link to="/study">Nauka</router-link>
+  <div class="study">
+    {{ flashcardText }}
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import List from '@/components/List.vue'
-import Deck from '@/components/Deck.vue'
-//import  { getCookie } from '@/utils/cookies.js'
 import axios from 'axios'
+import { getFlashcards, commitChanges } from '@/utils/http.js'
 
 export default {
-  name: 'Deck',
+  name: 'Study',
   data: function() {
     return {
-      deck_name: '',
-      flashcards: [ // TODO zmienić domyślną wartość
-        {id: 1, name: 'Talia 1'},
-        {id: 2, name: 'Talia 2'},
-        {id: 3, name: 'Talin 3'}
-      ],
-      flashcard_componenet: Deck,
-      page: 0,
-      limit: 20,
-      last_page: false,
+      flashcards: [{}],
+      prevFlashcards: [],
+      removedIds: [],
+      editedIndexes: [],
+      currentFlashcardId: 0,
+      isFront: true,
+      bufferSize: 20
     }
   },
   computed: {
-    offset: function () {
-      return this.page * this.limit
+    flashcardText: function () {
+      if (this.isFront) {
+        return this.getCurrentFlashcard().front
+      } else {
+        return this.getCurrentFlashcard().back
+      }
     }
   },
   components: {
-    List
   },
   methods: {
-    getFlashcards: function () {
-      var vm = this
-      var deckId = window.localStorage.getItem('deckId')
-      axios.get('/api/deck', {params: {
-        deckId,
-        offset: vm.offset,
-        limit: vm.limit + 1, // Fetch 1 more to check if we're on last page
-        sortBy: 'interval', // TODO let user choose
-        direction: 'asc'
-      }})
-      .then(function (response) {
-        if (response.status === 200) {
-          vm.flashcards = response.data
-          vm.last_page = vm.flashcards.length < (vm.limit + 1)
-          if (!vm.last_page) {
-            vm.flashcards.pop()
-          }
+    commitPrev: function () {
+      var mapForUpdate = function (index) {
+        return {
+          front: this.prevFlashcards[index].front,
+          back: this.prevFlashcards[index].back,
+          deckId: this.prevFlashcards[index].deckId
         }
-      })
-    },
-    next: function () {
-      if (!this.last_page) {
-          this.page++
-          this.getFlashcards()
       }
+      var updated = this.editedIndexes.map(mapForUpdate)
+      this.editedIndexes = []
+      
+      // TODO update intervals
+
+      commitChanges(updated, this.removedIds, interval)
     },
-    prev: function () {
-      if (this.offset > 0) {
-        this.page--
-        this.getFlashcards()
+    getFlashcards: function () {
+      this.commitPrev()
+
+      this.prevFlashcards = this.flashcards
+
+      getFlashcards(this, 0, this.bufferSize)
+//    var vm = this
+//    var deckId = window.localStorage.getItem('deckId')
+//    axios.get('/api/deck', {params: {
+//      deckId,
+//      offset: 0,
+//      limit: 20,
+//      sortBy: 'interval',
+//      direction: 'asc'
+//    }})
+//    .then(function (response) {
+//      if (response.status === 200) {
+//        vm.flashcards = response.data
+//      }
+//    })
+    },
+    getCurrentFlashcard: function () {
+      var id = this.currentFlashcardId
+      if (id >= 0 && id < this.flashcards.length) {
+        return this.flashcards[id]
+      } else if (id < 0 && -id <= this.prevFlashcards.length) {
+        return this.prevFlashcards[this.prevFlashcards.length - id]
       }
     }
   },
   created: function () {
-    this.getFlashcards()
-    this.deck_name = window.localStorage.getItem('deck')
   }
 }
 </script>
