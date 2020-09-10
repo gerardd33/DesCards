@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum SortingField {
 
-	INTERVAL("repetitionInterval"),
+	INTERVAL("interval"),
 	CREATED("createdTime"),
 	FRONT("front"),
 	BACK("back");

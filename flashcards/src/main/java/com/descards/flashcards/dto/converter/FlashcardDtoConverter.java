@@ -1,4 +1,4 @@
-package com.descards.flashcards.converter;
+package com.descards.flashcards.dto.converter;
 
 import com.descards.flashcards.dto.FlashcardDto;
 import com.descards.flashcards.model.entity.Flashcard;
@@ -12,7 +12,7 @@ public class FlashcardDtoConverter {
 				.id(flashcard.getId())
 				.front(flashcard.getFront())
 				.back(flashcard.getBack())
-				.interval(flashcard.getRepetitionInterval().toMinutes())
+				.interval(flashcard.getInterval().getCurrent().toMinutes())
 				.created(flashcard.getCreatedTime())
 				.deckId(flashcard.getDeck().getId())
 				.build();

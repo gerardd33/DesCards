@@ -1,9 +1,12 @@
 package com.descards.flashcards.model.entity;
 
+import com.descards.flashcards.model.nonentity.RepetitionInterval;
+import com.descards.flashcards.model.nonentity.SchedulingAlgorithm;
+import com.descards.flashcards.model.nonentity.SpacedRepetitionAlgorithm;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -13,6 +16,7 @@ import java.time.temporal.ChronoUnit;
 @Entity
 @Data
 @NoArgsConstructor
+@Component
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Flashcard {
 
@@ -30,7 +34,8 @@ public class Flashcard {
 
 	private String back;
 
-	private Duration repetitionInterval;
+	@Setter(AccessLevel.NONE)
+	private RepetitionInterval interval;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime createdTime;
@@ -38,12 +43,11 @@ public class Flashcard {
 	public Flashcard(String front, String back) {
 		this.front = front;
 		this.back = back;
-		this.repetitionInterval = Duration.ZERO; // TODO constant from algorithm
 		this.createdTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 	}
 
-	public Flashcard(Deck deck, String front, String back) {
-		this(front, back);
-		this.deck = deck;
+	@Autowired
+	public void setRepetitionInterval(RepetitionInterval interval) {
+		this.interval = interval;
 	}
 }

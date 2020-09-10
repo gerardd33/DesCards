@@ -1,7 +1,7 @@
 package com.descards.flashcards.service;
 
 import com.descards.flashcards.dto.DeckDto;
-import com.descards.flashcards.converter.DeckDtoConverter;
+import com.descards.flashcards.dto.converter.DeckDtoConverter;
 import com.descards.flashcards.facade.UserDecksFacade;
 import com.descards.flashcards.model.entity.ApplicationUser;
 import com.descards.flashcards.model.entity.Deck;

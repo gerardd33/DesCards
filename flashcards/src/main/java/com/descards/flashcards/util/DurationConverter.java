@@ -1,7 +1,5 @@
 package com.descards.flashcards.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.time.Duration;
@@ -16,7 +14,7 @@ public class DurationConverter implements AttributeConverter<Duration, Long> {
 	}
 
 	@Override
-	public Duration convertToEntityAttribute(Long dbData) {
-		return Duration.of(dbData, ChronoUnit.MINUTES);
+	public Duration convertToEntityAttribute(Long minutes) {
+		return Duration.ofMinutes(minutes);
 	}
 }

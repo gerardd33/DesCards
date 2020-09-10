@@ -1,7 +1,7 @@
 package com.descards.flashcards.service;
 
 import com.descards.flashcards.dto.CategoryDto;
-import com.descards.flashcards.converter.CategoryDtoConverter;
+import com.descards.flashcards.dto.converter.CategoryDtoConverter;
 import com.descards.flashcards.facade.CategoryFacade;
 import com.descards.flashcards.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
