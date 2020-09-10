@@ -37,11 +37,11 @@ public class DeckFacadeImpl implements DeckFacade {
 
 		Pageable criteria;
 		if (request.getSortingDirection() == SortingDirection.DESCENDING) {
-			criteria = PageRequest.of(request.getOffset(), request.getLimit(), Sort.by(
+			criteria = PageRequest.of(request.getPageIndex(), request.getItemsPerPage(), Sort.by(
 					CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, request.getSortBy().name()))
 					.descending());
 		} else {
-			criteria = PageRequest.of(request.getOffset(), request.getLimit(), Sort.by(
+			criteria = PageRequest.of(request.getPageIndex(), request.getItemsPerPage(), Sort.by(
 					CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, request.getSortBy().name()))
 					.ascending());
 		}

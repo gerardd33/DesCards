@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class FlashcardPortionRequestDto {
 
-	private Integer offset;
+	private Integer page;
 
-	private Integer limit;
+	private Integer perPage;
 
 	private String sortBy;
 

@@ -19,8 +19,8 @@ public class FlashcardPortionRequestDtoMapper {
 		}
 
 		return FlashcardPortionRequest.builder()
-				.offset(requestDto.getOffset())
-				.limit(requestDto.getLimit())
+				.pageIndex(requestDto.getPage())
+				.itemsPerPage(requestDto.getPerPage())
 				.sortBy(sortBy)
 				.sortingDirection(sortingDirection)
 				.build();
