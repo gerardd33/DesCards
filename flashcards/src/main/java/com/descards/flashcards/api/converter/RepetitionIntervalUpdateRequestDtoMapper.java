@@ -1,10 +1,10 @@
-package com.descards.flashcards.dto.converter;
+package com.descards.flashcards.api.converter;
 
-import com.descards.flashcards.dto.RepetitionIntervalUpdateRequestDto;
+import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
 import com.descards.flashcards.model.nonentity.FlashcardStrength;
 import com.descards.flashcards.model.nonentity.RepetitionIntervalUpdateRequest;
 
-public class RepetitionIntervalUpdateRequestDtoConverter {
+public class RepetitionIntervalUpdateRequestDtoMapper {
 
 	public static RepetitionIntervalUpdateRequest convertFromDto(RepetitionIntervalUpdateRequestDto requestDto) {
 		FlashcardStrength strength = FlashcardStrength.parseApiName(requestDto.getStrength());

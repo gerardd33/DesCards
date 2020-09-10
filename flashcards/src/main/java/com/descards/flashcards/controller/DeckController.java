@@ -1,8 +1,8 @@
 package com.descards.flashcards.controller;
 
-import com.descards.flashcards.dto.FlashcardDto;
-import com.descards.flashcards.dto.FlashcardPortionRequestDto;
-import com.descards.flashcards.dto.RepetitionIntervalUpdateRequestDto;
+import com.descards.flashcards.api.dto.FlashcardDto;
+import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
+import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.util.HttpGuard;
 import lombok.AllArgsConstructor;

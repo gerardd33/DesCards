@@ -1,7 +1,7 @@
 package com.descards.flashcards.service;
 
-import com.descards.flashcards.dto.CategoryDto;
-import com.descards.flashcards.dto.converter.CategoryDtoConverter;
+import com.descards.flashcards.api.dto.CategoryDto;
+import com.descards.flashcards.api.converter.CategoryDtoMapper;
 import com.descards.flashcards.facade.CategoryFacade;
 import com.descards.flashcards.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	@Override
 	public List<CategoryDto> getAllCategories() {
 		return StreamSupport.stream(categoryRepository.findAll().spliterator(), false)
-				.map(CategoryDtoConverter::convertToDto)
+				.map(CategoryDtoMapper::convertToDto)
 				.collect(Collectors.toList());
 	}
 }

@@ -1,6 +1,6 @@
 package com.descards.flashcards.facade;
 
-import com.descards.flashcards.dto.CategoryDto;
+import com.descards.flashcards.api.dto.CategoryDto;
 
 import java.util.List;
 

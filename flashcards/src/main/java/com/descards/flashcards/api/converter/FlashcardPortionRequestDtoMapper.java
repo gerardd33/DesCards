@@ -1,11 +1,11 @@
-package com.descards.flashcards.dto.converter;
+package com.descards.flashcards.api.converter;
 
-import com.descards.flashcards.dto.FlashcardPortionRequestDto;
+import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.model.nonentity.FlashcardPortionRequest;
 import com.descards.flashcards.model.nonentity.SortingDirection;
 import com.descards.flashcards.model.nonentity.SortingField;
 
-public class FlashcardPortionRequestDtoConverter {
+public class FlashcardPortionRequestDtoMapper {
 
 	public static FlashcardPortionRequest convertFromDto(FlashcardPortionRequestDto requestDto) {
 		SortingField sortBy = SortingField.INTERVAL;

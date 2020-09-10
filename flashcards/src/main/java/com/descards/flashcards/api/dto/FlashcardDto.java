@@ -1,4 +1,4 @@
-package com.descards.flashcards.dto;
+package com.descards.flashcards.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;

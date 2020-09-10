@@ -1,4 +1,4 @@
-package com.descards.flashcards.dto;
+package com.descards.flashcards.api.dto;
 
 import lombok.Builder;
 import lombok.Data;

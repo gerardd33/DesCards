@@ -19,6 +19,6 @@ public class ApplicationConfig {
 
 	@Bean
 	public FlashcardFactory getFlashcardFactory() {
-		return new FlashcardFactory();
+		return new FlashcardFactory(getRepetitionInterval());
 	}
 }

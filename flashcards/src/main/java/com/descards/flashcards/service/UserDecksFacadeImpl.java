@@ -1,7 +1,7 @@
 package com.descards.flashcards.service;
 
-import com.descards.flashcards.dto.DeckDto;
-import com.descards.flashcards.dto.converter.DeckDtoConverter;
+import com.descards.flashcards.api.dto.DeckDto;
+import com.descards.flashcards.api.converter.DeckDtoMapper;
 import com.descards.flashcards.facade.UserDecksFacade;
 import com.descards.flashcards.model.entity.ApplicationUser;
 import com.descards.flashcards.model.entity.Deck;
@@ -30,7 +30,7 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 		ApplicationUser user = applicationUserRepository.findById(userId)
 				.orElseThrow(NoSuchElementException::new);
 		return user.getDecks().stream()
-				.map(DeckDtoConverter::convertToDto)
+				.map(DeckDtoMapper::convertToDto)
 				.collect(Collectors.toList());
 	}
 
@@ -38,7 +38,7 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 	public void createDeck(long userId, DeckDto deckToCreateDto) {
 		ApplicationUser user = applicationUserRepository.findById(userId)
 				.orElseThrow(NoSuchElementException::new);
-		Deck deckToAdd = DeckDtoConverter.convertFromDto(deckToCreateDto);
+		Deck deckToAdd = DeckDtoMapper.convertFromDto(deckToCreateDto);
 
 		deckToAdd.setUser(user);
 		deckRepository.save(deckToAdd);

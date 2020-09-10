@@ -16,6 +16,12 @@ public class RepetitionInterval {
 		this.current = algorithm.getInitial();
 	}
 
+	public RepetitionInterval copy() {
+		RepetitionInterval newRepetitionInterval = new RepetitionInterval(algorithm);
+		newRepetitionInterval.setCurrent(current);
+		return newRepetitionInterval;
+	}
+
 	public Duration getAgain() {
 		return algorithm.getAgainFor(this.current);
 	}
@@ -32,7 +38,7 @@ public class RepetitionInterval {
 		return algorithm.getEasyFor(this.current);
 	}
 
-	public void setAs(FlashcardStrength strength) {
+	public void setFromStrength(FlashcardStrength strength) {
 		switch (strength) {
 			case AGAIN:
 				this.current = getAgain();
@@ -47,5 +53,9 @@ public class RepetitionInterval {
 				this.current = getEasy();
 				break;
 		}
+	}
+
+	public void setFromMinutes(Long minutes) {
+		this.current = Duration.ofMinutes(minutes);
 	}
 }

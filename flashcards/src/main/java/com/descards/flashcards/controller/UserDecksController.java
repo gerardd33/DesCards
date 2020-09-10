@@ -1,6 +1,6 @@
 package com.descards.flashcards.controller;
 
-import com.descards.flashcards.dto.DeckDto;
+import com.descards.flashcards.api.dto.DeckDto;
 import com.descards.flashcards.facade.UserDecksFacade;
 import com.descards.flashcards.util.HttpGuard;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,9 @@
-package com.descards.flashcards.dto.converter;
+package com.descards.flashcards.api.converter;
 
-import com.descards.flashcards.dto.DeckDto;
+import com.descards.flashcards.api.dto.DeckDto;
 import com.descards.flashcards.model.entity.Deck;
 
-public class DeckDtoConverter {
+public class DeckDtoMapper {
 
 	public static DeckDto convertToDto(Deck deck) {
 		return DeckDto.builder()

@@ -1,9 +1,9 @@
-package com.descards.flashcards.dto.converter;
+package com.descards.flashcards.api.converter;
 
-import com.descards.flashcards.dto.CategoryDto;
+import com.descards.flashcards.api.dto.CategoryDto;
 import com.descards.flashcards.model.entity.Category;
 
-public class CategoryDtoConverter {
+public class CategoryDtoMapper {
 
 	public static CategoryDto convertToDto(Category category) {
 		return CategoryDto.builder()

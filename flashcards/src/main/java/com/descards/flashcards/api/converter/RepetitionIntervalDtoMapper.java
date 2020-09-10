@@ -1,9 +1,9 @@
-package com.descards.flashcards.dto.converter;
+package com.descards.flashcards.api.converter;
 
-import com.descards.flashcards.dto.RepetitionIntervalDto;
+import com.descards.flashcards.api.dto.RepetitionIntervalDto;
 import com.descards.flashcards.model.nonentity.RepetitionInterval;
 
-public class RepetitionIntervalDtoConverter {
+public class RepetitionIntervalDtoMapper {
 
 	public static RepetitionIntervalDto convertToDto(RepetitionInterval interval) {
 		return RepetitionIntervalDto.builder()

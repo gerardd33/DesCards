@@ -1,11 +1,11 @@
 package com.descards.flashcards.service;
 
-import com.descards.flashcards.dto.FlashcardDto;
-import com.descards.flashcards.dto.FlashcardPortionRequestDto;
-import com.descards.flashcards.dto.RepetitionIntervalUpdateRequestDto;
-import com.descards.flashcards.dto.converter.FlashcardDtoConverter;
-import com.descards.flashcards.dto.converter.FlashcardPortionRequestDtoConverter;
-import com.descards.flashcards.dto.converter.RepetitionIntervalUpdateRequestDtoConverter;
+import com.descards.flashcards.api.dto.FlashcardDto;
+import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
+import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
+import com.descards.flashcards.api.converter.FlashcardDtoMapper;
+import com.descards.flashcards.api.converter.FlashcardPortionRequestDtoMapper;
+import com.descards.flashcards.api.converter.RepetitionIntervalUpdateRequestDtoMapper;
 import com.descards.flashcards.facade.DeckFacade;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;
@@ -33,7 +33,7 @@ public class DeckFacadeImpl implements DeckFacade {
 
 	@Override
 	public List<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto) {
-		FlashcardPortionRequest request = FlashcardPortionRequestDtoConverter.convertFromDto(requestDto);
+		FlashcardPortionRequest request = FlashcardPortionRequestDtoMapper.convertFromDto(requestDto);
 
 		Pageable criteria;
 		if (request.getSortingDirection() == SortingDirection.DESCENDING) {
@@ -48,7 +48,7 @@ public class DeckFacadeImpl implements DeckFacade {
 
 		Collection<Flashcard> cardPortion = flashcardRepository.findAllByDeckId(deckId, criteria);
 		return cardPortion.stream()
-				.map(FlashcardDtoConverter::convertToDto)
+				.map(FlashcardDtoMapper::convertToDto)
 				.collect(Collectors.toList());
 	}
 
@@ -63,7 +63,7 @@ public class DeckFacadeImpl implements DeckFacade {
 				.orElseThrow(NoSuchElementException::new);
 
 		Set<Flashcard> cardsToAdd = cardsToAddDtos.stream()
-				.map(FlashcardDtoConverter::convertFromDto)
+				.map(FlashcardDtoMapper::convertFromDto)
 				.collect(Collectors.toSet());
 
 		cardsToAdd.forEach(card -> card.setDeck(deck));
@@ -125,7 +125,7 @@ public class DeckFacadeImpl implements DeckFacade {
 		}
 
 		requestDtos.stream()
-				.map(RepetitionIntervalUpdateRequestDtoConverter::convertFromDto)
+				.map(RepetitionIntervalUpdateRequestDtoMapper::convertFromDto)
 				.forEach(request -> {
 					Flashcard card = flashcardRepository.findById(request.getCardId())
 							.orElseThrow(NoSuchElementException::new);

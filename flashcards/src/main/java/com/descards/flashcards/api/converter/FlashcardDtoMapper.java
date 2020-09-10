@@ -1,19 +1,19 @@
-package com.descards.flashcards.dto.converter;
+package com.descards.flashcards.api.converter;
 
-import com.descards.flashcards.dto.FlashcardDto;
+import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.model.entity.Flashcard;
 import com.descards.flashcards.model.nonentity.FlashcardFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FlashcardDtoConverter {
+public class FlashcardDtoMapper {
 
 	private static FlashcardFactory flashcardFactory;
 
 	@Autowired
 	public static void setFlashcardFactory(FlashcardFactory flashcardFactory) {
-		FlashcardDtoConverter.flashcardFactory = flashcardFactory;
+		FlashcardDtoMapper.flashcardFactory = flashcardFactory;
 	}
 
 	public static FlashcardDto convertToDto(Flashcard flashcard) {
@@ -21,7 +21,7 @@ public class FlashcardDtoConverter {
 				.id(flashcard.getId())
 				.front(flashcard.getFront())
 				.back(flashcard.getBack())
-				.interval(RepetitionIntervalDtoConverter.convertToDto(flashcard.getInterval()))
+				.interval(RepetitionIntervalDtoMapper.convertToDto(flashcard.getInterval()))
 				.created(flashcard.getCreatedTime())
 				.deckId(flashcard.getDeck().getId())
 				.build();

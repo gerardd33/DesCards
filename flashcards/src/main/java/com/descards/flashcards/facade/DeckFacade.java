@@ -1,8 +1,8 @@
 package com.descards.flashcards.facade;
 
-import com.descards.flashcards.dto.FlashcardDto;
-import com.descards.flashcards.dto.FlashcardPortionRequestDto;
-import com.descards.flashcards.dto.RepetitionIntervalUpdateRequestDto;
+import com.descards.flashcards.api.dto.FlashcardDto;
+import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
+import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
 
 import java.util.List;
 import java.util.Set;
