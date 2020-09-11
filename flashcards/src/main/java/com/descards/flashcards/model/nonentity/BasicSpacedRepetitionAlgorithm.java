@@ -2,7 +2,7 @@ package com.descards.flashcards.model.nonentity;
 
 import java.time.Duration;
 
-public class SpacedRepetitionAlgorithm implements SchedulingAlgorithm {
+public class BasicSpacedRepetitionAlgorithm implements SchedulingAlgorithm {
 
 	private static final Duration LEARNING_INTERVAL = Duration.ofMinutes(5);
 
@@ -24,7 +24,7 @@ public class SpacedRepetitionAlgorithm implements SchedulingAlgorithm {
 
 	@Override
 	public Duration getHardFor(Duration duration) {
-		if (duration.compareTo(LEARNED) <= 0) {
+		if (duration.compareTo(LEARNED) < 0) {
 			return duration.plus(LEARNING_INTERVAL);
 		} else {
 			return BASE_INTERVAL;
@@ -33,7 +33,7 @@ public class SpacedRepetitionAlgorithm implements SchedulingAlgorithm {
 
 	@Override
 	public Duration getOkFor(Duration duration) {
-		if (duration.compareTo(LEARNED) <= 0) {
+		if (duration.compareTo(LEARNED) < 0) {
 			return duration.plus(LEARNING_INTERVAL);
 		} else if (duration.compareTo(BASE_INTERVAL) < 0) {
 			return BASE_INTERVAL;

@@ -9,7 +9,7 @@ public class ApplicationConfig {
 
 	@Bean
 	public SchedulingAlgorithm getSchedulingAlgorithm() {
-		return new SpacedRepetitionAlgorithm();
+		return new BasicSpacedRepetitionAlgorithm();
 	}
 
 	@Bean

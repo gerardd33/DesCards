@@ -1,4 +1,4 @@
-package com.descards.flashcards.service;
+package com.descards.flashcards.service.impl;
 
 import com.descards.flashcards.api.dto.DeckDto;
 import com.descards.flashcards.util.mapper.DeckDtoMapper;
