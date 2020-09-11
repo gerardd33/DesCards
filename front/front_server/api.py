@@ -138,8 +138,8 @@ def decks():
 @bp.route('/deck', methods=['GET'])
 def deck():
     schema = {'deckId': {'type': 'string'},
-              'offset': {'type': 'string'},
-              'limit': {'type': 'string'},
+              'page': {'type': 'string'},
+              'perPage': {'type': 'string'},
               'sortBy': {'type': 'string',
                          'allowed': ['interval', 'created', 'front', 'back']},
               'direction': {'type': 'string',
@@ -153,7 +153,19 @@ def deck():
     if data is None:
         return 'Incorrect data', 400
 
-    first = int(data['offset'])
+    first = int(data['page']) * int(data['perPage'])
+    after_last = first + int(data['perPage'])
 
     return jsonify(flashcards[first:after_last]), 200
-after_last = first + int(data['limit'])
+
+
+@bp.route('/categories', methods=['GET'])
+def categories():
+    categories = [
+        {'id': 1, 'name': 'history', 'specialFields': ['date', 'who', 'wher']},
+        {'id': 2, 'name': 'biology', 'specialFields': ['definition']},
+        {'id': 3, 'name': 'xd', 'specialFields': ['dae', 'o', 'h']},
+        {'id': 4, 'name': 'math', 'specialFields': ['definition', 'result']},
+    ]
+
+    return jsonify(categories)
