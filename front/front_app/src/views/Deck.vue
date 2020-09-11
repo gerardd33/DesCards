@@ -94,7 +94,6 @@ export default {
       // - unmount/destroy?
       // - apply changes
 
-      var deckId = window.localStorage.getItem('deckId')
       var removed = this.removed_indexes.map((index) => this.flashcards[index].id)
       this.removed_indexes = []
 
