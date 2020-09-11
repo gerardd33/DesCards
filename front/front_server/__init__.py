@@ -7,8 +7,11 @@ def create_app():
     from . import index
     app.register_blueprint(index.bp)
 
-    from . import api
-    app.register_blueprint(api.bp)
+    from . import users_api
+    app.register_blueprint(users_api.bp)
+
+    from . import flashcards_api
+    app.register_blueprint(flashcards_api.bp)
 
     return app
 
