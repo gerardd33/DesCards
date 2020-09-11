@@ -1,12 +1,13 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, g
 import requests
+import os
 from random import randint, random
 from . import utils
 
 bp = Blueprint('flashcards_api', __name__, url_prefix='/api')
 
-USERS_HOST = 'http://users_server_1:5000'  # TODO read from .env
-FLASHCARDS_HOST = 'http://users_server_1:5000'  # TODO read from .env
+USERS_HOST = 'http://' + os.environ['USERS']
+FLASHCARDS_HOST = 'http://' + os.environ['FLASHCARDS']
 # TODO make https
 
 flashcards = [
@@ -16,17 +17,26 @@ flashcards = [
 ]
 
 
+def get_session():
+    if 'session' not in g:
+        g.session = requests.Session()
+
+    return g.session
+
+
 @bp.before_request
 def auth():
     token = request.cookies.get('token')
     if token is None:
         return "Invalid token", 403
 
-    res = requests.get(USERS_HOST + '/auth/validate', json={'token': token})
+    res = get_session().get(USERS_HOST + '/auth/validate',
+                            json={'token': token})
     if res.status_code != 200:
-        return res.data, res.status_code
+        return res.content, res.status_code
 
-    if not res.json['is_valid']:
+    print(res.json(), flush=True)
+    if not res.json()['is_valid']:
         return "Invalid token", 403
 
     return None
@@ -34,24 +44,19 @@ def auth():
 
 @bp.route('/user_decks', methods=['GET'])
 def decks():
-    # weryfikacja poprawności requesta
-    # schema = {'userid': {'type': 'integer'}}
-    # data = validate(request.json, schema)
+    token = request.cookies.get('token')
+    if token is None:
+        return "Invalid token", 403
 
-    # print(request.json, flush=True)
+#   json = utils.jwt_decode(token)
 
-    # if data is None:
-    #     return 'Incorrect data', 400
+#   res = requests.get(FLASHCARDS_HOST + '/user-decks/' + json['userId'])
+    res = requests.get(FLASHCARDS_HOST + '/user-decks/1')
 
-    decks = [
-        {'id': 1, 'name': 'Talia 1', 'user': 'admin'},
-        {'id': 2, 'name': 'Talia 2', 'user': 'admin'},
-        {'id': 3, 'name': 'Talin 3', 'user': 'admin'},
-        {'id': 4, 'name': 'Historia', 'user': 'admin'},
-        {'id': 5, 'name': 'Angielski', 'user': 'admin'},
-    ]
+    if res.status_code != 200:
+        return res.content, res.status_code
 
-    return jsonify(decks), 200
+    return jsonify(res.json()), 200
 
 
 @bp.route('/deck', methods=['GET'])

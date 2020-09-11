@@ -1,10 +1,11 @@
 from flask import Blueprint, jsonify, request
 import requests
+import os
 from . import utils
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
-USERS_HOST = 'http://users_server_1:5000'  # TODO read from .env
+USERS_HOST = 'http://' + os.environ['USERS']
 # TODO make https
 
 

@@ -1,4 +1,5 @@
 from cerberus import Validator
+import jwt
 
 
 def validate(dictionary, schema):
@@ -8,3 +9,14 @@ def validate(dictionary, schema):
         return None
 
     return dictionary
+
+
+def jwt_decode(token):
+    try:
+        json = jwt.decode(token,
+                          verify=False)
+    except (jwt.exceptions.InvalidSignatureError,
+            jwt.exceptions.DecodeError):
+        return None
+
+    return json
