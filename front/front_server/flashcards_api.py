@@ -53,10 +53,7 @@ def decks():
 #   res = requests.get(FLASHCARDS_HOST + '/user-decks/' + json['userId'])
     res = requests.get(FLASHCARDS_HOST + '/user-decks/1')
 
-    if res.status_code != 200:
-        return res.content, res.status_code
-
-    return jsonify(res.json()), 200
+    return res.content, res.status_code
 
 
 @bp.route('/deck', methods=['GET'])
@@ -77,10 +74,16 @@ def deck():
     if data is None:
         return 'Incorrect data', 400
 
-    first = int(data['page']) * int(data['perPage'])
-    after_last = first + int(data['perPage'])
+    res = requests.get(FLASHCARDS_HOST + '/deck/' + data['deckId'],
+                       json=data)
 
-    return jsonify(flashcards[first:after_last]), 200
+#   print(res.json(), flush=True)
+    return res.content, res.status_code
+
+#   first = int(data['page']) * int(data['perPage'])
+#   after_last = first + int(data['perPage'])
+
+#   return jsonify(flashcards[first:after_last]), 200
 
 
 @bp.route('/categories', methods=['GET'])
