@@ -2,7 +2,7 @@ package com.descards.flashcards.api.controller;
 
 import com.descards.flashcards.api.dto.DeckDto;
 import com.descards.flashcards.service.facade.UserDecksFacade;
-import com.descards.flashcards.util.HttpGuard;
+import com.descards.flashcards.util.controller.HttpGuard;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

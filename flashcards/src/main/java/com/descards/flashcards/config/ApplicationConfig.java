@@ -4,7 +4,7 @@ import com.descards.flashcards.model.nonentity.BasicSpacedRepetitionAlgorithm;
 import com.descards.flashcards.model.nonentity.FlashcardFactory;
 import com.descards.flashcards.model.nonentity.RepetitionInterval;
 import com.descards.flashcards.model.nonentity.SchedulingAlgorithm;
-import com.descards.flashcards.util.DeckInfoRetriever;
+import com.descards.flashcards.util.service.DeckInfoRetriever;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

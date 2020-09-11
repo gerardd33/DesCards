@@ -1,4 +1,4 @@
-package com.descards.flashcards.util;
+package com.descards.flashcards.util.service;
 
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;

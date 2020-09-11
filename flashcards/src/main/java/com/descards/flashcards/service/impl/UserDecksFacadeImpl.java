@@ -7,7 +7,7 @@ import com.descards.flashcards.repository.ApplicationUserRepository;
 import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
 import com.descards.flashcards.service.facade.UserDecksFacade;
-import com.descards.flashcards.util.mapper.DeckDtoMapper;
+import com.descards.flashcards.util.api.mapper.DeckDtoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

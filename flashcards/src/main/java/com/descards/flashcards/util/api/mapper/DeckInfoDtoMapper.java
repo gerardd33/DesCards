@@ -1,4 +1,4 @@
-package com.descards.flashcards.util.mapper;
+package com.descards.flashcards.util.api.mapper;
 
 import com.descards.flashcards.api.dto.DeckInfoDto;
 import com.descards.flashcards.model.nonentity.DeckInfo;

@@ -1,4 +1,4 @@
-package com.descards.flashcards.util.database.converter;
+package com.descards.flashcards.util.repository.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
