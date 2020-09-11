@@ -23,6 +23,11 @@ public class DeckController {
 		return HttpGuard.getResponse(() -> deckFacade.getCardPortion(deckId, requestDto));
 	}
 
+	@GetMapping("/{deckId}/info")
+	ResponseEntity<?> getDeckInfo(@PathVariable long deckId) {
+		return HttpGuard.getResponse(() -> deckFacade.getDeckInfo(deckId));
+	}
+
 	@PostMapping("/{deckId}/add-card")
 	ResponseEntity<?> addCard(@PathVariable long deckId, @RequestBody FlashcardDto cardToAddDto) {
 		return HttpGuard.getResponse(() -> deckFacade.addCard(deckId, cardToAddDto));

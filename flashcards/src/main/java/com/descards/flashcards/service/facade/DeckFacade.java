@@ -1,5 +1,6 @@
 package com.descards.flashcards.service.facade;
 
+import com.descards.flashcards.api.dto.DeckInfoDto;
 import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
@@ -11,6 +12,8 @@ import java.util.Set;
 public interface DeckFacade {
 
 	List<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto);
+
+	DeckInfoDto getDeckInfo(long deckId);
 
 	void addCard(long deckId, FlashcardDto cardToAddDto);
 

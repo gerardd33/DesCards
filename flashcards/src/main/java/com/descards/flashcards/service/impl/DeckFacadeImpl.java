@@ -1,5 +1,6 @@
 package com.descards.flashcards.service.impl;
 
+import com.descards.flashcards.api.dto.DeckInfoDto;
 import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
@@ -51,6 +52,12 @@ public class DeckFacadeImpl implements DeckFacade {
 		return cardPortion.stream()
 				.map(FlashcardDtoMapper::convertToDto)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public DeckInfoDto getDeckInfo(long deckId) {
+		// ...
+		return null;
 	}
 
 	@Override
