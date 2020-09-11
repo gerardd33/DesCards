@@ -1,6 +1,7 @@
 package com.descards.flashcards.config;
 
 import com.descards.flashcards.model.nonentity.*;
+import com.descards.flashcards.util.DeckInfoRetriever;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,5 +21,10 @@ public class ApplicationConfig {
 	@Bean
 	public FlashcardFactory getFlashcardFactory() {
 		return new FlashcardFactory(getRepetitionInterval());
+	}
+
+	@Bean
+	public DeckInfoRetriever getDeckInfoRetriever() {
+		return new DeckInfoRetriever();
 	}
 }
