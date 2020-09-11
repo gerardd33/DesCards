@@ -7,7 +7,7 @@ import com.descards.flashcards.model.nonentity.SortingField;
 
 public class FlashcardPortionRequestDtoMapper {
 
-	public static FlashcardPortionRequest convertFromDto(FlashcardPortionRequestDto requestDto) {
+	public static FlashcardPortionRequest mapFromDto(FlashcardPortionRequestDto requestDto) {
 		SortingField sortBy = SortingField.INTERVAL;
 		if (requestDto.getSortBy() != null) {
 			sortBy = SortingField.parseApiName(requestDto.getSortBy());

@@ -1,19 +1,17 @@
-package com.descards.flashcards.service;
+package com.descards.flashcards.service.impl;
 
+import com.descards.flashcards.api.dto.DeckInfoDto;
 import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
-import com.descards.flashcards.model.nonentity.RepetitionIntervalUpdateRequest;
-import com.descards.flashcards.util.mapper.FlashcardDtoMapper;
-import com.descards.flashcards.util.mapper.FlashcardPortionRequestDtoMapper;
-import com.descards.flashcards.util.mapper.RepetitionIntervalUpdateRequestDtoMapper;
-import com.descards.flashcards.service.facade.DeckFacade;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;
-import com.descards.flashcards.model.nonentity.FlashcardPortionRequest;
-import com.descards.flashcards.model.nonentity.SortingDirection;
+import com.descards.flashcards.model.nonentity.*;
 import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
+import com.descards.flashcards.service.facade.DeckFacade;
+import com.descards.flashcards.util.DeckInfoRetriever;
+import com.descards.flashcards.util.mapper.*;
 import com.google.common.base.CaseFormat;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,9 +31,11 @@ public class DeckFacadeImpl implements DeckFacade {
 
 	FlashcardRepository flashcardRepository;
 
+	DeckInfoRetriever deckInfoRetriever;
+
 	@Override
 	public List<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto) {
-		FlashcardPortionRequest request = FlashcardPortionRequestDtoMapper.convertFromDto(requestDto);
+		FlashcardPortionRequest request = FlashcardPortionRequestDtoMapper.mapFromDto(requestDto);
 
 		Pageable criteria;
 		if (request.getSortingDirection() == SortingDirection.DESCENDING) {
@@ -49,8 +50,29 @@ public class DeckFacadeImpl implements DeckFacade {
 
 		Collection<Flashcard> cardPortion = flashcardRepository.findAllByDeckId(deckId, criteria);
 		return cardPortion.stream()
-				.map(FlashcardDtoMapper::convertToDto)
+				.map(FlashcardDtoMapper::mapToDto)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public DeckInfoDto getDeckInfo(long deckId) {
+		Deck deck = deckRepository.findById(deckId)
+				.orElseThrow(NoSuchElementException::new);
+
+		deckInfoRetriever.setDeck(deck);
+		RepetitionInterval smallestInterval = deckInfoRetriever.getSmallestInterval();
+		RepetitionInterval greatestInterval = deckInfoRetriever.getGreatestInterval();
+		LocalDateTime lastAddition = deckInfoRetriever.getLastAddition();
+
+		DeckInfo deckInfo = DeckInfo.builder()
+				.deck(deck)
+				.totalCards((long) deck.getCards().size())
+				.smallestInterval(smallestInterval)
+				.greatestInterval(greatestInterval)
+				.lastAddition(lastAddition)
+				.build();
+
+		return DeckInfoDtoMapper.mapToDto(deckInfo);
 	}
 
 	@Override
@@ -64,7 +86,7 @@ public class DeckFacadeImpl implements DeckFacade {
 				.orElseThrow(NoSuchElementException::new);
 
 		Set<Flashcard> cardsToAdd = cardsToAddDtos.stream()
-				.map(FlashcardDtoMapper::convertFromDto)
+				.map(FlashcardDtoMapper::mapFromDto)
 				.collect(Collectors.toSet());
 
 		cardsToAdd.forEach(card -> card.setDeck(deck));
@@ -94,6 +116,11 @@ public class DeckFacadeImpl implements DeckFacade {
 	}
 
 	@Override
+	public void updateCard(long deckId, FlashcardDto cardToUpdateDto) {
+		updateCards(deckId, Collections.singleton(cardToUpdateDto));
+	}
+
+	@Override
 	public void updateCards(long deckId, Set<FlashcardDto> cardsToUpdateDtos) {
 		if (!deckRepository.existsById(deckId)) {
 			throw new NoSuchElementException();
@@ -119,6 +146,11 @@ public class DeckFacadeImpl implements DeckFacade {
 	}
 
 	@Override
+	public void updateInterval(long deckId, RepetitionIntervalUpdateRequestDto requestDto) {
+		updateIntervals(deckId, Collections.singleton(requestDto));
+	}
+
+	@Override
 	public void updateIntervals(long deckId, Set<RepetitionIntervalUpdateRequestDto> requestDtos) {
 		if (!deckRepository.existsById(deckId)) {
 			throw new NoSuchElementException();
@@ -126,12 +158,13 @@ public class DeckFacadeImpl implements DeckFacade {
 
 		for (RepetitionIntervalUpdateRequestDto requestDto : requestDtos) {
 			RepetitionIntervalUpdateRequest request =
-					RepetitionIntervalUpdateRequestDtoMapper.convertFromDto(requestDto);
+					RepetitionIntervalUpdateRequestDtoMapper.mapFromDto(requestDto);
 			flashcardRepository.findById(request.getCardId()).ifPresent(card -> {
 				if (card.getDeck().getId() != deckId) {
 					throw new IllegalArgumentException();
 				}
 
+				card.getInterval().setFromStrength(request.getCardStrength());
 				flashcardRepository.save(card);
 			});
 		}

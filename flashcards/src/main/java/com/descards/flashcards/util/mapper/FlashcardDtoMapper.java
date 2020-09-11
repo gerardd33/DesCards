@@ -11,25 +11,25 @@ public class FlashcardDtoMapper {
 
 	private static FlashcardFactory flashcardFactory;
 
-	@Autowired
-	public static void setFlashcardFactory(FlashcardFactory flashcardFactory) {
-		FlashcardDtoMapper.flashcardFactory = flashcardFactory;
-	}
-
-	public static FlashcardDto convertToDto(Flashcard flashcard) {
+	public static FlashcardDto mapToDto(Flashcard flashcard) {
 		return FlashcardDto.builder()
 				.id(flashcard.getId())
 				.front(flashcard.getFront())
 				.back(flashcard.getBack())
-				.interval(RepetitionIntervalDtoMapper.convertToDto(flashcard.getInterval()))
+				.interval(RepetitionIntervalDtoMapper.mapToDto(flashcard.getInterval()))
 				.created(flashcard.getCreatedTime())
 				.deckId(flashcard.getDeck().getId())
 				.build();
 	}
 
-	public static Flashcard convertFromDto(FlashcardDto flashcardDto) {
+	public static Flashcard mapFromDto(FlashcardDto flashcardDto) {
 		return flashcardFactory.getObject(
 				flashcardDto.getFront(), flashcardDto.getBack()
 		);
+	}
+
+	@Autowired
+	public void setFlashcardFactory(FlashcardFactory flashcardFactory) {
+		FlashcardDtoMapper.flashcardFactory = flashcardFactory;
 	}
 }
