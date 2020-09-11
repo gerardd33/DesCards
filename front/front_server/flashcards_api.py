@@ -88,11 +88,5 @@ def deck():
 
 @bp.route('/categories', methods=['GET'])
 def categories():
-    categories = [
-        {'id': 1, 'name': 'history', 'specialFields': ['date', 'who', 'wher']},
-        {'id': 2, 'name': 'biology', 'specialFields': ['definition']},
-        {'id': 3, 'name': 'xd', 'specialFields': ['dae', 'o', 'h']},
-        {'id': 4, 'name': 'math', 'specialFields': ['definition', 'result']},
-    ]
-
-    return jsonify(categories)
+    res = requests.get(FLASHCARDS_HOST + '/categories')
+    return res.content, res.status_code
