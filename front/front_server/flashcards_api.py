@@ -5,6 +5,7 @@ from . import utils
 
 bp = Blueprint('flashcards_api', __name__, url_prefix='/api')
 
+USERS_HOST = 'http://users_server_1:5000'  # TODO read from .env
 FLASHCARDS_HOST = 'http://users_server_1:5000'  # TODO read from .env
 # TODO make https
 
@@ -13,6 +14,22 @@ flashcards = [
      'created': '1:2:3', 'interval': randint(1, 8400000)}
     for i in range(100)
 ]
+
+
+@bp.before_request
+def auth():
+    token = request.cookies.get('token')
+    if token is None:
+        return "Invalid token", 403
+
+    res = requests.get(USERS_HOST + '/auth/validate', json={'token': token})
+    if res.status_code != 200:
+        return res.data, res.status_code
+
+    if not res.json['is_valid']:
+        return "Invalid token", 403
+
+    return None
 
 
 @bp.route('/user_decks', methods=['GET'])
