@@ -1,6 +1,5 @@
 package com.descards.flashcards.util;
 
-import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 

@@ -4,7 +4,6 @@ import com.descards.flashcards.api.dto.DeckInfoDto;
 import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
-import com.descards.flashcards.model.nonentity.RepetitionIntervalUpdateRequest;
 
 import java.util.List;
 import java.util.Set;

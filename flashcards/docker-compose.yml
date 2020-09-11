@@ -6,27 +6,19 @@ services:
     build:
       context: ./
       target: prod
-#   volumes:
-#     - ./flashcards_server:/usr/src/app/flashcards_server
+#    volumes:
+#        - ./flashcards_server:/usr/src/app/flashcards_server
     ports:
       - 8080:8080
-#    networks:
-#      - front_net
-#    environment: [FLASK_APP, POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_DB]
     stop_signal: SIGINT
 
   database:
     image: postgres
-    restart: always # ???
+    restart: always
     environment: [POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_DB]
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 10000:8080 # port 10000 on host
-
-# networks:
-#   front_net:
-#     external: true
-
+      - 10000:8080

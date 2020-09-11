@@ -1,10 +1,12 @@
 package com.descards.flashcards.model.nonentity;
 
 import lombok.Data;
+import org.springframework.context.annotation.Scope;
 
 import java.time.Duration;
 
 @Data
+@Scope("prototype")
 public class RepetitionInterval {
 
 	private SchedulingAlgorithm algorithm;

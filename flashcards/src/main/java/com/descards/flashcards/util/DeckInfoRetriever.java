@@ -2,9 +2,12 @@ package com.descards.flashcards.util;
 
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.model.entity.Flashcard;
+import com.descards.flashcards.model.nonentity.RepetitionInterval;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -16,9 +19,17 @@ import java.util.function.BinaryOperator;
 @NoArgsConstructor
 public class DeckInfoRetriever {
 
-	Deck deck;
+	private Deck deck;
 
-	public Duration getSmallestInterval() {
+	private static RepetitionInterval BASE_INTERVAL;
+
+	@Autowired
+	@Qualifier("baseRepetitionInterval")
+	public void setBaseInterval(RepetitionInterval baseInterval) {
+		BASE_INTERVAL = baseInterval;
+	}
+
+	public RepetitionInterval getSmallestInterval() {
 		Optional<Flashcard> cardWithSmallestInterval = findCardWithLargest(
 				(card1, card2) -> {
 					Duration interval1 = card1.getInterval().getCurrent();
@@ -27,10 +38,10 @@ public class DeckInfoRetriever {
 				});
 
 		return cardWithSmallestInterval.isPresent() ?
-				cardWithSmallestInterval.get().getInterval().getCurrent() : Duration.ZERO;
+				cardWithSmallestInterval.get().getInterval() : BASE_INTERVAL;
 	}
 
-	public Duration getGreatestInterval() {
+	public RepetitionInterval getGreatestInterval() {
 		Optional<Flashcard> cardWithGreatestInterval = findCardWithLargest(
 				(card1, card2) -> {
 					Duration interval1 = card1.getInterval().getCurrent();
@@ -39,7 +50,7 @@ public class DeckInfoRetriever {
 				});
 
 		return cardWithGreatestInterval.isPresent() ?
-				cardWithGreatestInterval.get().getInterval().getCurrent() : Duration.ZERO;
+				cardWithGreatestInterval.get().getInterval() : BASE_INTERVAL;
 	}
 
 	public LocalDateTime getLastAddition() {

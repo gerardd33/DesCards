@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 
 public class DeckInfoDtoMapper {
 
-	public static DeckInfoDto convertToDto(DeckInfo deckInfo) {
+	public static DeckInfoDto mapToDto(DeckInfo deckInfo) {
 		if (deckInfo.getTotalCards() == 0) {
 			return DeckInfoDto.builder()
-					.deck(DeckDtoMapper.convertToDto(deckInfo.getDeck()))
+					.deck(DeckDtoMapper.mapToDto(deckInfo.getDeck()))
 					.totalCards(0L)
 					.smallestInterval(0L)
 					.greatestInterval(0L)
@@ -19,7 +19,7 @@ public class DeckInfoDtoMapper {
 		}
 
 		return DeckInfoDto.builder()
-				.deck(DeckDtoMapper.convertToDto(deckInfo.getDeck()))
+				.deck(DeckDtoMapper.mapToDto(deckInfo.getDeck()))
 				.totalCards(deckInfo.getTotalCards())
 				.smallestInterval(deckInfo.getSmallestInterval().getCurrent().toMinutes())
 				.greatestInterval(deckInfo.getGreatestInterval().getCurrent().toMinutes())

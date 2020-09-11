@@ -3,7 +3,6 @@ package com.descards.flashcards.util.database.converter;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
 @Converter(autoApply = true)
 public class DurationConverter implements AttributeConverter<Duration, Long> {
