@@ -10,7 +10,7 @@ SESSION_VALID_TIME = datetime.timedelta(minutes=15)
 DATABASE_NAME = os.environ['POSTGRES_DB']
 DATABASE_USER = os.environ['POSTGRES_USER']
 DATABASE_PASSWORD = os.environ['POSTGRES_PASSWORD']
-DATABASE_HOST = "database"
+DATABASE_HOST = os.environ['DATABASE']
 
 
 class Database():
