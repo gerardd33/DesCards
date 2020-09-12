@@ -141,7 +141,8 @@ def update_intervals():
 @bp.route('/deck_info', methods=['GET'])
 def deck_info():
     schema = {'deckId': {'type': 'string'}}
-    data = utils.validate(request.json, schema)
+    json = request.args.to_dict()
+    data = utils.validate(json, schema)
 
     if data is None:
         return "Invalid data", 400
