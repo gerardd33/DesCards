@@ -14,16 +14,19 @@ export var getFlashcards = async function (vm, page, perPage, sortBy='interval',
   })
 }
 
-export var commitChanges = async function (editedCards, removedIds=null, intervals=null) {
+export var commitChanges = async function (flashcards, removedIds=null, intervals=null) {
   var deckId = window.localStorage.getItem('deckId')
 
   axios.post('/api/update_cards', {
       deckId,
-      editedCards
+      flashcards
   })
   .then(function () {
     if (intervals !== null) {
-      return axios.post()
+      return axios.post('/api/update_intervals', {
+          deckId,
+          intervals
+      })
     } else {
       return null
     }

@@ -9,6 +9,7 @@
     </list>
     <button @click="prev">Poprzedni</button>
     <button @click="next">Następny</button>
+    <button @click="applyChanges">Zapisz zmiany</button>
     <button>Dodaj</button>
     <router-link to="/study">Nauka</router-link>
     <flashcard-form :flashcard="flashcards[edited_key]" @xd="update_flashcard"></flashcard-form>
@@ -19,12 +20,11 @@
 <script>
 // @ is an alias to /src
 import List from '@/components/List.vue'
-// import Deck from '@/components/Deck.vue'
 import FlashcardForm from '@/components/FlashcardForm.vue'
 import Flashcard from '@/components/Flashcard.vue'
 import AutoCardForm from '@/components/AutoCardForm.vue'
 import  { getFlashcards, commitChanges } from '@/utils/http.js'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'Deck',
@@ -90,41 +90,27 @@ export default {
 //  },
     applyChanges: function () {
       // powinno być wykonane przy:
-      // - next/prev
+      // - next/prev OK
       // - unmount/destroy?
       // - apply changes
+      var vm = this
 
-      var removed = this.removed_indexes.map((index) => this.flashcards[index].id)
-      this.removed_indexes = []
+      var removed = vm.removed_indexes.map((index) => vm.flashcards[index].id)
+      vm.removed_indexes = []
 
       var mapForUpdate = function (index) {
         return {
-          front: this.flashcards[index].front,
-          back: this.flashcards[index].back,
-          deckId: this.flashcards[index].deckId
+          id: vm.flashcards[index].id,
+          front: vm.flashcards[index].front,
+          back: vm.flashcards[index].back,
+          deckId: vm.flashcards[index].deckId
         }
       }
-      var updated = this.edited_indexes.map(mapForUpdate)
-      this.edited_indexes = []
+      console.log(vm.edited_indexes)
+      var updated = vm.edited_indexes.map(mapForUpdate)
+      vm.edited_indexes = []
 
       commitChanges(updated, removed)
-
-//    axios.post('/api/remove_cards', {
-//      deckId, 
-//      removed
-//    })
-//    .then(function () {
-//      return axios('/api/update_cards', {
-//        deckId,
-//        updated
-//      })}
-//    )
-//    .then(function () {console.log('zapisano zmiany')})
-//    .catch(function () {
-//      // some error message,
-//      console.log('nie udało się zapisać zmian')
-//    })
-      
     },
     next: function () {
       this.applyChanges()
