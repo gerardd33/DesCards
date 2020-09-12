@@ -13,6 +13,7 @@
 <script>
 import Manual from '@/components/ManualAddForm.vue'
 import Auto from '@/components/AutoCardForm.vue'
+import axios from 'axios'
 
 export default {
   name: 'AddCard',
@@ -25,9 +26,23 @@ export default {
   methods: {
     manual: function (flashcard) {
       console.log(flashcard)
+      axios.post('/api/add_manual', flashcard)
+      .then(function () {
+        console.log('Dodano fiszkę')
+      })
+      .catch(function () {
+        console.log('Dodanie nie powiodło się')
+      })
     },
-    auto: function (fields) {
-      console.log(fields)
+    auto: function (request) {
+      console.log(request)
+      axios.post('/api/add_auto', request)
+      .then(function () {
+        console.log('Dodano fiszkę')
+      })
+      .catch(function () {
+        console.log('Dodanie nie powiodło się')
+      })
     },
     setManual: function () {
       this.form = Manual
