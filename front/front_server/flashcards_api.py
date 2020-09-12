@@ -150,3 +150,33 @@ def deck_info():
     deckId = data['deckId']
     res = requests.get(FLASHCARDS_HOST + f'/deck/{deckId}/info/')
     return res.content, res.status_code
+
+
+@bp.route('/add_manual', methods=['POST'])
+def add_manual():
+    schema = {'deckId': {'type': 'string'},
+              'front': {'type': 'string'},
+              'back': {'type': 'string'}}
+    data = utils.validate(request.json, schema)
+
+    if data is None:
+        return "Invalid data", 400
+
+    deckId = data['deckId']
+    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/add-card/',
+                        json=data)
+    return res.content, res.status_code
+
+
+@bp.route('/add_auto', methods=['POST'])
+def add_auto():
+    schema = {'deckId': {'type': 'string'},
+              'query': {'type': 'string'},
+              'fields': {'type': 'list'},
+              'verbosity': {'type': 'string'}}
+    data = utils.validate(request.json, schema)
+
+    if data is None:
+        return "Invalid data", 400
+
+    print('added to queue', data, flush=True)
