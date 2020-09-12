@@ -111,12 +111,12 @@ def update_cards():
 @bp.route('/remove_cards', methods=['POST'])
 def remove_cards():
     schema = {'deckId': {'type': 'string'},
-              'flashcards': {'type': 'list'}}
+              'removedIds': {'type': 'list'}}
     data = utils.validate(request.json, schema)
 
     deckId = data['deckId']
-    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/update_cards/',
-                        json=data)
+    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/remove-cards/',
+                        json=data['removedIds'])
     return res.content, res.status_code
 
 
