@@ -13,7 +13,7 @@
     <button>Dodaj</button>
     <router-link to="/study">Nauka</router-link>
     <flashcard-form :flashcard="flashcards[edited_key]" @xd="update_flashcard"></flashcard-form>
-    <auto-card-form></auto-card-form>
+    <add-card></add-card>
   </div>
 </template>
 
@@ -22,7 +22,8 @@
 import List from '@/components/List.vue'
 import FlashcardForm from '@/components/FlashcardForm.vue'
 import Flashcard from '@/components/Flashcard.vue'
-import AutoCardForm from '@/components/AutoCardForm.vue'
+// import AutoCardForm from '@/components/AutoCardForm.vue'
+import AddCard from '@/components/AddCard.vue'
 import  { getFlashcards, commitChanges } from '@/utils/http.js'
 import axios from 'axios'
 
@@ -58,7 +59,7 @@ export default {
   components: {
     List,
     FlashcardForm,
-    AutoCardForm
+    AddCard
   },
   methods: {
     update_flashcard: function (updated_flashcard) {

@@ -1,5 +1,6 @@
 <template>
   <div class="auto-card-create-form">
+    <input v-model="query">
     <select v-model="selected">
       <option v-for="(category, index) in categories"
         :key="index"
@@ -16,7 +17,10 @@
       <label :for="index">{{ field.name }}</label>
       <br>
     </div>
-    <button @click="generate">generuj</button>
+    <input type="checkbox"
+      v-model="verbose">
+    Generuj szczegółowy opis
+    <button @click="add">Dodaj</button>
   </div>
 </template>
 
@@ -29,16 +33,22 @@ export default {
   data: function () {
     return {
       categories: [],
-      selected: {}
+      selected: {},
+      query: '',
+      verbose: false
     }
   },
   methods: {
-    remove: function () {
-      this.deleted = true
-      this.$emit('delete', this.index)
-    },
-    generate: function () {
+    add: function () {
       console.log(this.selected)
+      var fields = []
+      for (var field of this.selected.specialFields) {
+        if (field.checked) {
+          fields.push(field.name)
+        }
+      }
+      var deckId = window.localStorage.getItem('deckId')
+      this.$emit('add-auto', {query: this.query, fields, verbose: this.verbose, deckId})
     }
   },
   created: function () {
@@ -53,6 +63,7 @@ export default {
         })
         if (vm.categories.length > 0) {
           vm.selected = vm.categories[0]
+          // TODO choose last category
         }
       }
     })
