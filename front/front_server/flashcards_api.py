@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, g
+from flask import Blueprint, request, g
 import requests
 import os
 from random import randint, random
@@ -89,4 +89,44 @@ def deck():
 @bp.route('/categories', methods=['GET'])
 def categories():
     res = requests.get(FLASHCARDS_HOST + '/categories')
+    return res.content, res.status_code
+
+
+@bp.route('/update_cards', methods=['POST'])
+def update_cards():
+    schema = {'deckId': {'type': 'string'},
+              'flashcards': {'type': 'list'}}
+    print(request.json, flush=True)
+    data = utils.validate(request.json, schema)
+
+    if data is None:
+        return "Invalid data", 400
+
+    deckId = data['deckId']
+    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/update-cards/',
+                        json=data['flashcards'])
+    return res.content, res.status_code
+
+
+@bp.route('/remove_cards', methods=['POST'])
+def remove_cards():
+    schema = {'deckId': {'type': 'string'},
+              'flashcards': {'type': 'list'}}
+    data = utils.validate(request.json, schema)
+
+    deckId = data['deckId']
+    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/update_cards/',
+                        json=data)
+    return res.content, res.status_code
+
+
+@bp.route('/update_intervals', methods=['POST'])
+def update_intervals():
+    schema = {'deckId': {'type': 'string'},
+              'flashcards': {'type': 'list'}}
+    data = utils.validate(request.json, schema)
+
+    deckId = data['deckId']
+    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/update_cards/',
+                        json=data)
     return res.content, res.status_code
