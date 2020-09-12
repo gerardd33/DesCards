@@ -24,7 +24,7 @@ import FlashcardForm from '@/components/FlashcardForm.vue'
 import Flashcard from '@/components/Flashcard.vue'
 import AutoCardForm from '@/components/AutoCardForm.vue'
 import  { getFlashcards, commitChanges } from '@/utils/http.js'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   name: 'Deck',
@@ -37,17 +37,22 @@ export default {
         {id: 3, name: 'Talin 3', front:'trzy', back:'fdsa'}
       ],
       flashcard_componenet: Flashcard,
+      cardsInDeck: 0,
       page: 0,
-      perPage: 20,
-      last_page: false,
+      perPage: 4,
       edited_key: 0,
       removed_indexes: [],
+      removed: 0,
       edited_indexes: [],
     }
   },
   computed: {
-    offset: function () {
-      return this.page * this.limit
+    lastPage: function () {
+      console.log(this.cardsInDeck, this.removed, this.perPage)
+      var l = Math.floor((this.cardsInDeck - 1 - this.removed) / this.perPage) 
+      if (l < 0) { l = 0 }
+      console.log(l)
+      return l 
     }
   },
   components: {
@@ -96,6 +101,7 @@ export default {
       var vm = this
 
       var removed = vm.removed_indexes.map((index) => vm.flashcards[index].id)
+      vm.removed += removed.length
       vm.removed_indexes = []
 
       var mapForUpdate = function (index) {
@@ -114,14 +120,14 @@ export default {
     },
     next: function () {
       this.applyChanges()
-      if (!this.last_page) {
+      if (this.page < this.lastPage) {
           this.page++
           getFlashcards(this, this.page, this.perPage)
       }
     },
     prev: function () {
       this.applyChanges()
-      if (this.offset > 0) {
+      if (this.page > 0) {
         this.page--
         getFlashcards(this, this.page, this.perPage)
       }
@@ -129,6 +135,13 @@ export default {
   },
   created: function () {
     getFlashcards(this, this.page, this.perPage)
+    var deckId = window.localStorage.getItem('deckId')
+    var vm = this
+    axios.get('/api/deck_info', {params: {deckId}})
+    .then(function (response) {
+      vm.cardsInDeck = response.data.totalCards
+      console.log(vm.cardsInDeck, response)
+    })
     this.deck_name = window.localStorage.getItem('deck')
   }
   // TODO commit changes on exit
