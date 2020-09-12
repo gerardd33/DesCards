@@ -114,6 +114,9 @@ def remove_cards():
               'removedIds': {'type': 'list'}}
     data = utils.validate(request.json, schema)
 
+    if data is None:
+        return "Invalid data", 400
+
     deckId = data['deckId']
     res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/remove-cards/',
                         json=data['removedIds'])
@@ -123,10 +126,13 @@ def remove_cards():
 @bp.route('/update_intervals', methods=['POST'])
 def update_intervals():
     schema = {'deckId': {'type': 'string'},
-              'flashcards': {'type': 'list'}}
+              'intervals': {'type': 'list'}}
     data = utils.validate(request.json, schema)
 
+    if data is None:
+        return "Invalid data", 400
+
     deckId = data['deckId']
-    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/update_cards/',
-                        json=data)
+    res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/update-intervals/',
+                        json=data['intervals'])
     return res.content, res.status_code
