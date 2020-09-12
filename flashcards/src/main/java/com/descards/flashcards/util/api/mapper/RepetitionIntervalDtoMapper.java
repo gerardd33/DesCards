@@ -1,11 +1,11 @@
-package com.descards.flashcards.util.mapper;
+package com.descards.flashcards.util.api.mapper;
 
 import com.descards.flashcards.api.dto.RepetitionIntervalDto;
 import com.descards.flashcards.model.nonentity.RepetitionInterval;
 
 public class RepetitionIntervalDtoMapper {
 
-	public static RepetitionIntervalDto convertToDto(RepetitionInterval interval) {
+	public static RepetitionIntervalDto mapToDto(RepetitionInterval interval) {
 		return RepetitionIntervalDto.builder()
 				.current(interval.getCurrent().toMinutes())
 				.again(interval.getAgain().toMinutes())

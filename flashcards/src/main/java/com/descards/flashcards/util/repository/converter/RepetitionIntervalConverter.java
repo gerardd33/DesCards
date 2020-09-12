@@ -1,4 +1,4 @@
-package com.descards.flashcards.util.database.converter;
+package com.descards.flashcards.util.repository.converter;
 
 import com.descards.flashcards.model.nonentity.RepetitionInterval;
 import org.springframework.beans.factory.annotation.Autowired;

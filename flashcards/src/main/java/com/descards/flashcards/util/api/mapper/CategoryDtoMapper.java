@@ -1,11 +1,11 @@
-package com.descards.flashcards.util.mapper;
+package com.descards.flashcards.util.api.mapper;
 
 import com.descards.flashcards.api.dto.CategoryDto;
 import com.descards.flashcards.model.entity.Category;
 
 public class CategoryDtoMapper {
 
-	public static CategoryDto convertToDto(Category category) {
+	public static CategoryDto mapToDto(Category category) {
 		return CategoryDto.builder()
 				.id(category.getId())
 				.name(category.getName())

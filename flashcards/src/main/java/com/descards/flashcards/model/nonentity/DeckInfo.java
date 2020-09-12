@@ -1,9 +1,10 @@
 package com.descards.flashcards.model.nonentity;
 
-import com.descards.flashcards.api.dto.DeckDto;
 import com.descards.flashcards.model.entity.Deck;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 

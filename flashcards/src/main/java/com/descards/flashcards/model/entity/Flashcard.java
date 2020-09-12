@@ -1,9 +1,10 @@
 package com.descards.flashcards.model.entity;
 
 import com.descards.flashcards.model.nonentity.RepetitionInterval;
-import com.descards.flashcards.util.database.converter.RepetitionIntervalConverter;
+import com.descards.flashcards.util.repository.converter.RepetitionIntervalConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

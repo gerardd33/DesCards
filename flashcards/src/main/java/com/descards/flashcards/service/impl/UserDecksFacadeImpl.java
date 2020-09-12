@@ -1,13 +1,13 @@
 package com.descards.flashcards.service.impl;
 
 import com.descards.flashcards.api.dto.DeckDto;
-import com.descards.flashcards.util.mapper.DeckDtoMapper;
-import com.descards.flashcards.service.facade.UserDecksFacade;
 import com.descards.flashcards.model.entity.ApplicationUser;
 import com.descards.flashcards.model.entity.Deck;
 import com.descards.flashcards.repository.ApplicationUserRepository;
 import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
+import com.descards.flashcards.service.facade.UserDecksFacade;
+import com.descards.flashcards.util.api.mapper.DeckDtoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 		ApplicationUser user = applicationUserRepository.findById(userId)
 				.orElseThrow(NoSuchElementException::new);
 		return user.getDecks().stream()
-				.map(DeckDtoMapper::convertToDto)
+				.map(DeckDtoMapper::mapToDto)
 				.collect(Collectors.toList());
 	}
 
@@ -38,7 +38,7 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 	public void createDeck(long userId, DeckDto deckToCreateDto) {
 		ApplicationUser user = applicationUserRepository.findById(userId)
 				.orElseThrow(NoSuchElementException::new);
-		Deck deckToAdd = DeckDtoMapper.convertFromDto(deckToCreateDto);
+		Deck deckToAdd = DeckDtoMapper.mapFromDto(deckToCreateDto);
 
 		deckToAdd.setUser(user);
 		deckRepository.save(deckToAdd);

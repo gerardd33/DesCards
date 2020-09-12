@@ -22,5 +22,5 @@ public class ApplicationUser {
 
 	@ToString.Exclude
 	@OneToMany(mappedBy = "user")
-	Set<Deck> decks = new HashSet<>();
+	private Set<Deck> decks = new HashSet<>();
 }

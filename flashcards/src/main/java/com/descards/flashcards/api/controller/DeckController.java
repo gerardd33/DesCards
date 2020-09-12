@@ -4,7 +4,7 @@ import com.descards.flashcards.api.dto.FlashcardDto;
 import com.descards.flashcards.api.dto.FlashcardPortionRequestDto;
 import com.descards.flashcards.api.dto.RepetitionIntervalUpdateRequestDto;
 import com.descards.flashcards.service.facade.DeckFacade;
-import com.descards.flashcards.util.HttpGuard;
+import com.descards.flashcards.util.controller.HttpGuard;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
