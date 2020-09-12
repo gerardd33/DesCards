@@ -11,10 +11,10 @@ public class TestMessageSender implements CommandLineRunner {
 
 	private final RabbitTemplate rabbitTemplate;
 
-	private final RabbitMqProperties rabbitMqProperties;
+	private final MessageQueueProperties messageQueueProperties;
 
 	@Override
 	public void run(String... args) {
-		rabbitTemplate.convertAndSend(rabbitMqProperties.getQueueName(), "Hello world!");
+		rabbitTemplate.convertAndSend(messageQueueProperties.getQueueName(), "Hello world!");
 	}
 }

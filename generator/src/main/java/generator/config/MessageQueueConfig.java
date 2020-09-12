@@ -7,15 +7,14 @@ import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @AllArgsConstructor
-public class RabbitMqConfig {
+public class MessageQueueConfig {
 
-	private final RabbitMqProperties properties;
+	private final MessageQueueProperties properties;
 
 	@Bean
 	public Queue queue() {

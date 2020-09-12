@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "rabbitmq.generator-request")
-public class RabbitMqProperties {
+public class MessageQueueProperties {
 
 	private String exchangeName;
 
