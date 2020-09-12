@@ -136,3 +136,16 @@ def update_intervals():
     res = requests.post(FLASHCARDS_HOST + f'/deck/{deckId}/update-intervals/',
                         json=data['intervals'])
     return res.content, res.status_code
+
+
+@bp.route('/deck_info', methods=['GET'])
+def deck_info():
+    schema = {'deckId': {'type': 'string'}}
+    data = utils.validate(request.json, schema)
+
+    if data is None:
+        return "Invalid data", 400
+
+    deckId = data['deckId']
+    res = requests.get(FLASHCARDS_HOST + f'/deck/{deckId}/info/')
+    return res.content, res.status_code
