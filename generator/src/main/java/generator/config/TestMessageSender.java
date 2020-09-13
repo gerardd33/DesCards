@@ -9,8 +9,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Collections;
 
 @Component
 @AllArgsConstructor
@@ -22,10 +21,14 @@ public class TestMessageSender implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
+		sendTestRequest();
+	}
+
+	private void sendTestRequest() {
 		GeneratorRequest generatorRequest = GeneratorRequest.builder()
 				.deckId(4L)
 				.query("Battle of Waterloo")
-				.specialFields(Stream.of("Date").collect(Collectors.toList()))
+				.specialFields(Collections.singletonList("Date"))
 				.verbosity(Verbosity.BRIEF)
 				.build();
 
