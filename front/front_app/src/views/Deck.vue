@@ -40,9 +40,9 @@ export default {
     return {
       deck_name: '',
       flashcards: [ // TODO zmienić domyślną wartość
-        {id: 1, name: 'Talia 1', front:'asdf', back:'fdsa'},
-        {id: 2, name: 'Talia 2', front:'dwa', back:'fdsa'},
-        {id: 3, name: 'Talin 3', front:'trzy', back:'fdsa'}
+        {id: 1, name: 'Talia 1', front:'asdf', back:'fdsa', interval: {current: 213}},
+        {id: 2, name: 'Talia 2', front:'dwa', back:'fdsa', interval: {current: 213}},
+        {id: 3, name: 'Talin 3', front:'trzy', back:'fdsa', interval: {current: 213}}
       ],
       flashcard_componenet: Flashcard,
       cardsInDeck: 0,

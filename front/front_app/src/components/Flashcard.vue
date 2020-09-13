@@ -1,21 +1,35 @@
 <template>
   <div class="flashcard" v-bind:class="{deleted: deleted}">
-    <span>{{ entry.id }}</span>
-    <span>{{ entry.front }}</span>
-    <span>{{ entry.back }}</span>
-    <span>{{ entry.interval }}</span>
-    <button @click="$emit('edit', index)">Edytuj</button>
-    <button @click="remove">Usuń</button>
+    <span class="field">{{ entry.id }}</span>
+    <span class="field">{{ entry.front }}</span>
+    <span class="field">{{ entry.back }}</span>
+    <span class="field">{{ interval }}</span>
+    <span class="field">
+      <button @click="$emit('edit', index)">{{ editButton }}</button>
+      <button @click="remove">{{ deleteButton }}</button>
+    </span>
   </div>
 </template>
 
 <script>
+import { parseInterval } from '@/utils/interval.js'
+import { editButton, deleteButton } from '@/consts/messages.js'
+
 export default {
   name: 'Flashcard',
   props: ['entry', 'index'],
   data: function () {
     return {
-      deleted: false
+      deleted: false,
+      // messages
+      editButton,
+      deleteButton
+    }
+  },
+  computed: {
+    interval: function () {
+      console.log(this.entry.interval)
+      return parseInterval(this.entry.interval.current)
     }
   },
   methods: {
@@ -28,7 +42,14 @@ export default {
 </script>
 
 <style scoped>
+.flashcard {
+  display: flex;
+  justify-content: space-between;
+}
 .deleted {
-    background-color: red;
+  background-color: red;
+}
+.field {
+  width: 20%;
 }
 </style>
