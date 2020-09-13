@@ -19,4 +19,8 @@ export default {
 </script>
 
 <style scoped>
+.list {
+  width: 60%;
+  margin: auto;
+}
 </style>
