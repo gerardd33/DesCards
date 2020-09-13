@@ -1,0 +1,18 @@
+{
+	"properties": [
+		{
+			"name": "rabbitmq.generator-request.exchange-name",
+			"type": "java.lang.String",
+			"description": "Name of exchange for requesting flashcard generation."
+		},
+		{
+			"name": "rabbitmq.generator-request.queue-name",
+			"type": "java.lang.String",
+			"description": "Name of queue for requesting flashcard generation."
+		},
+		{
+			"name": "flashcards.api.server-address",
+			"type": "java.lang.String",
+			"description": "Address of Flashcards server."
+		}
+	] }
