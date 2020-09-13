@@ -7,9 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.temporal.ChronoUnit;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Getter
@@ -34,10 +32,10 @@ public class GeneratorRequestManager {
 
 		Flashcard flashcard =
 				Flashcard.builder()
-					.deckId(generatorRequest.getDeckId())
-					.front(cardFront)
-					.back(cardBack)
-					.build();
+						.deckId(generatorRequest.getDeckId())
+						.front(cardFront)
+						.back(cardBack)
+						.build();
 		log.info("Prepared flashcard creation request: " + flashcard);
 
 		flashcardCreationRequestDispatcher.createFlashcard(flashcard);

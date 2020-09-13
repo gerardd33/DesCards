@@ -4,7 +4,6 @@ import generator.api.dto.GeneratorRequestDto;
 import generator.model.GeneratorRequest;
 import generator.model.Verbosity;
 import generator.util.api.mapper.GeneratorRequestDtoMapper;
-import generator.util.service.GeneratorRequestManager;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.CommandLineRunner;

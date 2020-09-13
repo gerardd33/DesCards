@@ -5,13 +5,9 @@ import generator.model.Flashcard;
 import generator.util.api.mapper.FlashcardDtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.Objects;
 
 @Slf4j
 @AllArgsConstructor

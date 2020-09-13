@@ -8,8 +8,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Controller;
 
-import java.util.concurrent.TimeUnit;
-
 @Slf4j
 @Controller
 @AllArgsConstructor
