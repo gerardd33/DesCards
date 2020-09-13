@@ -1,6 +1,7 @@
 <template>
   <div class="auto-card-create-form">
-    <input v-model="query">
+    <label for="query">{{ frontLabel }}</label>
+    <input v-model="query" id="query"><br>
     <select v-model="selected">
       <option v-for="(category, index) in categories"
         :key="index"
@@ -8,6 +9,7 @@
         {{ category.name }}
       </option>
     </select>
+    <br>
     <div class="special-fields"
       v-for="(field, index) in selected.specialFields"
       :key="index">
@@ -18,14 +20,17 @@
       <br>
     </div>
     <input type="checkbox"
-      v-model="verbose">
-    Generuj szczegółowy opis
-    <button @click="add">Dodaj</button>
+      v-model="verbose"
+      id="verbose">
+    <label for="verbose">{{ verboseLabel }}</label>
+    <br>
+    <button @click="add">{{ addButton }}</button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { addButton, verboseLabel, frontLabel } from '@/consts/messages.js'
 
 export default {
   name: 'AutoCardForm',
@@ -35,7 +40,11 @@ export default {
       categories: [],
       selected: {},
       query: '',
-      verbose: false
+      verbose: false,
+      // messages
+      addButton,
+      verboseLabel,
+      frontLabel
     }
   },
   methods: {
