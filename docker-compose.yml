@@ -2,13 +2,13 @@ version: "3.4"
 
 services:
   front-server:
-    build: ./front/front_server/
-    volumes:
-      - ./front/:/usr/src/app/
+    build: 
+      context: ./front
+      target: prod
+#   volumes:
+#     - ./front/:/usr/src/app/
     ports:
       - 5000:5000
-#   networks:
-#     - net
     stop_signal: SIGINT
     environment:
       - FLASK_APP=front_server
