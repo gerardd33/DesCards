@@ -26,19 +26,23 @@ export default {
   methods: {
     manual: function (flashcard) {
       console.log(flashcard)
+      var vm = this
       axios.post('/api/add_manual', flashcard)
       .then(function () {
         console.log('Dodano fiszkę')
+        vm.$emit('added')
       })
-      .catch(function () {
-        console.log('Dodanie nie powiodło się')
+      .catch(function (error) {
+        console.log('Dodanie nie powiodło się', error)
       })
     },
     auto: function (request) {
       console.log(request)
+      var vm = this
       axios.post('/api/add_auto', request)
       .then(function () {
         console.log('Dodano fiszkę')
+        vm.$emit('added')
       })
       .catch(function () {
         console.log('Dodanie nie powiodło się')

@@ -2,7 +2,7 @@
   <div class="list">
     <component v-bind:is="component" 
       v-for="(entry, index) in list"
-      v-bind:key="index"
+      v-bind:key="entry.id"
       v-bind:index="index"
       v-bind:entry="entry"
       @edit="function (key) {$emit('edit', key)}"

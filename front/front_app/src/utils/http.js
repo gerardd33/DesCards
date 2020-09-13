@@ -17,7 +17,7 @@ export var getFlashcards = async function (vm, page, perPage, sortBy='interval',
 export var commitChanges = async function (flashcards, removedIds=null, intervals=null) {
   var deckId = window.localStorage.getItem('deckId')
 
-  axios.post('/api/update_cards', {
+  return axios.post('/api/update_cards', {
       deckId,
       flashcards
   })

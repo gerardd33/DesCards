@@ -9,11 +9,11 @@
     </list>
     <button @click="prev">Poprzedni</button>
     <button @click="next">Następny</button>
-    <button @click="applyChanges">Zapisz zmiany</button>
+    <button @click="save">Zapisz zmiany</button>
     <button>Dodaj</button>
     <router-link to="/study">Nauka</router-link>
     <flashcard-form :flashcard="flashcards[edited_key]" @xd="update_flashcard"></flashcard-form>
-    <add-card></add-card>
+    <add-card @added="added++"></add-card>
   </div>
 </template>
 
@@ -44,13 +44,14 @@ export default {
       edited_key: 0,
       removed_indexes: [],
       removed: 0,
+      added: 0,
       edited_indexes: [],
     }
   },
   computed: {
     lastPage: function () {
-      console.log(this.cardsInDeck, this.removed, this.perPage)
-      var l = Math.floor((this.cardsInDeck - 1 - this.removed) / this.perPage) 
+      var difference = this.added - this.removed
+      var l = Math.floor((this.cardsInDeck - 1 + difference) / this.perPage) 
       if (l < 0) { l = 0 }
       console.log(l)
       return l 
@@ -117,21 +118,36 @@ export default {
       var updated = vm.edited_indexes.map(mapForUpdate)
       vm.edited_indexes = []
 
-      commitChanges(updated, removed)
+      return commitChanges(updated, removed)
+    },
+    save: function () {
+      var vm = this
+      this.applyChanges()
+      .then(function () {
+        getFlashcards(vm, vm.page, vm.perPage)
+      })
     },
     next: function () {
-      this.applyChanges()
+      console.log(this.cardsInDeck, this.removed, this.lastPage, this.added)
+      var vm = this
+      var promise = this.applyChanges()
       if (this.page < this.lastPage) {
-          this.page++
-          getFlashcards(this, this.page, this.perPage)
+        this.page++
       }
+      promise.then(function () {
+        getFlashcards(vm, vm.page, vm.perPage)
+      })
     },
     prev: function () {
-      this.applyChanges()
+      console.log(this.cardsInDeck, this.removed, this.lastPage, this.added)
+      var vm = this
+      var promise = this.applyChanges()
       if (this.page > 0) {
         this.page--
-        getFlashcards(this, this.page, this.perPage)
       }
+      promise.then(function () {
+        getFlashcards(vm, vm.page, vm.perPage)
+      })
     }
   },
   created: function () {
