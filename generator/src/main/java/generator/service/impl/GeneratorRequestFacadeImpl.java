@@ -13,12 +13,11 @@ public class GeneratorRequestFacadeImpl implements GeneratorRequestFacade {
 
 	@Override
 	public void processRequest(GeneratorRequestDto generatorRequestDto) {
-		// TODO add waiting on manager's semaphore while it's busy
+		generatorRequestManager.getSemaphore().tryAcquire();
 
 		generatorRequestManager.setGeneratorRequest(
 				GeneratorRequestDtoMapper.mapFromDto(generatorRequestDto)
 		);
-
 		generatorRequestManager.processRequest();
 	}
 }

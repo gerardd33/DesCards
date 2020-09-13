@@ -8,9 +8,13 @@ import generator.util.service.GeneratorRequestManager;
 import generator.util.service.GoogleSnippetInformationFinder;
 import generator.util.service.InformationFinder;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.concurrent.Semaphore;
 
 @AllArgsConstructor
 @Configuration
@@ -25,8 +29,8 @@ public class ApplicationConfig {
 
 	@Bean
 	public GeneratorRequestManager generatorRequestManager() {
-		return new GeneratorRequestManager(generatorRequest(),
-				informationFinder(), flashcardCreationRequestDispatcher());
+		return new GeneratorRequestManager(generatorRequest(), informationFinder(),
+				flashcardCreationRequestDispatcher(), semaphore());
 	}
 
 	@Bean
@@ -42,5 +46,11 @@ public class ApplicationConfig {
 	@Bean
 	public FlashcardCreationRequestDispatcher flashcardCreationRequestDispatcher() {
 		return new FlashcardCreationRequestDispatcher(flashcardsApi);
+	}
+
+	@Bean
+	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public Semaphore semaphore() {
+		return new Semaphore(1);
 	}
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -21,6 +22,8 @@ public class GeneratorRequestManager {
 	private InformationFinder informationFinder;
 
 	private FlashcardCreationRequestDispatcher flashcardCreationRequestDispatcher;
+
+	private Semaphore semaphore;
 
 	public void processRequest() {
 		log.info("Processing: " + generatorRequest);
@@ -37,7 +40,7 @@ public class GeneratorRequestManager {
 					.build();
 		log.info("Prepared flashcard creation request: " + flashcard);
 
-		// TODO get feedback and release the semaphore
 		flashcardCreationRequestDispatcher.createFlashcard(flashcard);
+		this.semaphore.release();
 	}
 }
