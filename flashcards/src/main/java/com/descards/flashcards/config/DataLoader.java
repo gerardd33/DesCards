@@ -73,7 +73,7 @@ public class DataLoader implements ApplicationRunner {
 		ApplicationUser user = new ApplicationUser();
 		Deck historyDeck = new Deck("History deck", user);
 
-		Collection<Flashcard> flashcards = Stream.of(card1, card2, card3, card4, card5, card6).collect(Collectors.toSet());
+		Collection<Flashcard> flashcards = Stream.of(card1).collect(Collectors.toSet());
 		historyDeck.getCards().addAll(flashcards);
 		historyDeck.getCards().forEach(card -> card.setDeck(historyDeck));
 		historyDeck.setUser(user);
