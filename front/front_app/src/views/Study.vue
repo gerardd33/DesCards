@@ -1,14 +1,18 @@
 <template>
   <div class="study">
-    {{ flashcardText }}
+    <div class="flashcard">
+      <span class="text">
+      {{ flashcardText }}
+      </span>
+    </div>
     <button @click="prev">Prev</button>
+    <button @click="isFront = !isFront">Show</button>
     <button @click="next">Next</button>
     <br>
     <button @click="setStrength('again')">Again</button>
     <button @click="setStrength('hard')">Hard</button>
     <button @click="setStrength('ok')">Ok</button>
     <button @click="setStrength('easy')">Easy</button>
-    <router-link to="/deck">Talia</router-link>
   </div>
 </template>
 
@@ -21,7 +25,7 @@ export default {
   name: 'Study',
   data: function() {
     return {
-      flashcards: [{}],
+      flashcards: [{front: 'front', back: 'back'}],
       prevFlashcards: [],
       removedIds: [],
       prevRemovedIds: [],
@@ -117,3 +121,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.flashcard {
+  width: 80%;
+  height: 80vh;
+  margin: auto;
+  text-align: center;
+  line-height: 80vh;
+}
+
+.text {
+  font-size: 40px;
+}
+</style>
