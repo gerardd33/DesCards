@@ -12,3 +12,16 @@ export const registerError = 'Nie udało się utworzyć konta'
 // Flashcard.vue
 export const editButton = 'Edytuj'
 export const deleteButton = 'Usuń'
+
+// Deck.vue
+export const nextButton = 'Następny'
+export const prevButton = 'Poprzedni'
+export const addButton = 'Dodaj'
+export const studyButton = 'Nauka'
+export const refreshButton = 'Odśwież'
+export const pageName = 'Strona '
+
+// Flashcard.vue
+export const saveButton = 'Zapisz'
+export const frontLabel = 'Przód'
+export const backLabel = 'Tył'
