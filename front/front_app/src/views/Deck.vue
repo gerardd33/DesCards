@@ -1,19 +1,26 @@
 <template>
   <div class="flashcards-container">
-    {{ deck_name }}<br>
-    {{ page }}
-    <list :list="flashcards"
-      :component="flashcard_componenet"
-      @edit="edit"
-      @delete="remove">
-    </list>
-    <button @click="prev">Poprzedni</button>
-    <button @click="next">Następny</button>
-    <button @click="save">Zapisz zmiany</button>
-    <button>Dodaj</button>
-    <router-link to="/study">Nauka</router-link>
-    <flashcard-form :flashcard="flashcards[edited_key]" @xd="update_flashcard"></flashcard-form>
-    <add-card @added="added++"></add-card>
+    <div class="list">
+      {{ deck_name }}<br>
+      {{ page }}
+      <list :list="flashcards"
+        :component="flashcard_componenet"
+        @edit="edit"
+        @delete="remove">
+      </list>
+      <button @click="prev">Poprzedni</button>
+      <button @click="next">Następny</button>
+    </div>
+    <div class="sidebar">
+      <flashcard-form :flashcard="flashcards[edited_key]" 
+        @xd="update_flashcard"
+        @hide="showEditForm=false"
+        v-if="showEditForm"></flashcard-form>
+      <button @click="showAddForm=!showAddForm">Dodaj</button><br>
+      <add-card v-if="showAddForm" @added="added++; showAddForm=false"></add-card>
+      <button @click="save">Odśwież</button><br>
+      <button @click="$router.push('/study')">Nauka</button><br>
+    </div>
   </div>
 </template>
 
@@ -42,6 +49,8 @@ export default {
       page: 0,
       perPage: 4,
       edited_key: 0,
+      showEditForm: false,
+      showAddForm: false,
       removed_indexes: [],
       removed: 0,
       added: 0,
@@ -67,9 +76,14 @@ export default {
       this.flashcards[this.edited_key] = updated_flashcard
       console.log('updated', this.flashcards[this.edited_key])
     },
+    onAdded: function () {
+      this.added++
+      this.showAddForm = false
+    },
     edit: function (key) {
       this.edited_key = key
       this.edited_indexes.push(key)
+      this.showEditForm = true
     },
     remove: function (key) {
       this.removed_indexes.push(key)
@@ -140,6 +154,32 @@ export default {
   beforeUnmount: function () {
     this.applyChanges()
   }
-  // TODO commit changes on exit
 }
 </script>
+
+<style scoped>
+.flashcards-container {
+  display: grid;
+  grid-template-columns: 70% auto;
+}
+
+.list {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.sidebar {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+a {
+  text-decoration: none;
+  text-decoration-color: black;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+}
+</style>
