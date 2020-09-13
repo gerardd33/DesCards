@@ -3,6 +3,12 @@
     {{ flashcardText }}
     <button @click="prev">Prev</button>
     <button @click="next">Next</button>
+    <br>
+    <button @click="setStrength('again')">Again</button>
+    <button @click="setStrength('hard')">Hard</button>
+    <button @click="setStrength('ok')">Ok</button>
+    <button @click="setStrength('easy')">Easy</button>
+    <router-link to="/deck">Talia</router-link>
   </div>
 </template>
 
@@ -38,7 +44,7 @@ export default {
   components: {
   },
   methods: {
-    commit: function (cards, removedIds, editedIndexes, intervals=null) {
+    commit: function (cards, removedIds, editedIndexes) {
       var mapForUpdate = function (index) {
         return {
           front: cards[index].front,
@@ -50,7 +56,15 @@ export default {
       this.editedIndexes = []
       
       // TODO update intervals
+      // console.log(this.flashcards, this.prevFlashcards)
+      console.log('study', cards)
+      var intervals = cards.map(function (card) {return {id: card.id, strength: card.strength}})
+      .filter(function (value) {
+        var str = value.strength
+        return (str === 'easy' || str === 'ok' || str === 'hard' || str === 'again')
+      })
 
+      console.log('study', intervals)
       commitChanges(updated, removedIds, intervals)
     },
     getCurrentFlashcard: function () {
@@ -86,10 +100,20 @@ export default {
       if (-this.currentFlashcardId < this.prevFlashcards.length) {
         this.currentFlashcardId--
       }
+    },
+    addStrengthField: function () {
+      this.flashcards = this.flashcards.map(function (card) {return {...card, strength: ''}})
+    },
+    setStrength: function (strength) {
+      this.getCurrentFlashcard().strength = strength
+      console.log(this.getCurrentFlashcard())
     }
   },
   created: function () {
     getFlashcards(this, 0, this.bufferSize)
+  },
+  beforeUnmount: function() {
+    this.commit(this.flashcards, this.removedIds, this.editedIndexes)
   }
 }
 </script>

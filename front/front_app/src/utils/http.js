@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export var getFlashcards = async function (vm, page, perPage, sortBy='interval', direction='asc') {
   var deckId = window.localStorage.getItem('deckId')
-  axios.get('/api/deck', {params: {
+  return axios.get('/api/deck', {params: {
     deckId,
     page,
     perPage,
