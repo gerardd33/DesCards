@@ -2,6 +2,7 @@
   <div class="flashcard-form">
     Front <input :value="flashcard.front" @input="update('front', $event.target.value)">
     Back <input :value="flashcard.back" @input="update('back', $event.target.value)">
+    <button @click="$emit('hide')">Zapisz</button>
   </div>
 </template>
 
