@@ -45,7 +45,7 @@ export default {
       removed_indexes: [],
       removed: 0,
       added: 0,
-      edited_indexes: [],
+      edited_indexes: [0],
     }
   },
   computed: {
@@ -75,31 +75,7 @@ export default {
       this.removed_indexes.push(key)
       // console.log(this.removed_indexes)
     },
-//  getFlashcards: function () {
-//    var vm = this
-//    var deckId = window.localStorage.getItem('deckId')
-//    axios.get('/api/deck', {params: {
-//      deckId,
-//      offset: vm.offset,
-//      limit: vm.limit + 1, // Fetch 1 more to check if we're on last page
-//      sortBy: 'interval', // TODO let user choose
-//      direction: 'asc'
-//    }})
-//    .then(function (response) {
-//      if (response.status === 200) {
-//        vm.flashcards = response.data
-//        vm.last_page = vm.flashcards.length < (vm.limit + 1)
-//        if (!vm.last_page) {
-//          vm.flashcards.pop()
-//        }
-//      }
-//    })
-//  },
     applyChanges: function () {
-      // powinno być wykonane przy:
-      // - next/prev OK
-      // - unmount/destroy?
-      // - apply changes
       var vm = this
 
       var removed = vm.removed_indexes.map((index) => vm.flashcards[index].id)
@@ -116,7 +92,7 @@ export default {
       }
       console.log(vm.edited_indexes)
       var updated = vm.edited_indexes.map(mapForUpdate)
-      vm.edited_indexes = []
+      vm.edited_indexes = [0]
 
       return commitChanges(updated, removed)
     },
@@ -160,6 +136,9 @@ export default {
       console.log(vm.cardsInDeck, response)
     })
     this.deck_name = window.localStorage.getItem('deck')
+  },
+  beforeUnmount: function () {
+    this.applyChanges()
   }
   // TODO commit changes on exit
 }
