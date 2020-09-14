@@ -52,10 +52,10 @@ def decks():
     if token is None:
         return "Invalid token", 403
 
-#   json = utils.jwt_decode(token)
+    json = utils.jwt_decode(token)
 
-#   res = requests.get(FLASHCARDS_HOST + '/user-decks/' + json['userId'])
-    res = requests.get(FLASHCARDS_HOST + '/user-decks/1')
+    res = requests.get(FLASHCARDS_HOST + '/user-decks/' + str(json['userId']))
+#   res = requests.get(FLASHCARDS_HOST + '/user-decks/1')
 
     return res.content, res.status_code
 
