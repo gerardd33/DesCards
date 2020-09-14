@@ -4,8 +4,7 @@ import generator.util.service.GoogleSnippetInformationFinder;
 import generator.util.service.InformationFinder;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,13 +33,13 @@ public class InformationFinderConfig {
 			throw new IllegalStateException();
 		}
 
-		return new RemoteWebDriver(webDriverUrl, chromeOptions());
+		return new RemoteWebDriver(webDriverUrl, firefoxOptions());
 	}
 
 	@Bean
-	public ChromeOptions chromeOptions() {
-		// TODO --headless
-		// TODO try firefox
-		return new ChromeOptions();
+	public FirefoxOptions firefoxOptions() {
+		FirefoxOptions options = new FirefoxOptions();
+		options.setHeadless(true);
+		return options;
 	}
 }
