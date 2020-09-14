@@ -16,7 +16,7 @@ public class InformationFinderConfig {
 		return new GoogleSnippetInformationFinder(webDriver());
 	}
 
-	@Bean
+	@Bean(destroyMethod = "quit")
 	public WebDriver webDriver() {
 		return new ChromeDriver(chromeOptions());
 	}
