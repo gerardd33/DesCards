@@ -1,11 +1,13 @@
 
 CREATE TABLE users (
-    username VARCHAR(50) PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
     password BYTEA NOT NULL
 );
 
 CREATE TABLE sessions (
-    username VARCHAR(50) PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    userid INTEGER,
     expires TIMESTAMP NOT NULL
 );
 

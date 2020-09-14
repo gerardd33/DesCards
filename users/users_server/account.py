@@ -43,14 +43,14 @@ def delete():
                              current_app.config['JWT_SECRET'],
                              current_app.config['JWT_ALGORITHM'])
 
-    username = json['username']
+    user_id = json['userId']
 
     database = db.get_db()
 
     # Do logout here
     try:
-        database.delete_session(username)
-        database.delete_user(username)
+        database.delete_session(user_id)
+        database.delete_user(user_id)
     except Exception:  # TODO use correct type of exception
         return 'Failed to delete an account', 409
 
