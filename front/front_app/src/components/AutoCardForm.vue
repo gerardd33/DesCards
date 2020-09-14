@@ -57,7 +57,7 @@ export default {
         }
       }
       var deckId = window.localStorage.getItem('deckId')
-      this.$emit('add-auto', {query: this.query, specialFields, verbosity: this.verbose?'verbose':'breif', deckId})
+      this.$emit('add-auto', {query: this.query, specialFields, verbosity: this.verbose?'verbose':'brief', deckId})
     }
   },
   created: function () {
