@@ -49,13 +49,8 @@ services:
     build:
       context: ./flashcards/
       target: prod
-#   volumes:
-#     - ./flashcards_server:/usr/src/app/flashcards_server
-#   ports:
-#     - 8080:8080
-#   networks:
-#     - flashcards_local
-#     - front_net
+    ports:
+        - 8080:8080
     stop_signal: SIGINT
 #   hostname: flashcards
 
@@ -89,3 +84,4 @@ services:
 networks:
   selenium-server:
     driver: bridge
+# TODO check if networks needed

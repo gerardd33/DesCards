@@ -18,7 +18,7 @@ public class GeneratorRequestMessageReceiver {
 
 	@RabbitHandler
 	public void receiveMessage(GeneratorRequestDto message) {
-		log.info("Received: " + message);
+		log.info("Received: <" + message + ">");
 		generatorRequestFacade.processRequest(message);
 	}
 }

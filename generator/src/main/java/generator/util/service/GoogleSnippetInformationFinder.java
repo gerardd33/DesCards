@@ -29,8 +29,7 @@ public class GoogleSnippetInformationFinder implements InformationFinder {
 
 	@Override
 	public String findInformation(GeneratorRequest generatorRequest) {
-		return "no back yet";
-//		return getGoogleSnippet(generatorRequest);
+		return getGoogleSnippet(generatorRequest);
 	}
 
 	private String getGoogleSnippet(GeneratorRequest generatorRequest) {

@@ -18,12 +18,12 @@ public class MessageQueueConfig {
 
 	@Bean
 	public Queue queue() {
-		return new Queue(properties.getQueueName(), false);
+		return new Queue(properties.getQueueName(), true);
 	}
 
 	@Bean
 	public Declarables generatorRequestBindings() {
-		Queue generatorRequestQueue = new Queue(properties.getQueueName(), false);
+		Queue generatorRequestQueue = new Queue(properties.getQueueName(), true);
 		FanoutExchange generatorRequestExchange = new FanoutExchange(properties.getExchangeName());
 
 		return new Declarables(generatorRequestQueue, generatorRequestExchange,
