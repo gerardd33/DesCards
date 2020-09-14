@@ -17,5 +17,5 @@ CMD ["python3", "-m", "unittest"]
 # CMD ["python3", "-m", "unittest", "discover","users_server/tests"]
 
 FROM base AS prod
-COPY ./ ./
+COPY ./ ./users_server
 CMD ["flask",  "run", "--host=0.0.0.0"]
