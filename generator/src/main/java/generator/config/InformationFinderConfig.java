@@ -2,7 +2,6 @@ package generator.config;
 
 import generator.util.service.GoogleSnippetInformationFinder;
 import generator.util.service.InformationFinder;
-import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -19,7 +18,6 @@ public class InformationFinderConfig {
 
 	@Bean
 	public WebDriver webDriver() {
-		// TODO try changing to Firefox
 		return new ChromeDriver(chromeOptions());
 	}
 
@@ -27,7 +25,6 @@ public class InformationFinderConfig {
 	public ChromeOptions chromeOptions() {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");
-		//TODO try "--window-size=1920,1200"
 		return options;
 	}
 }
