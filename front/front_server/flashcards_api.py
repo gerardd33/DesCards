@@ -10,7 +10,7 @@ bp = Blueprint('flashcards_api', __name__, url_prefix='/api')
 
 USERS_HOST = 'http://' + os.environ['USERS']
 FLASHCARDS_HOST = 'http://' + os.environ['FLASHCARDS']
-RABBIT_HOST = 'flashcards-rabbit'
+RABBIT_HOST = os.environ['RABBIT']
 GENERATOR_EXCHANGE = 'generator-request-exchange'
 # TODO make https
 
