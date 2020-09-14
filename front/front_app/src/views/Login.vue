@@ -1,0 +1,56 @@
+<template>
+  <div class="login-container">
+    <login-form v-on:login="login"
+      v-bind:message="message"
+      v-bind:title="title"/>
+    <router-link to="/register">Załóż konto</router-link>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import LoginForm from '@/components/LoginForm.vue'
+import { loginTitle, wrongCredentials, loginError } from '@/consts/messages.js'
+import axios from 'axios'
+
+export default {
+  name: 'Home',
+  data: function() {
+    return {
+      test: 0,
+      message: '',
+      title: loginTitle
+    }
+  },
+  components: {
+    'login-form': LoginForm
+  },
+  methods: {
+    login: function(username, password) {
+      var vm = this
+      // get access token from server
+      axios.post('/api/login', 
+                {username,
+                 password})
+      .then(function (response) {
+          if (response.status === 200) {
+            vm.$router.push('/decks')
+          } else {
+            vm.message = loginError
+          }
+      })
+      .catch(function (error){
+        if (error.response) {
+          if (error.response.status === 403) {
+            vm.message = wrongCredentials
+          } else {
+            vm.message = loginError
+          }
+        } else {
+          vm.message = loginError
+        }
+      })
+    }
+  }
+}
+</script>
