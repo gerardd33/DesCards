@@ -24,10 +24,11 @@ public class Flashcard {
 	@EqualsAndHashCode.Include
 	private Deck deck;
 
-	@Column(unique = true)
+	@Column(unique = true, columnDefinition = "TEXT")
 	@EqualsAndHashCode.Include
 	private String front;
 
+	@Column(columnDefinition = "TEXT")
 	private String back;
 
 	@Convert(converter = RepetitionIntervalConverter.class)
