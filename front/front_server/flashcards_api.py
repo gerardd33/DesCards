@@ -176,7 +176,7 @@ def add_manual():
 def add_auto():
     schema = {'deckId': {'type': 'string'},
               'query': {'type': 'string'},
-              'fields': {'type': 'list'},
+              'specialFields': {'type': 'list'},
               'verbosity': {'type': 'string'}}
     print(request.json, flush=True)
     data = utils.validate(request.json, schema)
