@@ -38,27 +38,23 @@ public class GoogleSnippetInformationFinder implements InformationFinder {
 
 		log.info("Searching in google: " + googleQuery);
 		String answer;
-		try {
-			webDriver.get(GOOGLE_SEARCH_URL + googleQuery);
-			List<WebElement> elements = new ArrayList<>();
-			if (generatorRequest.getVerbosity().equals(Verbosity.BRIEF)) {
-				elements = webDriver.findElements(By.xpath(BRIEF_ANSWER_WINDOW_XPATH));
-			}
-
-			if (elements.isEmpty()) {
-				elements = webDriver.findElements(By.cssSelector(ANSWER_WINDOW_SELECTOR));
-				if (elements.isEmpty()) {
-					elements = webDriver.findElements(By.cssSelector(BIO_WINDOW_SELECTOR));
-				}
-			}
-
-			answer = elements.stream()
-					.map(element -> element.getAttribute("textContent"))
-					.findFirst()
-					.orElse(NO_ANSWER_MESSAGE);
-		} finally {
-			webDriver.quit();
+		webDriver.get(GOOGLE_SEARCH_URL + googleQuery);
+		List<WebElement> elements = new ArrayList<>();
+		if (generatorRequest.getVerbosity().equals(Verbosity.BRIEF)) {
+			elements = webDriver.findElements(By.xpath(BRIEF_ANSWER_WINDOW_XPATH));
 		}
+
+		if (elements.isEmpty()) {
+			elements = webDriver.findElements(By.cssSelector(ANSWER_WINDOW_SELECTOR));
+			if (elements.isEmpty()) {
+				elements = webDriver.findElements(By.cssSelector(BIO_WINDOW_SELECTOR));
+			}
+		}
+
+		answer = elements.stream()
+				.map(element -> element.getAttribute("textContent"))
+				.findFirst()
+				.orElse(NO_ANSWER_MESSAGE);
 
 		log.info("Found answer: <" + answer + ">");
 		return answer;
