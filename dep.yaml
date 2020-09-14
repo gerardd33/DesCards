@@ -44,8 +44,52 @@ spec:
         app: descards
     spec:
       containers:
-        - image: gcr.io/descards/front-server:latest
+        - image: gcr.io/descards/front-server:0.1
           name: front-server
           ports:
             - containerPort: 5000
               name: front-server
+          - env: 
+            - name: FLASK_APP
+              value: "front_server"
+            - name: USERS
+              value: "users-server:5000"
+            - name: FLASHCARDS
+              value: "flashcards-server:8080"
+            - name: RABBIT
+              value: "rabbit"
+        - image: gcr.io/descards/users-server:0.1
+          name: users-server
+          - env:
+            - name: FLASK_APP
+              value: "users_server"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_DB
+              value: "users-database"
+        - image: gcr.io/descards/users-database:0.1
+          name: users-database
+          - env:
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_DB
+              value: "users-database"
+        - image: gcr.io/descards/flashcards-server:0.1
+          name: flashcards-server
+        - image: postgres
+          name: flashcards-database
+          - env:
+            - name: POSTGRES_PASSWORD
+              value: "descards"
+            - name: POSTGRES_USER
+              value: "flashcards"
+            - name: POSTGRES_DB
+              value: "flashcards"
+        - image: gcr.io/descards/generator:0.1
+          name: generator
+        - image: rabbitmq:3.6.14-management
+          name: rabbit
