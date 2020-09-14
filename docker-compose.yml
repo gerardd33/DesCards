@@ -68,7 +68,13 @@ services:
 #   networks:
 #     - flashcards_local
 
-  generator-queue:
+  generator:
+    build: 
+      context: ./generator
+      target: prod
+    stop_signal: SIGINT
+
+  flashcards-rabbit:
     image: rabbitmq:3.6.14-management
     ports:
       - 5672:5672

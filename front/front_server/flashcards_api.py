@@ -10,7 +10,7 @@ bp = Blueprint('flashcards_api', __name__, url_prefix='/api')
 
 USERS_HOST = 'http://' + os.environ['USERS']
 FLASHCARDS_HOST = 'http://' + os.environ['FLASHCARDS']
-RABBIT_HOST = 'generator-queue'
+RABBIT_HOST = 'flashcards-rabbit'
 GENERATOR_EXCHANGE = 'generator-request-exchange'
 # TODO make https
 
@@ -176,7 +176,7 @@ def add_manual():
 def add_auto():
     schema = {'deckId': {'type': 'string'},
               'query': {'type': 'string'},
-              'fields': {'type': 'list'},
+              'specialFields': {'type': 'list'},
               'verbosity': {'type': 'string'}}
     print(request.json, flush=True)
     data = utils.validate(request.json, schema)
@@ -189,7 +189,8 @@ def add_auto():
         pika.ConnectionParameters(host=RABBIT_HOST))
     channel = connection.channel()
 
-    channel.exchange_declare(exchange=GENERATOR_EXCHANGE)
+    channel.exchange_declare(exchange=GENERATOR_EXCHANGE,
+                             exchange_type='fanout', durable=True)
 
     channel.basic_publish(exchange=GENERATOR_EXCHANGE, routing_key='',
                           body=json.dumps(data))
