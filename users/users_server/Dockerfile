@@ -16,5 +16,6 @@ FROM base AS test
 CMD ["python3", "-m", "unittest"]
 # CMD ["python3", "-m", "unittest", "discover","users_server/tests"]
 
-FROM bsae AS prod
-# TODO copy code instead of using volume
+FROM base AS prod
+COPY ./ ./users_server
+CMD ["flask",  "run", "--host=0.0.0.0"]
