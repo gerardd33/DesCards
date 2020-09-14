@@ -5,7 +5,6 @@ import generator.api.dto.GeneratorRequestDto;
 import generator.service.facade.GeneratorRequestFacade;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Controller;
@@ -20,10 +19,11 @@ public class GeneratorRequestMessageReceiver {
 
 	GeneratorRequestFacade generatorRequestFacade;
 
+	ObjectMapper objectMapper;
+
 	@RabbitHandler
 	public void receiveMessage(String message) throws IOException {
 		log.info("Received message from Rabbit: " + message);
-		ObjectMapper objectMapper = new ObjectMapper();
 		GeneratorRequestDto generatorRequestDto = objectMapper
 				.readValue(message, GeneratorRequestDto.class);
 
