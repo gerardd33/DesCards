@@ -189,7 +189,8 @@ def add_auto():
         pika.ConnectionParameters(host=RABBIT_HOST))
     channel = connection.channel()
 
-    channel.exchange_declare(exchange=GENERATOR_EXCHANGE)
+    channel.exchange_declare(exchange=GENERATOR_EXCHANGE,
+                             exchange_type='fanout', durable=True)
 
     channel.basic_publish(exchange=GENERATOR_EXCHANGE, routing_key='',
                           body=json.dumps(data))
