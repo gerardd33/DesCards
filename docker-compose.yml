@@ -14,6 +14,7 @@ services:
       - FLASK_APP=front_server
       - USERS=users-server:5000
       - FLASHCARDS=flashcards-server:8080
+      - RABBIT=rabbit
 
   users-server:
     build:
