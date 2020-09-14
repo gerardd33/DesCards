@@ -21,15 +21,15 @@ public class TestMessageSender implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-//		sendTestRequest();
+		sendTestRequest();
 	}
 
 	private void sendTestRequest() {
 		GeneratorRequest generatorRequest = GeneratorRequest.builder()
 				.deckId(1L)
-				.query("Battle of the Somme")
-				.specialFields(Collections.singletonList("Date"))
-				.verbosity(Verbosity.BRIEF)
+				.query("crisis of the third century")
+				.specialFields(Collections.emptyList())
+				.verbosity(Verbosity.VERBOSE)
 				.build();
 
 		GeneratorRequestDto generatorRequestDto = GeneratorRequestDtoMapper.mapToDto(generatorRequest);
