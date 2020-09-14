@@ -26,11 +26,11 @@ public class InformationFinderConfig {
 	@Bean(destroyMethod = "quit")
 	public WebDriver webDriver() {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability("headless", true);
+//		capabilities.setCapability("headless", true);
 
 		URL webDriverUrl;
 		try {
-			webDriverUrl = new URL(informationFinderProperties.getWebdriverAddress());
+			webDriverUrl = new URL(informationFinderProperties.getSeleniumAddress());
 		} catch (MalformedURLException exception) {
 			exception.printStackTrace();
 			throw new IllegalStateException();
