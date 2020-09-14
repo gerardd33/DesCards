@@ -11,5 +11,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "information-finder")
 public class InformationFinderProperties {
 
-	private String webdriverAddress;
+	private String seleniumAddress;
 }

@@ -80,3 +80,12 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+
+  selenium-server:
+    image: selenium/standalone-chrome
+    ports:
+      - 4444:4444
+
+networks:
+  selenium-server:
+    driver: bridge
