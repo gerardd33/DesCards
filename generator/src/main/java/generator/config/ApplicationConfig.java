@@ -5,7 +5,6 @@ import generator.service.facade.GeneratorRequestFacade;
 import generator.service.impl.GeneratorRequestFacadeImpl;
 import generator.util.service.FlashcardCreationRequestDispatcher;
 import generator.util.service.GeneratorRequestManager;
-import generator.util.service.GoogleSnippetInformationFinder;
 import generator.util.service.InformationFinder;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -16,11 +15,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.concurrent.Semaphore;
 
-@AllArgsConstructor
 @Configuration
+@AllArgsConstructor
 public class ApplicationConfig {
 
 	private final WebClient flashcardsApi;
+
+	private final InformationFinder informationFinder;
 
 	@Bean
 	public GeneratorRequestFacade generatorRequestFacade() {
@@ -29,18 +30,13 @@ public class ApplicationConfig {
 
 	@Bean
 	public GeneratorRequestManager generatorRequestManager() {
-		return new GeneratorRequestManager(generatorRequest(), informationFinder(),
+		return new GeneratorRequestManager(generatorRequest(), informationFinder,
 				flashcardCreationRequestDispatcher(), semaphore());
 	}
 
 	@Bean
 	public GeneratorRequest generatorRequest() {
 		return new GeneratorRequest();
-	}
-
-	@Bean
-	public InformationFinder informationFinder() {
-		return new GoogleSnippetInformationFinder();
 	}
 
 	@Bean
