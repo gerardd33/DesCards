@@ -16,9 +16,9 @@ public class GeneratorRequestDtoMapper {
 	}
 
 	public static GeneratorRequest mapFromDto(GeneratorRequestDto generatorRequestDto) {
-		Verbosity verbosity = Verbosity.BRIEF;
+		Verbosity verbosity = Verbosity.VERBOSE;
 		if (generatorRequestDto.getVerbosity() != null) {
-			Verbosity.parseApiName(generatorRequestDto.getVerbosity());
+			verbosity = Verbosity.parseApiName(generatorRequestDto.getVerbosity());
 		}
 
 		return GeneratorRequest.builder()

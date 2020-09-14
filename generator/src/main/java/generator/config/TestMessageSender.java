@@ -27,8 +27,8 @@ public class TestMessageSender implements CommandLineRunner {
 	private void sendTestRequest() {
 		GeneratorRequest generatorRequest = GeneratorRequest.builder()
 				.deckId(1L)
-				.query("Battle of the Somme")
-				.specialFields(Collections.singletonList("Date"))
+				.query("elon musk age")
+				.specialFields(Collections.emptyList())
 				.verbosity(Verbosity.BRIEF)
 				.build();
 

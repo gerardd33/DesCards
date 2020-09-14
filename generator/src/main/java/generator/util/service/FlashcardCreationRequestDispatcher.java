@@ -6,7 +6,6 @@ import generator.util.api.mapper.FlashcardDtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Slf4j
@@ -21,8 +20,7 @@ public class FlashcardCreationRequestDispatcher {
 		log.info("Creating flashcard in deck " + deckId);
 
 		FlashcardDto flashcardDto = FlashcardDtoMapper.mapToDto(flashcard);
-		ClientResponse response = flashcardsApi
-				.post()
+		flashcardsApi.post()
 				.uri("/deck/" + deckId + "/add-card")
 				.body(BodyInserters.fromValue(flashcardDto))
 				.exchange()
