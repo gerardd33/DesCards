@@ -50,14 +50,14 @@ export default {
   methods: {
     add: function () {
       console.log(this.selected)
-      var fields = []
+      var specialFields = []
       for (var field of this.selected.specialFields) {
         if (field.checked) {
-          fields.push(field.name)
+          specialFields.push(field.name)
         }
       }
       var deckId = window.localStorage.getItem('deckId')
-      this.$emit('add-auto', {query: this.query, fields, verbose: this.verbose, deckId})
+      this.$emit('add-auto', {query: this.query, specialFields, verbosity: this.verbose?'verbose':'breif', deckId})
     }
   },
   created: function () {

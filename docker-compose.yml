@@ -2,13 +2,13 @@ version: "3.4"
 
 services:
   front-server:
-    build: ./front/front_server/
+    build: 
+      context: ./front
+      target: dev
     volumes:
       - ./front/:/usr/src/app/
     ports:
       - 5000:5000
-#   networks:
-#     - net
     stop_signal: SIGINT
     environment:
       - FLASK_APP=front_server
@@ -50,8 +50,8 @@ services:
       target: prod
 #   volumes:
 #     - ./flashcards_server:/usr/src/app/flashcards_server
-    ports:
-      - 8080:8080
+#   ports:
+#     - 8080:8080
 #   networks:
 #     - flashcards_local
 #     - front_net
@@ -68,8 +68,14 @@ services:
 #   networks:
 #     - flashcards_local
 
-# flashcards-adminer:
-#   image: adminer
-#   restart: always
-#   ports:
-#     - 10000:8080 # port 10000 on host
+  generator:
+    build: 
+      context: ./generator
+      target: prod
+    stop_signal: SIGINT
+
+  flashcards-rabbit:
+    image: rabbitmq:3.6.14-management
+    ports:
+      - 5672:5672
+      - 15672:15672

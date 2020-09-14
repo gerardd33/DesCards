@@ -1,6 +1,6 @@
 
 module.exports = {
-//    outputDir: '../front_server/templates',
-//    assetsDir: '../static/'
+      outputDir: '../front_server/templates',
+      assetsDir: '../static/'
 }
 
