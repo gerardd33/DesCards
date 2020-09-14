@@ -4,9 +4,9 @@ services:
   front-server:
     build: 
       context: ./front
-      target: prod
-#   volumes:
-#     - ./front/:/usr/src/app/
+      target: dev
+    volumes:
+      - ./front/:/usr/src/app/
     ports:
       - 5000:5000
     stop_signal: SIGINT
@@ -50,8 +50,8 @@ services:
       target: prod
 #   volumes:
 #     - ./flashcards_server:/usr/src/app/flashcards_server
-    ports:
-      - 8080:8080
+#   ports:
+#     - 8080:8080
 #   networks:
 #     - flashcards_local
 #     - front_net
@@ -68,8 +68,8 @@ services:
 #   networks:
 #     - flashcards_local
 
-# flashcards-adminer:
-#   image: adminer
-#   restart: always
-#   ports:
-#     - 10000:8080 # port 10000 on host
+  generator-queue:
+    image: rabbitmq:3.6.14-management
+    ports:
+      - 5672:5672
+      - 15672:15672

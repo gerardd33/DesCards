@@ -4,6 +4,7 @@ RUN pip install flask
 RUN pip install requests
 RUN pip install cerberus
 RUN pip install pyjwt
+RUN pip install pika
 
 FROM base AS dev
 WORKDIR /usr/src/app

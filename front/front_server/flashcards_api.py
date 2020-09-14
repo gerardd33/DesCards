@@ -3,11 +3,15 @@ import requests
 import os
 from random import randint, random
 from . import utils
+import pika
+import json
 
 bp = Blueprint('flashcards_api', __name__, url_prefix='/api')
 
 USERS_HOST = 'http://' + os.environ['USERS']
 FLASHCARDS_HOST = 'http://' + os.environ['FLASHCARDS']
+RABBIT_HOST = 'generator-queue'
+GENERATOR_EXCHANGE = 'generator-request-exchange'
 # TODO make https
 
 flashcards = [
@@ -174,9 +178,22 @@ def add_auto():
               'query': {'type': 'string'},
               'fields': {'type': 'list'},
               'verbosity': {'type': 'string'}}
+    print(request.json, flush=True)
     data = utils.validate(request.json, schema)
 
     if data is None:
         return "Invalid data", 400
 
+    # TODO make connection once and store it
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(host=RABBIT_HOST))
+    channel = connection.channel()
+
+    channel.exchange_declare(exchange=GENERATOR_EXCHANGE)
+
+    channel.basic_publish(exchange=GENERATOR_EXCHANGE, routing_key='',
+                          body=json.dumps(data))
+
     print('added to queue', data, flush=True)
+
+    return "Request added", 200
