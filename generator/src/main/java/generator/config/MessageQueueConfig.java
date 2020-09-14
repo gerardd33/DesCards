@@ -29,9 +29,4 @@ public class MessageQueueConfig {
 		return new Declarables(generatorRequestQueue, generatorRequestExchange,
 				BindingBuilder.bind(generatorRequestQueue).to(generatorRequestExchange));
 	}
-
-	@Bean
-	public MessageConverter jsonMessageConverter() {
-		return new Jackson2JsonMessageConverter();
-	}
 }

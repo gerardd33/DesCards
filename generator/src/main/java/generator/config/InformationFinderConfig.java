@@ -26,15 +26,10 @@ public class InformationFinderConfig {
 
 	@Bean(destroyMethod = "quit")
 	public WebDriver webDriver() {
-		System.out.println("Creating webdriver bean");
-		System.out.println(informationFinderProperties);
-		System.out.println("Address: " + informationFinderProperties.getSeleniumAddress());
 		URL webDriverUrl;
 		try {
 			webDriverUrl = new URL(informationFinderProperties.getSeleniumAddress());
-			System.out.println("jest ok");
 		} catch (MalformedURLException exception) {
-			System.out.println("wyjebalo");
 			exception.printStackTrace();
 			throw new IllegalStateException();
 		}

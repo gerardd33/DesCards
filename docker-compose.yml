@@ -80,8 +80,3 @@ services:
     image: selenium/standalone-chrome
     ports:
       - 4444:4444
-
-networks:
-  selenium-server:
-    driver: bridge
-# TODO check if networks needed
