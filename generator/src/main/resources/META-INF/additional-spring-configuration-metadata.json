@@ -14,5 +14,10 @@
 			"name": "flashcards.api.server-address",
 			"type": "java.lang.String",
 			"description": "Address of Flashcards server."
+		},
+		{
+			"name": "information-finder.webdriver-address",
+			"type": "java.lang.String",
+			"description": "Address of Selenium web driver."
 		}
 	] }
