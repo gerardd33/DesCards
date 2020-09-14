@@ -18,17 +18,18 @@ def login():
 
     database = db.get_db()
 
-    is_validated = database.validate_user(data['username'],
-                                          data['password'])
+    user_id = database.validate_user(data['username'],
+                                     data['password'])
 
-    if is_validated is False:
+    if user_id is None:
         return 'Incorrect login or password', 403
 
-    database.create_session(data['username'])
-    token = jwt.encode({'username': data['username']},
+    session_id = database.create_session(user_id)
+    token = jwt.encode({'username': data['username'],
+                        'userId': user_id,
+                        'sessionId': session_id},
                        current_app.config['JWT_SECRET'],
                        algorithm=current_app.config['JWT_ALGORITHM'])
-    # TODO Add some noise, so that token is different every time
     token = token.decode()
     return jsonify({'token': token}), 200
 
@@ -50,10 +51,10 @@ def logout():
     if json is None:
         return 'Incorrect token', 403
 
-    username = json['username']
+    user_id = json['userId']
 
     database = db.get_db()
-    database.delete_session(username)
+    database.delete_session(user_id)
     return 'Logged out', 200
 
 
@@ -74,9 +75,9 @@ def validate():
     if json is None:
         return jsonify({'is_valid': False}), 200
 
-    username = json['username']
+    user_id = json['userId']
 
     database = db.get_db()
-    is_valid = database.validate_session(username)
+    is_valid = database.validate_session(user_id)
 
     return jsonify({'is_valid': is_valid}), 200

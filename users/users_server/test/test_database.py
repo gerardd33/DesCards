@@ -22,7 +22,7 @@ class TestDatabase(unittest.TestCase):
         self.database = wait_for_db()
 
     def test_create_delete_user(self):
-        self.database.create_user("test", "test")
+        user_id = self.database.create_user("test", "test")
 
         cur = self.database.conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s", ('test',))
@@ -30,14 +30,14 @@ class TestDatabase(unittest.TestCase):
         test_user = cur.fetchone()
         self.assertIsNotNone("test")
 
-        self.database.delete_user("test")
+        self.database.delete_user(user_id)
         cur.execute("SELECT * FROM users WHERE username=%s", ('test',))
 
         test_user = cur.fetchone()
         self.assertIsNone(test_user)
 
     def test_verify_user(self):
-        self.database.create_user("test", "correct_password")
+        user_id = self.database.create_user("test", "correct_password")
 
         result = self.database.validate_user("test", "wrong_pasword")
         self.assertFalse(result)
@@ -45,7 +45,7 @@ class TestDatabase(unittest.TestCase):
         result = self.database.validate_user("test", "correct_password")
         self.assertTrue(result)
 
-        self.database.delete_user("test")
+        self.database.delete_user(user_id)
 
     def test_create_delete_validate_session(self):
         result = self.database.validate_session("test")
