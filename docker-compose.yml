@@ -19,7 +19,7 @@ services:
   users-server:
     build:
       context: ./users/users_server/
-      target: dev
+      target: prod
     volumes:
       - ./users/users_server/:/usr/src/app/users_server/
         # ports:
