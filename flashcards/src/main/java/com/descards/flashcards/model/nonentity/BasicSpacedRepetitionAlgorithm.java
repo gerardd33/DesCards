@@ -1,7 +1,10 @@
 package com.descards.flashcards.model.nonentity;
 
+import lombok.NoArgsConstructor;
+
 import java.time.Duration;
 
+@NoArgsConstructor
 public class BasicSpacedRepetitionAlgorithm implements SchedulingAlgorithm {
 
 	private static final Duration LEARNING_INTERVAL = Duration.ofMinutes(5);

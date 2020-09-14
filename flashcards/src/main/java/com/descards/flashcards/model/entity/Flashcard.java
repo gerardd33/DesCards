@@ -24,6 +24,7 @@ public class Flashcard {
 	@EqualsAndHashCode.Include
 	private Deck deck;
 
+	@Column(unique = true)
 	@EqualsAndHashCode.Include
 	private String front;
 
