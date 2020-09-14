@@ -25,50 +25,58 @@ class Database():
         cur = self.conn.cursor()
         password = password.encode('utf-8')
         password = bcrypt.hashpw(password, bcrypt.gensalt())
-        cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)",
+        cur.execute("INSERT INTO users (username, password) VALUES (%s, %s) RETURNING id",
                     (username, password))
+        user_id = cur.fetchone()[0]
         self.conn.commit()
+        return user_id
 
-    def delete_user(self, username):
+    def delete_user(self, userid):
         cur = self.conn.cursor()
-        cur.execute("DELETE FROM users WHERE username = %s", (username,))
+        cur.execute("DELETE FROM users WHERE id = %s", (userid,))
         self.conn.commit()
 
     def validate_user(self, username, password):
         cur = self.conn.cursor()
-        cur.execute("SELECT username, password FROM users WHERE username = %s",
+        cur.execute("SELECT id, username, password FROM users WHERE username = %s",
                     (username,))
 
         user = cur.fetchone()
 
         if user is None:
-            return False
+            return None
 
-        return bcrypt.checkpw(password.encode('utf-8'), user[1].tobytes())
+        if bcrypt.checkpw(password.encode('utf-8'), user[2].tobytes()):
+            return user[0]
+        else:
+            return None
 
-    def create_session(self, username):
+    def create_session(self, userid):
+        self.delete_session(userid)
         cur = self.conn.cursor()
-        cur.execute("INSERT INTO sessions (username, expires) VALUES (%s, %s)",
-                    (username, datetime.datetime.now() + SESSION_VALID_TIME))
+        cur.execute("INSERT INTO sessions (userid, expires) VALUES (%s, %s) RETURNING id",
+                    (userid, datetime.datetime.now() + SESSION_VALID_TIME))
+        session_id = cur.fetchone()[0]
         self.conn.commit()
+        return session_id
 
-    def validate_session(self, username):
+    def validate_session(self, userid):
         cur = self.conn.cursor()
-        cur.execute("SELECT * FROM sessions WHERE username = %s",
-                    (username,))
+        cur.execute("SELECT id, userid, expires FROM sessions WHERE userid=%s",
+                    (userid,))
         session = cur.fetchone()
 
         if session is None:
             return False
 
-        if session[1] < datetime.datetime.now():
+        if session[2] < datetime.datetime.now():
             return False
 
         return True
 
-    def delete_session(self, username):
+    def delete_session(self, userid):
         cur = self.conn.cursor()
-        cur.execute("DELETE FROM sessions WHERE username = %s", (username,))
+        cur.execute("DELETE FROM sessions WHERE userid = %s", (userid,))
         self.conn.commit()
 
     def __del__(self):

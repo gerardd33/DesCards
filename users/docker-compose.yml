@@ -5,7 +5,7 @@ services:
   server:
     build:
       context: ./users_server
-      target: dev
+      target: test
     volumes:
       - ./users_server:/usr/src/app/users_server
         # ports:
@@ -23,11 +23,13 @@ services:
     networks:
       - users_local
 
-#  adminer:
-#    image: adminer
-#    restart: always
-#    ports:
-#      - 10000:8080
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10001:8080
+    networks:
+      - users_local
 
 
 networks:

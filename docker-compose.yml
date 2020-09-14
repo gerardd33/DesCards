@@ -4,7 +4,7 @@ services:
   front-server:
     build: 
       context: ./front
-      target: dev
+      target: prod
     volumes:
       - ./front/:/usr/src/app/
     ports:
@@ -14,6 +14,7 @@ services:
       - FLASK_APP=front_server
       - USERS=users-server:5000
       - FLASHCARDS=flashcards-server:8080
+      - RABBIT=rabbit
 
   users-server:
     build:
@@ -74,7 +75,7 @@ services:
       target: prod
     stop_signal: SIGINT
 
-  flashcards-rabbit:
+  rabbit:
     image: rabbitmq:3.6.14-management
     ports:
       - 5672:5672
