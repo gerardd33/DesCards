@@ -2,14 +2,21 @@
   <div class="deck">
     <span>{{}}</span>
     <span class="deck-name">{{ entry.name }}</span>
-    <button @click="choose">Wybierz</button>
+    <button @click="choose">{{ chooseLabel }}</button>
   </div>
 </template>
 
 <script>
+import {chooseLabel} from "@/consts/messages";
+
 export default {
   name: 'Deck',
   props: ['entry'],
+	data: function() {
+		return {
+			chooseLabel: chooseLabel
+		}
+	},
   methods: {
     choose: function () {
       window.localStorage.setItem('deck', this.entry.name)

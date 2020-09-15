@@ -1,32 +1,33 @@
 // pl
 // Login.vue
 export const loginTitle = 'Log in'
-export const wrongCredentials = 'Niepoprawny login lub hasło'
-export const loginError = 'Logowanie nie powiodło się'
+export const wrongCredentials = 'Incorrect login or password'
+export const loginError = 'Login failed'
 export const registerPrompt = "Don't have an account? Register here."
 
 // Register.vue
 export const registerPageTitle = 'Register'
-export const accountCreated = 'Konto zostało utworzone'
-export const registerError = 'Nie udało się utworzyć konta'
+export const accountCreated = 'Account created'
+export const registerError = 'Failed to register account'
 
 // Flashcard.vue
-export const editButton = 'Edytuj'
-export const deleteButton = 'Usuń'
+export const editButton = 'Edit'
+export const deleteButton = 'Delete'
 
 // Deck.vue
-export const nextButton = 'Następny'
-export const prevButton = 'Poprzedni'
-export const addButton = 'Dodaj'
-export const studyButton = 'Nauka'
-export const refreshButton = 'Odśwież'
-export const manageButton = 'Prezeglądaj'
-export const pageName = 'Strona '
+export const nextButton = 'Next'
+export const prevButton = 'Previous'
+export const addButton = 'Add'
+export const studyButton = 'Study'
+export const refreshButton = 'Refresh'
+export const manageButton = 'Browse'
+export const pageName = 'Page '
+export const chooseLabel = 'Choose'
 
 // Flashcard.vue
-export const saveButton = 'Zapisz'
-export const frontLabel = 'Przód'
-export const backLabel = 'Tył'
+export const saveButton = 'Save'
+export const frontLabel = 'Front'
+export const backLabel = 'Back'
 
 
-export const deckNameLabel = 'Nazwa talii'
+export const deckNameLabel = 'Deck name'

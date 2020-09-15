@@ -10,7 +10,7 @@
       {{ getCurrentFlashcard().back }}
       </span>
     </div>
-    <button @click="prev">Prev</button>
+    <button @click="prev">Previous</button>
     <button @click="isFront = !isFront">Show</button>
     <button @click="next">Next</button>
     <br>
