@@ -1,16 +1,16 @@
 <template>
   <div class="study">
     <div :class="{flashcard: isFront, front: !isFront}">
-      <span class="text">
+      <span class="text-front">
       {{ getCurrentFlashcard().front }}
       </span>
     </div>
     <div :class="{back: !isFront}" v-if="!isFront">
-      <span class="text">
+      <span class="text-back">
       {{ getCurrentFlashcard().back }}
       </span>
     </div>
-    <button @click="prev">Prev</button>
+    <button @click="prev">Previous</button>
     <button @click="isFront = !isFront">Show</button>
     <button @click="next">Next</button>
     <br>
@@ -131,29 +131,42 @@ export default {
 <style scoped>
 .flashcard {
   width: 80%;
-  height: 76vh;
+  height: 60vh;
   margin: auto;
   text-align: center;
-  line-height: 76vh;
+  line-height: 60vh;
 }
 
 .front {
-  width: 80%;
-  height: 57vh;
+  width: 100%;
+	left: 0;
+  height: 30vh;
+	text-align: center;
 }
 
 .back {
   width: 80%;
+	height: 30vh;
   margin: auto;
   text-align: center;
 }
 
-.text {
+.text-front {
   font-size: 40px;
+	display: block;
+	position: center;
+	text-align: center;
+	padding: 10px;
 }
+
+.text-back {
+	font-size: 25px;
+	display: block;
+}
+
 button {
   width: 200px;
   height: 50px;
-  margin: 0px 12px;
+  margin: 6px 12px;
 }
 </style>

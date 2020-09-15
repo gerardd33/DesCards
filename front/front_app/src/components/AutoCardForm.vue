@@ -4,7 +4,7 @@
       <label for="query">{{ frontLabel }}</label>
       <input v-model="query" id="query"><br>
     </div>
-    <select v-model="selectedId">
+    <select class="category" v-model="selectedId">
       <option v-for="(category, index) in categories"
         :key="index"
         :value="index">
@@ -58,11 +58,16 @@ export default {
       for (var field of this.selected.specialFields) {
         if (field.checked) {
           specialFields.push(field.name)
+					field.checked = false
         }
       }
       var deckId = window.localStorage.getItem('deckId')
       this.$emit('add-auto', {query: this.query, specialFields, deckId})
-    }
+			this.resetInput()
+    },
+		resetInput: function() {
+			this.query = ''
+		}
   },
   created: function () {
     // get categories
@@ -70,8 +75,8 @@ export default {
     axios.get('/api/categories')
     .then(function (response) {
       if (response.status === 200) {
-        vm.categories = response.data.map((value) => { 
-          return {...value, specialFields: value.specialFields.map((name) => {return {name, checked: false}})} 
+        vm.categories = response.data.map((value) => {
+          return {...value, specialFields: value.specialFields.map((name) => {return {name, checked: false}})}
 
         })
         if (vm.categories.length > 0) {
@@ -95,15 +100,29 @@ export default {
   margin: 12px;
 }
 
-.query > input { 
-  width: 500px;
-  height: 20px;
+.query > input {
+  width: 550px;
+  height: 40px;
+	font-size: 22px;
+	padding: 5px 10px;
 }
 
 .add {
-  width: 200px;
-  height: 50px;
-  margin: 20px;
-  font-size: 20px;
+	width: 200px;
+	height: 50px;
+	margin: 20px;
+	font-size: 20px;
 }
+
+.category {
+	font-size: 16px;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+
+.special-fields {
+	text-align: left;
+	margin-left: 375px;
+}
+
 </style>

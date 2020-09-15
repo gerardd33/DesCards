@@ -1,7 +1,7 @@
 <template>
   <div class="flashcards-container">
     <div class="list">
-      {{ deck_name }}<br>
+			<span class="deck-name">{{ deck_name }}</span><br>
       <list :list="flashcards"
         :component="flashcard_componenet"
         @edit="edit"
@@ -180,5 +180,12 @@ a {
 button {
   width: 200px;
   height: 50px;
+}
+
+.deck-name {
+	display: inline-block;
+	font-size: 30px;
+	font-weight: bold;
+	margin: 10px;
 }
 </style>

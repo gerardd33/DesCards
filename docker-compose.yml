@@ -4,7 +4,7 @@ services:
   front-server:
     build: 
       context: ./front
-      target: prod
+      target: dev
     volumes:
       - ./front/:/usr/src/app/
     ports:

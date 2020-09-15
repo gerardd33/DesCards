@@ -1,9 +1,9 @@
 <template>
   <div class="flashcard-form">
-    <label for="front">{{ frontLabel }}</label>
+    <label for="front">{{ frontLabel }}</label><br>
     <input id="front" :value="flashcard.front" @input="update('front', $event.target.value)">
     <br>
-    <label for="back">{{ backLabel }}</label>
+    <label for="back">{{ backLabel }}</label><br>
     <input id="back" :value="flashcard.back" @input="update('back', $event.target.value)">
     <br>
     <button @click="$emit('hide')">Zapisz</button>
@@ -27,7 +27,7 @@ export default {
     update: function (key, value) {
       var a = { ...this.flashcard, [key]: value }
       console.log(a)
-      this.$emit('xd', a) 
+      this.$emit('update-card', a)
     }
   },
   computed: {
@@ -42,4 +42,13 @@ export default {
 </script>
 
 <style scoped>
+
+input#front, input#back {
+	height: 30px;
+	width: 175px;
+	font-size: 18px;
+	margin: 5px;
+	padding: 3px 5px;
+}
+
 </style>

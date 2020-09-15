@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -48,4 +49,17 @@ export default {
 button, input {
   margin: 12px;
 }
+
+button {
+	background-color: white;
+	border: 2px solid mediumseagreen;
+	border-radius: 30px;
+	padding: 5px 10px;
+	font-size: 16px;
+}
+
+#nav {
+	font-size: 18px;
+}
+
 </style>

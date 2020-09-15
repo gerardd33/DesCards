@@ -1,15 +1,22 @@
 <template>
   <div class="deck">
-    <span>{{ entry.id }}</span>
-    <span>{{ entry.name }}</span>
-    <button @click="choose">Wybierz</button>
+    <span>{{}}</span>
+    <span class="deck-name">{{ entry.name }}</span>
+    <button @click="choose">{{ chooseLabel }}</button>
   </div>
 </template>
 
 <script>
+import {chooseLabel} from "@/consts/messages";
+
 export default {
   name: 'Deck',
   props: ['entry'],
+	data: function() {
+		return {
+			chooseLabel: chooseLabel
+		}
+	},
   methods: {
     choose: function () {
       window.localStorage.setItem('deck', this.entry.name)
@@ -25,4 +32,24 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
+span, button {
+	display: inline-block;
+	margin: 10px;
+	font-size: 16px;
+}
+
+.deck {
+	border: 2px solid mediumspringgreen;
+	border-radius: 30px;
+	padding: 10px 30px;
+	margin: 10px;
+}
+
+.deck-name {
+	display: inline-block;
+	font-size: 25px;
+	font-weight: bold;
+}
+
 </style>

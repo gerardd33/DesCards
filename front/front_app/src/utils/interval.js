@@ -10,7 +10,7 @@ var units = [
 export var parseInterval = function (interval) {
     for (var entry of units) {
       if (interval < entry.max) {
-        return interval.toString() + entry.unit
+        return interval.toString() + ' ' + entry.unit
       }
       interval = Math.floor(interval / entry.max)
     }
