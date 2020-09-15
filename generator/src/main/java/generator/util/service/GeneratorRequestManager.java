@@ -15,6 +15,8 @@ import java.util.concurrent.Semaphore;
 @AllArgsConstructor
 public class GeneratorRequestManager {
 
+	private static final String EN_DASH_SPACE = " \u2013 ";
+
 	private GeneratorRequest generatorRequest;
 
 	private InformationFinder informationFinder;
@@ -27,7 +29,7 @@ public class GeneratorRequestManager {
 		log.info("Processing: " + generatorRequest);
 
 		generatorRequest.getSpecialFields().forEach(fieldLabel -> {
-			String cardFront = generatorRequest.getQuery() + " " + fieldLabel;
+			String cardFront = generatorRequest.getQuery() + EN_DASH_SPACE + fieldLabel;
 			String cardBack = informationFinder.findInformation(
 					generatorRequest.getQuery(), fieldLabel);
 			createFlashcard(generatorRequest.getDeckId(), cardFront, cardBack);

@@ -26,5 +26,3 @@ export const saveButton = 'Zapisz'
 export const frontLabel = 'Przód'
 export const backLabel = 'Tył'
 
-// AutoCardForm.vue
-export const verboseLabel = 'Generuj szczegółową fiszkę'
