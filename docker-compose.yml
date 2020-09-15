@@ -4,7 +4,7 @@ services:
   front-server:
     build: 
       context: ./front
-      target: dev
+      target: prod
     volumes:
       - ./front/:/usr/src/app/
     ports:
@@ -19,14 +19,9 @@ services:
   users-server:
     build:
       context: ./users/users_server/
-      target: dev
+      target: prod
     volumes:
       - ./users/users_server/:/usr/src/app/users_server/
-        # ports:
-        # - 5000:5000
-#   networks:
-#     - users_local
-#     - front_net
     environment:
       - FLASK_APP=users_server
       - POSTGRES_PASSWORD=postgres
@@ -42,17 +37,18 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=develop
-#   networks:
-#     - users_local
 
   flashcards-server:
     build:
       context: ./flashcards/
       target: prod
-    ports:
-        - 8080:8080
+#   volumes:
+#     - ./flashcards_server:/usr/src/app/flashcards_server
+#   ports:
+#     - 8080:8080
     stop_signal: SIGINT
-#   hostname: flashcards
+    environment:
+      - DATABASE=flashcards-database
 
   flashcards-database:
     image: postgres
@@ -61,14 +57,16 @@ services:
       - POSTGRES_PASSWORD=descards
       - POSTGRES_USER=flashcards
       - POSTGRES_DB=flashcards
-#   networks:
-#     - flashcards_local
 
   generator:
     build: 
       context: ./generator
       target: prod
     stop_signal: SIGINT
+    environment:
+      - FLASHCARDS=flashcards-server
+      - RABBIT=rabbit
+      - SELENIUM=selenium-server
 
   rabbit:
     image: rabbitmq:3.6.14-management

@@ -15,34 +15,27 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: users
+  name: flashcards
   labels:
-    app: users
+    app: flashcards
 spec:
   containers:
-  - image: gcr.io/descards/users-server:0.1
-    name: users-server
+  - image: gcr.io/descards/flashcards-server:0.1
+    name: flashcards-server
     imagePullPolicy: Always
     ports:
-    - containerPort: 5000
+    - containerPort: 8080
     env:
-    - name: FLASK_APP
-      value: "users_server"
-    - name: POSTGRES_PASSWORD
-      value: "postgres"
-    - name: POSTGRES_USER
-      value: "postgres"
-    - name: POSTGRES_DB
-      value: "develop"
     - name: DATABASE
       value: "localhost"
-  - image: gcr.io/descards/users-database:0.1
-    name: users-database
-    imagePullPolicy: Always
+  - image: postgres
+    name: flashcards-database
+    ports:
+    - containerPort: 5432
     env:
     - name: POSTGRES_PASSWORD
-      value: "postgres"
+      value: "descards"
     - name: POSTGRES_USER
-      value: "postgres"
+      value: "flashcards"
     - name: POSTGRES_DB
-      value: "develop"
+      value: "flashcards"

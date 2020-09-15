@@ -15,34 +15,24 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: users
+  name: generator
   labels:
-    app: users
+    app: generator
 spec:
   containers:
-  - image: gcr.io/descards/users-server:0.1
-    name: users-server
+  - image: gcr.io/descards/generator:0.1
+    name: generator
     imagePullPolicy: Always
     ports:
-    - containerPort: 5000
+    - containerPort: 8080
     env:
-    - name: FLASK_APP
-      value: "users_server"
-    - name: POSTGRES_PASSWORD
-      value: "postgres"
-    - name: POSTGRES_USER
-      value: "postgres"
-    - name: POSTGRES_DB
-      value: "develop"
-    - name: DATABASE
+    - name: FLASHCARDS
+      value: $(FLASHCARDS_SERVICE_SERVICE_HOST)
+    - name: RABBIT
+      value: $(RABBIT_SERVICE_SERVICE_HOST)
+    - name: SELENIUM
       value: "localhost"
-  - image: gcr.io/descards/users-database:0.1
-    name: users-database
-    imagePullPolicy: Always
-    env:
-    - name: POSTGRES_PASSWORD
-      value: "postgres"
-    - name: POSTGRES_USER
-      value: "postgres"
-    - name: POSTGRES_DB
-      value: "develop"
+  - image: selenium/standalone-chrome
+    name: selenium
+    ports:
+    - containerPort: 4444
