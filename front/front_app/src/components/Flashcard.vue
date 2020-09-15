@@ -2,7 +2,7 @@
   <div class="flashcard" v-bind:class="{deleted: deleted}">
     <span class="field">{{ entry.id }}</span>
     <span class="field">{{ entry.front }}</span>
-    <span class="field">{{ entry.back }}</span>
+    <span class="back" :title="entry.back">{{ backShort }}</span>
     <span class="field">{{ interval }}</span>
     <span class="field">
       <button @click="$emit('edit', index)">{{ editButton }}</button>
@@ -30,6 +30,13 @@ export default {
     interval: function () {
       console.log(this.entry.interval)
       return parseInterval(this.entry.interval.current)
+    },
+    backShort: function () {
+      if (this.entry.back.length > 52) {
+        return this.entry.back.substr(0, 52) + '...'
+      } else {
+        return this.entry.back
+      }
     }
   },
   methods: {
@@ -49,7 +56,7 @@ export default {
 .deleted {
   background-color: red;
 }
-.field {
-  width: 20%;
+.back {
+  width: 50%;
 }
 </style>

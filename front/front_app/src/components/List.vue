@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .list {
-  width: 60%;
+  width: 90%;
   margin: auto;
 }
 </style>
