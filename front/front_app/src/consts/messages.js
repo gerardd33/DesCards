@@ -19,6 +19,7 @@ export const prevButton = 'Poprzedni'
 export const addButton = 'Dodaj'
 export const studyButton = 'Nauka'
 export const refreshButton = 'Odśwież'
+export const manageButton = 'Prezeglądaj'
 export const pageName = 'Strona '
 
 // Flashcard.vue
