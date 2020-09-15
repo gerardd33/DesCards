@@ -66,6 +66,7 @@ services:
     environment:
       - FLASHCARDS=flashcards-server
       - RABBIT=rabbit
+      - SELENIUM=selenium-server
 
   rabbit:
     image: rabbitmq:3.6.14-management
