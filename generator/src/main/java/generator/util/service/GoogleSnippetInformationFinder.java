@@ -1,7 +1,5 @@
 package generator.util.service;
 
-import generator.model.GeneratorRequest;
-import generator.model.Verbosity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -25,22 +23,32 @@ public class GoogleSnippetInformationFinder implements InformationFinder {
 
 	private static final String NO_ANSWER_MESSAGE = "Could not find the answer";
 
+	private static final String EMPTY_FIELD = "";
+
 	private final WebDriver webDriver;
 
 	@Override
-	public String findInformation(GeneratorRequest generatorRequest) {
-		return getGoogleSnippet(generatorRequest);
+	public String findInformation(String query) {
+		return getGoogleSnippet(query);
 	}
 
-	private String getGoogleSnippet(GeneratorRequest generatorRequest) {
-		String googleQuery = generatorRequest.getQuery() + " " +
-				String.join(" ", generatorRequest.getSpecialFields());
+	@Override
+	public String findInformation(String query, String specialField) {
+		return getGoogleSnippet(query, specialField);
+	}
 
+	private String getGoogleSnippet(String query) {
+		return getGoogleSnippet(query, EMPTY_FIELD);
+	}
+
+	private String getGoogleSnippet(String query, String specialField) {
+		String googleQuery = query + " " + specialField;
 		log.info("Searching in google: " + googleQuery);
+
 		String answer;
 		webDriver.get(GOOGLE_SEARCH_URL + googleQuery);
 		List<WebElement> elements = new ArrayList<>();
-		if (generatorRequest.getVerbosity().equals(Verbosity.BRIEF)) {
+		if (!specialField.equals(EMPTY_FIELD)) {
 			elements = webDriver.findElements(By.xpath(BRIEF_ANSWER_WINDOW_XPATH));
 		}
 
@@ -56,7 +64,7 @@ public class GoogleSnippetInformationFinder implements InformationFinder {
 				.findFirst()
 				.orElse(NO_ANSWER_MESSAGE);
 
-		log.info("Found answer: <" + answer + ">");
+		log.info("Found answer: " + answer);
 		return answer;
 	}
 }

@@ -19,10 +19,6 @@
       <label :for="index">{{ field.name }}</label>
       <br>
     </div>
-    <input type="checkbox"
-      v-model="verbose"
-      id="verbose">
-    <label for="verbose">{{ verboseLabel }}</label>
     <br>
     <button @click="add">{{ addButton }}</button>
   </div>
@@ -30,7 +26,7 @@
 
 <script>
 import axios from 'axios'
-import { addButton, verboseLabel, frontLabel } from '@/consts/messages.js'
+import { addButton, frontLabel } from '@/consts/messages.js'
 
 export default {
   name: 'AutoCardForm',
@@ -40,10 +36,8 @@ export default {
       categories: [],
       selected: {},
       query: '',
-      verbose: false,
       // messages
       addButton,
-      verboseLabel,
       frontLabel
     }
   },
@@ -57,7 +51,7 @@ export default {
         }
       }
       var deckId = window.localStorage.getItem('deckId')
-      this.$emit('add-auto', {query: this.query, specialFields, verbosity: this.verbose?'verbose':'brief', deckId})
+      this.$emit('add-auto', {query: this.query, specialFields, deckId})
     }
   },
   created: function () {

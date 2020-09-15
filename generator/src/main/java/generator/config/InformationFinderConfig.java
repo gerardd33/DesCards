@@ -5,7 +5,6 @@ import generator.util.service.InformationFinder;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,8 +38,8 @@ public class InformationFinderConfig {
 
 	@Bean
 	public ChromeOptions chromeOptions() {
-		// TODO --headless
-		// TODO try firefox
-		return new ChromeOptions();
+		ChromeOptions options = new ChromeOptions();
+		options.setHeadless(true);
+		return options;
 	}
 }

@@ -15,6 +15,8 @@ import java.util.concurrent.Semaphore;
 @AllArgsConstructor
 public class GeneratorRequestManager {
 
+	private static final String EN_DASH_SPACE = " \u2013 ";
+
 	private GeneratorRequest generatorRequest;
 
 	private InformationFinder informationFinder;
@@ -25,20 +27,29 @@ public class GeneratorRequestManager {
 
 	public void processRequest() {
 		log.info("Processing: " + generatorRequest);
-		String cardFront = generatorRequest.getQuery() + " "
-				+ String.join(" ", generatorRequest.getSpecialFields());
 
-		String cardBack = informationFinder.findInformation(generatorRequest);
+		generatorRequest.getSpecialFields().forEach(fieldLabel -> {
+			String cardFront = generatorRequest.getQuery() + EN_DASH_SPACE + fieldLabel;
+			String cardBack = informationFinder.findInformation(
+					generatorRequest.getQuery(), fieldLabel);
+			createFlashcard(generatorRequest.getDeckId(), cardFront, cardBack);
+		});
 
-		Flashcard flashcard =
-				Flashcard.builder()
-						.deckId(generatorRequest.getDeckId())
-						.front(cardFront)
-						.back(cardBack)
-						.build();
-		log.info("Prepared flashcard creation request: " + flashcard);
+		String cardFront = generatorRequest.getQuery();
+		String cardBack = informationFinder.findInformation(generatorRequest.getQuery());
+		createFlashcard(generatorRequest.getDeckId(), cardFront, cardBack);
 
-		flashcardCreationRequestDispatcher.createFlashcard(flashcard);
 		this.semaphore.release();
+	}
+
+	private void createFlashcard(long deckId, String cardFront, String cardBack) {
+		Flashcard flashcard = Flashcard.builder()
+				.deckId(deckId)
+				.front(cardFront)
+				.back(cardBack)
+				.build();
+
+		log.info("Prepared flashcard creation request: " + flashcard);
+		flashcardCreationRequestDispatcher.createFlashcard(flashcard);
 	}
 }

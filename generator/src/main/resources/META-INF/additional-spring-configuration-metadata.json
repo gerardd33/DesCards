@@ -16,8 +16,9 @@
 			"description": "Address of Flashcards server."
 		},
 		{
-			"name": "information-finder.webdriver-address",
+			"name": "information-finder.selenium-address",
 			"type": "java.lang.String",
-			"description": "Address of Selenium web driver."
+			"description": "Address of Selenium standalone server."
 		}
-	] }
+	]
+}
