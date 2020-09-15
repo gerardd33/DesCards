@@ -5,8 +5,8 @@ services:
     build: 
       context: ./front
       target: prod
-    volumes:
-      - ./front/:/usr/src/app/
+    #volumes:
+      #- ./front/:/usr/src/app/
     ports:
       - 5000:5000
     stop_signal: SIGINT
@@ -20,8 +20,8 @@ services:
     build:
       context: ./users/users_server/
       target: prod
-    volumes:
-      - ./users/users_server/:/usr/src/app/users_server/
+    #volumes:
+      #- ./users/users_server/:/usr/src/app/users_server/
     environment:
       - FLASK_APP=users_server
       - POSTGRES_PASSWORD=postgres
