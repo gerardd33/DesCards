@@ -66,4 +66,9 @@ export default {
 </script>
 
 <style scoped>
+button {
+  width: 150px;
+  height: 30px;
+  margin: 12px;
+}
 </style>
