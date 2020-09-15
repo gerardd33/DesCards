@@ -12,46 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: apps/v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: users
   labels:
     app: users
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      name: users
-  template:
-    metadata:
-      labels:
-        name: users
-        app: users
-    spec:
-      containers:
-      - image: gcr.io/descards/users-server:0.1
-        name: users-server
-        ports:
-        - containerPort: 5000
-          name: users-server
-        env:
-        - name: FLASK_APP
-          value: "users_server"
-        - name: POSTGRES_PASSWORD
-          value: "postgres"
-        - name: POSTGRES_USER
-          value: "postgres"
-        - name: POSTGRES_DB
-          value: "develop"
-        - name: DATABASE
-          value: "users-database"
-      - image: gcr.io/descards/users-database:0.1
-        name: users-database
-        env:
-        - name: POSTGRES_PASSWORD
-          value: "postgres"
-        - name: POSTGRES_USER
-          value: "postgres"
-        - name: POSTGRES_DB
-          value: "develop"
+  containers:
+  - image: gcr.io/descards/users-server:0.1
+    name: users-server
+    ports:
+    - containerPort: 5000
+    env:
+    - name: FLASK_APP
+      value: "users_server"
+    - name: POSTGRES_PASSWORD
+      value: "postgres"
+    - name: POSTGRES_USER
+      value: "postgres"
+    - name: POSTGRES_DB
+      value: "develop"
+    - name: DATABASE
+      value: "users-database"
+  - image: gcr.io/descards/users-database:0.1
+    name: users-database
+    env:
+    - name: POSTGRES_PASSWORD
+      value: "postgres"
+    - name: POSTGRES_USER
+      value: "postgres"
+    - name: POSTGRES_DB
+      value: "develop"
