@@ -66,6 +66,8 @@ services:
       - POSTGRES_PASSWORD=descards
       - POSTGRES_USER=flashcards
       - POSTGRES_DB=flashcards
+    ports:
+      - 5432:5432
 #   networks:
 #     - flashcards_local
 
