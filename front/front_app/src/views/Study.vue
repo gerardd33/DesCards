@@ -1,6 +1,6 @@
 <template>
   <div class="study">
-    <div :class="{flashcard: isFront, back: !isFront}">
+    <div :class="{flashcard: isFront, front: !isFront}">
       <span class="text">
       {{ getCurrentFlashcard().front }}
       </span>
@@ -137,12 +137,15 @@ export default {
   line-height: 76vh;
 }
 
+.front {
+  width: 80%;
+  height: 57vh;
+}
+
 .back {
   width: 80%;
-  height: 38vh;
   margin: auto;
   text-align: center;
-  line-height: 38vh;
 }
 
 .text {

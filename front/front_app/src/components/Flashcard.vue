@@ -32,8 +32,8 @@ export default {
       return parseInterval(this.entry.interval.current)
     },
     backShort: function () {
-      if (this.entry.back.length > 52) {
-        return this.entry.back.substr(0, 52) + '...'
+      if (this.entry.back.length > 42) {
+        return this.entry.back.substr(0, 42) + '...'
       } else {
         return this.entry.back
       }
