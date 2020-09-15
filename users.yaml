@@ -22,6 +22,7 @@ spec:
   containers:
   - image: gcr.io/descards/users-server:0.1
     name: users-server
+    imagePullPolicy: Always
     ports:
     - containerPort: 5000
     env:
@@ -34,9 +35,10 @@ spec:
     - name: POSTGRES_DB
       value: "develop"
     - name: DATABASE
-      value: "users-database"
+      value: "localhost"
   - image: gcr.io/descards/users-database:0.1
     name: users-database
+    imagePullPolicy: Always
     env:
     - name: POSTGRES_PASSWORD
       value: "postgres"

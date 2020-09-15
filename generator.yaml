@@ -22,6 +22,7 @@ spec:
   containers:
   - image: gcr.io/descards/generator:0.1
     name: generator
+    imagePullPolicy: Always
     ports:
     - containerPort: 8080
   - image: rabbitmq:3.6.14-management

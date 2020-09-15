@@ -21,6 +21,7 @@ metadata:
 spec:
   containers:
   - image: gcr.io/descards/front-server:0.1
+    imagePullPolicy: Always
     name: front-server
     ports:
     - containerPort: 5000

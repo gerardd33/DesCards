@@ -22,6 +22,7 @@ spec:
   containers:
   - image: gcr.io/descards/flashcards-server:0.1
     name: flashcards-server
+    imagePullPolicy: Always
     ports:
     - containerPort: 8080
     env:
