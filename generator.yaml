@@ -26,3 +26,5 @@ spec:
     - containerPort: 8080
   - image: rabbitmq:3.6.14-management
     name: rabbit
+    ports:
+    - containerPort: 5672

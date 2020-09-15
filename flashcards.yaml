@@ -27,6 +27,8 @@ spec:
     env:
   - image: postgres
     name: flashcards-database
+    ports:
+    - containerPort: 5432
     env:
     - name: POSTGRES_PASSWORD
       value: "descards"
