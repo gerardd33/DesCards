@@ -157,18 +157,16 @@ export default {
 	position: center;
 	text-align: center;
 	padding: 10px;
-	margin: 10px;
 }
 
 .text-back {
 	font-size: 25px;
 	display: block;
-	margin: 10px;
 }
 
 button {
   width: 200px;
   height: 50px;
-  margin: 0px 12px;
+  margin: 6px 12px;
 }
 </style>

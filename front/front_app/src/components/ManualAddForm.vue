@@ -33,8 +33,13 @@ export default {
   methods: {
     add: function () {
       var deckId = window.localStorage.getItem('deckId')
-      this.$emit('add-manual', {front: this.front, back: this.back, deckId}) 
-    }
+      this.$emit('add-manual', {front: this.front, back: this.back, deckId})
+			this.resetInput()
+    },
+		resetInput: function() {
+			this.front = ''
+			this.back = ''
+		}
   },
 }
 </script>
@@ -45,20 +50,20 @@ table {
 }
 
 td > input {
-  margin: 0px 12px 0px 12px;
-  
+  margin: 6px 12px 6px 12px;
 }
 
 .add {
   width: 200px;
   height: 50px;
-  margin: 20px;
   font-size: 20px;
 }
 
 input {
-  height: 20px;
+  height: 25px;
   width: 500px;
   font-size: 20px;
+	margin: 20px;
+	padding: 5px 10px;
 }
 </style>

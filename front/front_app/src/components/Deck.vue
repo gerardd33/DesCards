@@ -1,7 +1,7 @@
 <template>
   <div class="deck">
-    <span>{{ entry.id }}</span>
-    <span>{{ entry.name }}</span>
+    <span>{{}}</span>
+    <span class="deck-name">{{ entry.name }}</span>
     <button @click="choose">Wybierz</button>
   </div>
 </template>
@@ -25,4 +25,24 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
+span, button {
+	display: inline-block;
+	margin: 10px;
+	font-size: 16px;
+}
+
+.deck {
+	border: 2px solid mediumspringgreen;
+	border-radius: 30px;
+	padding: 10px 30px;
+	margin: 10px;
+}
+
+.deck-name {
+	display: inline-block;
+	font-size: 25px;
+	font-weight: bold;
+}
+
 </style>

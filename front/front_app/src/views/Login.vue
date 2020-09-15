@@ -3,14 +3,14 @@
     <login-form v-on:login="login"
       v-bind:message="message"
       v-bind:title="title"/>
-    <router-link to="/register">Załóż konto</router-link>
+    <router-link to="/register">{{ registerPrompt }}</router-link>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/LoginForm.vue'
-import { loginTitle, wrongCredentials, loginError } from '@/consts/messages.js'
+import { loginTitle, registerPrompt, wrongCredentials, loginError } from '@/consts/messages.js'
 import axios from 'axios'
 
 export default {
@@ -19,7 +19,8 @@ export default {
     return {
       test: 0,
       message: '',
-      title: loginTitle
+      title: loginTitle,
+			registerPrompt: registerPrompt
     }
   },
   components: {

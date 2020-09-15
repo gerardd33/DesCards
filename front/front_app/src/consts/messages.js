@@ -1,11 +1,12 @@
 // pl
 // Login.vue
-export const loginTitle = 'Zaloguj się'
+export const loginTitle = 'Log in'
 export const wrongCredentials = 'Niepoprawny login lub hasło'
 export const loginError = 'Logowanie nie powiodło się'
+export const registerPrompt = "Don't have an account? Register here."
 
 // Register.vue
-export const registerTitle = 'Załóż konto'
+export const registerPageTitle = 'Register'
 export const accountCreated = 'Konto zostało utworzone'
 export const registerError = 'Nie udało się utworzyć konta'
 
