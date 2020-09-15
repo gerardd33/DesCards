@@ -1,4 +1,4 @@
-sudo dokcer-compose build
+sudo docker-compose build
 
 docker tag descards_front-server gcr.io/descards/front-server:0.1
 docker push gcr.io/descards/front-server:0.1
