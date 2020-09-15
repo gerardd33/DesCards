@@ -90,6 +90,24 @@ def deck():
 #   return jsonify(flashcards[first:after_last]), 200
 
 
+@bp.route('/add_deck', methods=['POST'])
+def add_deck():
+    schema = {'name': {'type': 'string'}, }
+    print(request.json, flush=True)
+    data = utils.validate(request.json, schema)
+
+    if data is None:
+        return "Invalid data", 400
+
+    token = request.cookies.get('token')
+    json = utils.jwt_decode(token)
+
+    res = requests.post(FLASHCARDS_HOST + '/user-decks/' + str(json['userId']),
+                       json=data)
+
+    return res.content, res.status_code
+
+
 @bp.route('/categories', methods=['GET'])
 def categories():
     res = requests.get(FLASHCARDS_HOST + '/categories')

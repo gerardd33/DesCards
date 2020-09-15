@@ -1,11 +1,13 @@
 <template>
   <div class="auto-card-create-form">
-    <label for="query">{{ frontLabel }}</label>
-    <input v-model="query" id="query"><br>
-    <select v-model="selected">
+    <div class="query">
+      <label for="query">{{ frontLabel }}</label>
+      <input v-model="query" id="query"><br>
+    </div>
+    <select v-model="selectedId">
       <option v-for="(category, index) in categories"
         :key="index"
-        :value="category">
+        :value="index">
         {{ category.name }}
       </option>
     </select>
@@ -20,7 +22,7 @@
       <br>
     </div>
     <br>
-    <button @click="add">{{ addButton }}</button>
+    <button class="add" @click="add">{{ addButton }}</button>
   </div>
 </template>
 
@@ -33,12 +35,20 @@ export default {
 //  props: ['entry', 'index'],
   data: function () {
     return {
-      categories: [],
-      selected: {},
+      categories: [{id:1, name:"kategoria"}],
       query: '',
       // messages
+      selectedId: (window.localStorage.getItem('last-category')===null)?null:parseInt(window.localStorage.getItem('last-category')),
       addButton,
       frontLabel
+    }
+  },
+  computed: {
+    selected: function () {
+      var id = this.selectedId
+      if (id === null || this.categories.length <= id)
+        return {}
+      return this.categories[this.selectedId]
     }
   },
   methods: {
@@ -70,9 +80,30 @@ export default {
         }
       }
     })
+  },
+  watch: {
+    selectedId: function (to) {
+      console.log('zmiana', to)
+      window.localStorage.setItem('last-category', to.toString())
+    }
   }
 }
 </script>
 
 <style scoped>
+.query > * {
+  margin: 12px;
+}
+
+.query > input { 
+  width: 500px;
+  height: 20px;
+}
+
+.add {
+  width: 200px;
+  height: 50px;
+  margin: 20px;
+  font-size: 20px;
+}
 </style>

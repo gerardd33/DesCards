@@ -1,6 +1,10 @@
 <template>
   <div class="decks-container">
-    <list :list="decks" :component="deck_component"></list>
+    <list class="list" :list="decks" :component="deck_component"></list>
+    <div class="sidebar">
+      <button @click="showAddForm=!showAddForm">{{ addButton }}</button>
+      <add-deck v-if="showAddForm"></add-deck>    
+    </div>
   </div>
 </template>
 
@@ -8,6 +12,8 @@
 // @ is an alias to /src
 import List from '@/components/List.vue'
 import Deck from '@/components/Deck.vue'
+import AddDeck from '@/components/AddDeck.vue'
+import { addButton } from '@/consts/messages.js'
 import axios from 'axios'
 
 export default {
@@ -19,11 +25,14 @@ export default {
         {id: 2, name: 'Science Deck'},
 				{id: 3, name: 'Computer Science Deck'}
       ],
-      deck_component: Deck
+      deck_component: Deck,
+      addButton,
+      showAddForm: false
     }
   },
   components: {
-    List
+    List,
+    AddDeck,
   },
   created: function () {
     var vm = this
@@ -37,3 +46,25 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.decks-container {
+  display: grid;
+  grid-template-columns: 70% auto;
+}
+
+.list {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.sidebar {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+}
+</style>

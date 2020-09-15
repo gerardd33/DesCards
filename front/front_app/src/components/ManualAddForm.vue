@@ -1,12 +1,17 @@
 <template>
   <div class="flashcard-form">
-    <label for="front">{{ frontLabel }}</label>
-    <input v-model="front">
+    <table>
+      <tr>
+        <td><label for="front">{{ frontLabel }}</label></td>
+        <td><input v-model="front"></td>
+      </tr>
+      <tr>
+        <td><label for="back">{{ backLabel }}</label></td>
+        <td><input class="back" v-model="back"></td>
+      </tr>
+    </table>
     <br>
-    <label for="back">{{ backLabel }}</label>
-    <input v-model="back">
-    <br>
-    <button @click="add">{{ addButton }}</button>
+    <button class="add" @click="add">{{ addButton }}</button>
   </div>
 </template>
 
@@ -35,4 +40,25 @@ export default {
 </script>
 
 <style scoped>
+table {
+  display: inline;
+}
+
+td > input {
+  margin: 0px 12px 0px 12px;
+  
+}
+
+.add {
+  width: 200px;
+  height: 50px;
+  margin: 20px;
+  font-size: 20px;
+}
+
+input {
+  height: 20px;
+  width: 500px;
+  font-size: 20px;
+}
 </style>

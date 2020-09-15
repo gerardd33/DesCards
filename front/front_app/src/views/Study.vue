@@ -1,8 +1,13 @@
 <template>
   <div class="study">
-    <div class="flashcard">
+    <div :class="{flashcard: isFront, back: !isFront}">
       <span class="text">
-      {{ flashcardText }}
+      {{ getCurrentFlashcard().front }}
+      </span>
+    </div>
+    <div :class="{back: !isFront}" v-if="!isFront">
+      <span class="text">
+      {{ getCurrentFlashcard().back }}
       </span>
     </div>
     <button @click="prev">Prev</button>
@@ -81,6 +86,7 @@ export default {
       }
     },
     next: function () {
+      this.isFront = true
       console.log(this.currentFlashcardId, this.prevFlashcards.length, this.flashcards.length)
       if (this.currentFlashcardId < this.flashcards.length - 1) {
         this.currentFlashcardId++
@@ -110,7 +116,7 @@ export default {
     },
     setStrength: function (strength) {
       this.getCurrentFlashcard().strength = strength
-      console.log(this.getCurrentFlashcard())
+      this.next()
     }
   },
   created: function () {
@@ -131,7 +137,19 @@ export default {
   line-height: 80vh;
 }
 
+.back {
+  width: 80%;
+  height: 40vh;
+  margin: auto;
+  text-align: center;
+  line-height: 40vh;
+}
+
 .text {
   font-size: 40px;
+}
+button {
+  width: 200px;
+  height: 50px;
 }
 </style>

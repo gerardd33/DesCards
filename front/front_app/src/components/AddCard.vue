@@ -20,7 +20,7 @@ export default {
   props: [],
   data: function () {
     return {
-      form: Manual,
+      form: (window.localStorage.getItem('last-form') === 'manual')?Manual:Auto
     }
   },
   methods: {
@@ -50,9 +50,11 @@ export default {
     },
     setManual: function () {
       this.form = Manual
+      window.localStorage.setItem('last-form', 'manual')
     },
     setAuto: function () {
       this.form = Auto
+      window.localStorage.setItem('last-form', 'auto')
     }
   },
   computed: {
@@ -64,4 +66,9 @@ export default {
 </script>
 
 <style scoped>
+button {
+  width: 150px;
+  height: 30px;
+  margin: 12px;
+}
 </style>

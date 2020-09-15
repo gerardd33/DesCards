@@ -2,26 +2,34 @@
   <div class="flashcards-container">
     <div class="list">
       {{ deck_name }}<br>
-      <add-card @added="added++; showAddForm=false"></add-card>
+      <list :list="flashcards"
+        :component="flashcard_componenet"
+        @edit="edit"
+        @delete="remove">
+      </list>
+      {{ pageName }}{{ page + 1 }}<br>
+      <button @click="prev">{{ prevButton }}</button>
+      <button @click="next">{{ nextButton }}</button>
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
         @xd="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
+      <button @click="save">{{ refreshButton }}</button><br>
       <button @click="$router.push('/study')">{{ studyButton }}</button><br>
-      <button @click="$router.push('/flashcards')">{{ manageButton }}</button><br>
+      <button @click="$router.push('/deck')">{{ addButton }}</button><br>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import List from '@/components/List.vue'
 import FlashcardForm from '@/components/FlashcardForm.vue'
 import Flashcard from '@/components/Flashcard.vue'
-import AddCard from '@/components/AddCard.vue'
 import { getFlashcards, commitChanges } from '@/utils/http.js'
-import { nextButton, prevButton, addButton, studyButton, refreshButton, pageName, manageButton } from '@/consts/messages.js'
+import { nextButton, prevButton, addButton, studyButton, refreshButton, pageName } from '@/consts/messages.js'
 import axios from 'axios'
 
 export default {
@@ -30,7 +38,7 @@ export default {
     return {
       deck_name: '',
       flashcards: [ // TODO zmienić domyślną wartość
-        {id: 1, name: 'History Deck', front:'asdf', back:'fdsa', interval: {current: 213}},
+        {id: 1, name: 'History Deck', front:'asdf', back:'12345678901234567890123456789012345678901234567890123456789012345678901234567890', interval: {current: 213}},
         {id: 2, name: 'Science Deck', front:'dwa', back:'fdsa', interval: {current: 213}},
 				{id: 2, name: 'Computer Science Deck', front:'dwa', back:'fdsa', interval: {current: 213}},
       ],
@@ -40,7 +48,6 @@ export default {
       perPage: 4,
       edited_key: 0,
       showEditForm: false,
-      showAddForm: false,
       removed_indexes: [],
       removed: 0,
       added: 0,
@@ -51,7 +58,6 @@ export default {
       addButton,
       studyButton,
       refreshButton,
-      manageButton,
       pageName
     }
   },
@@ -65,8 +71,8 @@ export default {
     }
   },
   components: {
-    FlashcardForm,
-    AddCard
+    List,
+    FlashcardForm
   },
   methods: {
     update_flashcard: function (updated_flashcard) {

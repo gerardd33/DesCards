@@ -1,7 +1,7 @@
 <template>
   <div class="deck">
-    {{ entry.id }}
-    {{ entry.name }}
+    <span>{{ entry.id }}</span>
+    <span>{{ entry.name }}</span>
     <button @click="choose">Wybierz</button>
   </div>
 </template>
@@ -21,4 +21,8 @@ export default {
 </script>
 
 <style scoped>
+.deck {
+  display: flex;
+  justify-content: space-between;
+}
 </style>
