@@ -4,9 +4,9 @@ services:
   front-server:
     build: 
       context: ./front
-      target: prod
-    #volumes:
-      #- ./front/:/usr/src/app/
+      target: dev
+    volumes:
+      - ./front/:/usr/src/app/
     ports:
       - 5000:5000
     stop_signal: SIGINT
