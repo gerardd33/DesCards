@@ -4,6 +4,7 @@ import Register from '../views/Register.vue'
 import Decks from '../views/Decks.vue'
 import Deck from '../views/Deck.vue'
 import Study from '../views/Study.vue'
+import Flashcards from '../views/Flashcards.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/study',
     name: 'Study',
     component: Study
+  },
+  {
+    path: '/flashcards',
+    name: 'Flashcards',
+    component: Flashcards
   }
 ]
 

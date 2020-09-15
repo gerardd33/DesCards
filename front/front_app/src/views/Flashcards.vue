@@ -2,27 +2,36 @@
   <div class="flashcards-container">
     <div class="list">
       {{ deck_name }}<br>
-      <add-card @added="added++; showAddForm=false"></add-card>
+      <list :list="flashcards"
+        :component="flashcard_componenet"
+        @edit="edit"
+        @delete="remove">
+      </list>
+      {{ pageName }}{{ page + 1 }}<br>
+      <button @click="prev">{{ prevButton }}</button>
+      <button @click="next">{{ nextButton }}</button>
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
         @xd="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
+      <button @click="showAddForm=!showAddForm">{{ addButton }}</button><br>
+      <add-card v-if="showAddForm" @added="added++; showAddForm=false"></add-card>
       <button @click="save">{{ refreshButton }}</button><br>
       <button @click="$router.push('/study')">{{ studyButton }}</button><br>
-      <button @click="$router.push('/flashcards')">{{ manageButton }}</button><br>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import List from '@/components/List.vue'
 import FlashcardForm from '@/components/FlashcardForm.vue'
 import Flashcard from '@/components/Flashcard.vue'
 import AddCard from '@/components/AddCard.vue'
 import { getFlashcards, commitChanges } from '@/utils/http.js'
-import { nextButton, prevButton, addButton, studyButton, refreshButton, pageName, manageButton } from '@/consts/messages.js'
+import { nextButton, prevButton, addButton, studyButton, refreshButton, pageName } from '@/consts/messages.js'
 import axios from 'axios'
 
 export default {
@@ -52,7 +61,6 @@ export default {
       addButton,
       studyButton,
       refreshButton,
-      manageButton,
       pageName
     }
   },
@@ -66,6 +74,7 @@ export default {
     }
   },
   components: {
+    List,
     FlashcardForm,
     AddCard
   },
