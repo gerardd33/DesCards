@@ -2,7 +2,6 @@ package generator.config;
 
 import generator.api.dto.GeneratorRequestDto;
 import generator.model.GeneratorRequest;
-import generator.model.Verbosity;
 import generator.util.api.mapper.GeneratorRequestDtoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -21,17 +20,28 @@ public class TestMessageSender implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-//		sendTestRequest();
+//		sendTestRequests();
 	}
 
-	private void sendTestRequest() {
+	private void sendTestRequests() {
 		GeneratorRequest generatorRequest = GeneratorRequest.builder()
 				.deckId(1L)
-				.query("elon musk age")
+				.query("jeff bezos age")
 				.specialFields(Collections.emptyList())
-				.verbosity(Verbosity.BRIEF)
 				.build();
 
+		sendRequest(generatorRequest);
+
+		generatorRequest = GeneratorRequest.builder()
+				.deckId(1L)
+				.query("huayna capac")
+				.specialFields(Collections.emptyList())
+				.build();
+
+		sendRequest(generatorRequest);
+	}
+
+	private void sendRequest(GeneratorRequest generatorRequest) {
 		GeneratorRequestDto generatorRequestDto = GeneratorRequestDtoMapper.mapToDto(generatorRequest);
 		rabbitTemplate.convertAndSend(messageQueueProperties.getQueueName(), generatorRequestDto);
 	}

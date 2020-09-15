@@ -176,8 +176,7 @@ def add_manual():
 def add_auto():
     schema = {'deckId': {'type': 'string'},
               'query': {'type': 'string'},
-              'specialFields': {'type': 'list'},
-              'verbosity': {'type': 'string'}}
+              'specialFields': {'type': 'list'}}
     print(request.json, flush=True)
     data = utils.validate(request.json, schema)
 
@@ -191,10 +190,6 @@ def add_auto():
 
     channel.exchange_declare(exchange=GENERATOR_EXCHANGE,
                              exchange_type='fanout', durable=True)
-
-    channel.basic_publish(exchange=GENERATOR_EXCHANGE, routing_key='',
-                          body=json.dumps(data))
-
     print('added to queue', data, flush=True)
-
+    channel.basic_publish(exchange=GENERATOR_EXCHANGE, routing_key='', body=json.dumps(data), properties=pika.BasicProperties(content_type="text/plain"))
     return "Request added", 200

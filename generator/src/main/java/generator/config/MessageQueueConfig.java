@@ -1,12 +1,11 @@
 package generator.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Declarables;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,12 +17,12 @@ public class MessageQueueConfig {
 
 	@Bean
 	public Queue queue() {
-		return new Queue(properties.getQueueName(), false);
+		return new Queue(properties.getQueueName(), true);
 	}
 
 	@Bean
 	public Declarables generatorRequestBindings() {
-		Queue generatorRequestQueue = new Queue(properties.getQueueName(), false);
+		Queue generatorRequestQueue = new Queue(properties.getQueueName(), true);
 		FanoutExchange generatorRequestExchange = new FanoutExchange(properties.getExchangeName());
 
 		return new Declarables(generatorRequestQueue, generatorRequestExchange,
@@ -31,7 +30,7 @@ public class MessageQueueConfig {
 	}
 
 	@Bean
-	public MessageConverter jsonMessageConverter() {
-		return new Jackson2JsonMessageConverter();
+	public ObjectMapper objectMapper() {
+		return new ObjectMapper();
 	}
 }
