@@ -29,14 +29,10 @@ spec:
     - name: FLASHCARDS
       value: $(FLASHCARDS_SERVICE_SERVICE_HOST)
     - name: RABBIT
-      value: "localhost"
+      value: $(RABBIT_SERVICE_SERVICE_HOST)
     - name: SELENIUM
       value: "localhost"
   - image: selenium/standalone-chrome
     name: selenium
     ports:
     - containerPort: 4444
-  - image: rabbitmq:3.6.14-management
-    name: rabbit
-    ports:
-    - containerPort: 5672
