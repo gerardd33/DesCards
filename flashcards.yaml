@@ -15,22 +15,22 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: front
+  name: flashcards
   labels:
-    app: front
+    app: flashcards
 spec:
   containers:
-  - image: gcr.io/descards/front-server:0.1
-    name: front-server
+  - image: gcr.io/descards/flashcards-server:0.1
+    name: flashcards-server
     ports:
-    - containerPort: 5000
-      name: web
+    - containerPort: 8080
     env:
-    - name: FLASK_APP
-      value: front_server
-    - name: USERS
-      value: $(USERS_SERVICE_SERVICE_HOST):5000
-    - name: FLASHCARDS
-      value: $(FLASHCARDS_SERVICE_SERVICE_HOST):8080
-    - name: RABBIT
-      value: $(GENERATOR_SERVICE_SERVICE_HOST)
+  - image: postgres
+    name: flashcards-database
+    env:
+    - name: POSTGRES_PASSWORD
+      value: "descards"
+    - name: POSTGRES_USER
+      value: "flashcards"
+    - name: POSTGRES_DB
+      value: "flashcards"

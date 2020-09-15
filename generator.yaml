@@ -15,22 +15,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: front
+  name: generator
   labels:
-    app: front
+    app: generator
 spec:
   containers:
-  - image: gcr.io/descards/front-server:0.1
-    name: front-server
+  - image: gcr.io/descards/generator-server:0.1
+    name: generator-server
     ports:
-    - containerPort: 5000
-      name: web
-    env:
-    - name: FLASK_APP
-      value: front_server
-    - name: USERS
-      value: $(USERS_SERVICE_SERVICE_HOST):5000
-    - name: FLASHCARDS
-      value: $(FLASHCARDS_SERVICE_SERVICE_HOST):8080
-    - name: RABBIT
-      value: $(GENERATOR_SERVICE_SERVICE_HOST)
+    - containerPort: 8080
+  - image: rabbitmq:3.6.14-management
+    name: rabbit
