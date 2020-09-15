@@ -9,10 +9,13 @@ import com.descards.flashcards.repository.FlashcardRepository;
 import com.descards.flashcards.service.facade.UserDecksFacade;
 import com.descards.flashcards.util.api.mapper.DeckDtoMapper;
 import lombok.AllArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.AbstractPlatformTransactionManager;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +31,8 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 	@Override
 	public List<DeckDto> getDeckList(long userId) {
 		ApplicationUser user = applicationUserRepository.findById(userId)
-				.orElseThrow(NoSuchElementException::new);
+				.orElseGet(() -> applicationUserRepository.save(new ApplicationUser()));
+
 		return user.getDecks().stream()
 				.map(DeckDtoMapper::mapToDto)
 				.collect(Collectors.toList());
@@ -37,7 +41,7 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 	@Override
 	public void createDeck(long userId, DeckDto deckToCreateDto) {
 		ApplicationUser user = applicationUserRepository.findById(userId)
-				.orElseThrow(NoSuchElementException::new);
+				.orElseGet(() -> applicationUserRepository.save(new ApplicationUser()));
 		Deck deckToAdd = DeckDtoMapper.mapFromDto(deckToCreateDto);
 
 		deckToAdd.setUser(user);
@@ -47,7 +51,7 @@ public class UserDecksFacadeImpl implements UserDecksFacade {
 	@Override
 	public void removeDeck(long userId, long deckToRemoveId) {
 		ApplicationUser user = applicationUserRepository.findById(userId)
-				.orElseThrow(NoSuchElementException::new);
+				.orElseGet(() -> applicationUserRepository.save(new ApplicationUser()));
 		Deck deck = deckRepository.findById(deckToRemoveId)
 				.orElseThrow(NoSuchElementException::new);
 
