@@ -16,10 +16,9 @@
         @xd="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
-      <button @click="showAddForm=!showAddForm">{{ addButton }}</button><br>
-      <add-card v-if="showAddForm" @added="added++; showAddForm=false"></add-card>
       <button @click="save">{{ refreshButton }}</button><br>
       <button @click="$router.push('/study')">{{ studyButton }}</button><br>
+      <button @click="$router.push('/deck')">{{ addButton }}</button><br>
     </div>
   </div>
 </template>
@@ -29,7 +28,6 @@
 import List from '@/components/List.vue'
 import FlashcardForm from '@/components/FlashcardForm.vue'
 import Flashcard from '@/components/Flashcard.vue'
-import AddCard from '@/components/AddCard.vue'
 import { getFlashcards, commitChanges } from '@/utils/http.js'
 import { nextButton, prevButton, addButton, studyButton, refreshButton, pageName } from '@/consts/messages.js'
 import axios from 'axios'
@@ -50,7 +48,6 @@ export default {
       perPage: 4,
       edited_key: 0,
       showEditForm: false,
-      showAddForm: false,
       removed_indexes: [],
       removed: 0,
       added: 0,
@@ -75,8 +72,7 @@ export default {
   },
   components: {
     List,
-    FlashcardForm,
-    AddCard
+    FlashcardForm
   },
   methods: {
     update_flashcard: function (updated_flashcard) {

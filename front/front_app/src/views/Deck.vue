@@ -9,7 +9,6 @@
         @xd="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
-      <button @click="save">{{ refreshButton }}</button><br>
       <button @click="$router.push('/study')">{{ studyButton }}</button><br>
       <button @click="$router.push('/flashcards')">{{ manageButton }}</button><br>
     </div>
