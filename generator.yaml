@@ -20,8 +20,8 @@ metadata:
     app: generator
 spec:
   containers:
-  - image: gcr.io/descards/generator-server:0.1
-    name: generator-server
+  - image: gcr.io/descards/generator:0.1
+    name: generator
     ports:
     - containerPort: 8080
   - image: rabbitmq:3.6.14-management
