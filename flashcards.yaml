@@ -26,6 +26,8 @@ spec:
     ports:
     - containerPort: 8080
     env:
+    - name: DATABASE
+      value: "localhost"
   - image: postgres
     name: flashcards-database
     ports:
