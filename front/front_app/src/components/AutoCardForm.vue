@@ -35,10 +35,10 @@ export default {
 //  props: ['entry', 'index'],
   data: function () {
     return {
-      categories: [],
+      categories: [{id:1, name:"kategoria"}],
       query: '',
       // messages
-      selectedId: (window.localStorage.getItem('last-category')===null)?{}:parseInt(window.localStorage.getItem('last-category')),
+      selectedId: (window.localStorage.getItem('last-category')===null)?null:parseInt(window.localStorage.getItem('last-category')),
       addButton,
       frontLabel
     }
@@ -47,7 +47,7 @@ export default {
     selected: function () {
       var id = this.selectedId
       if (id === null || this.categories.length <= id)
-          return {}
+        return {}
       return this.categories[this.selectedId]
     }
   },
