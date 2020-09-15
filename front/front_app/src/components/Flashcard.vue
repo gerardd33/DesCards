@@ -59,4 +59,7 @@ export default {
 .back {
   width: 50%;
 }
+span {
+  line-height: 50px;
+}
 </style>
