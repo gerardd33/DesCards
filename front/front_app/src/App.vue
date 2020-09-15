@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+      <router-link to="/">Login</router-link> |
       <router-link to="/decks">Home</router-link> |
       <router-link to="/">
         <span @click="logout">Logout</span>
