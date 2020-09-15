@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/decks">Home</router-link> |
       <router-link to="/">
         <span @click="logout">Logout</span>
-      </router-link> |
+      </router-link> 
     </div>
     <router-view/>
   </div>
@@ -17,38 +17,9 @@ export default {
   name: 'App',
   methods: {
     logout: function () {
-      console.log('xD')
       axios.post('/api/logout')
-      .then(function (response) {
-        if (response.status === 200) {
-          // pomyślnie wylogowano
-        } else {
-          // nie udało się wylogować
-        }
-      })
-      .catch(function () {
-        // nie udało się wylogować
-      })
     }
   }
-//watch: {
-//  $route: function(to) {
-//    var vm = this
-//    if (to.path !== '/' && to.path !== '/register') {
-//      // validate token
-//      this.$cookies.set('xD', true);
-//      axios.get('/api/validate')
-//      .then(function (response) {
-//        if (response.status !== 200 || !response.data.is_valid) {
-//          vm.$router.push('/')
-//        } 
-//      })
-//      .catch(function () {
-//        vm.$router.push('/')
-//      })
-//    }
-//  }
-//}
 }
 </script>
 

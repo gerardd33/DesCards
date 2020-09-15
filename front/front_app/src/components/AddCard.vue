@@ -17,7 +17,6 @@ import axios from 'axios'
 
 export default {
   name: 'AddCard',
-  props: [],
   data: function () {
     return {
       form: (window.localStorage.getItem('last-form') === 'manual')?Manual:Auto
@@ -57,11 +56,6 @@ export default {
       window.localStorage.setItem('last-form', 'auto')
     }
   },
-  computed: {
-  },
-  created: function () {
-    // TODO read last used form from localstorage
-  }
 }
 </script>
 
