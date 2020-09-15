@@ -15,9 +15,9 @@ export default {
   data: function() {
     return {
       decks: [
-        {id: 1, name: 'Talia 1'},
-        {id: 2, name: 'Talia 2'},
-        {id: 3, name: 'Talin 3'}
+        {id: 1, name: 'History Deck'},
+        {id: 2, name: 'Science Deck'},
+				{id: 3, name: 'Computer Science Deck'}
       ],
       deck_component: Deck
     }
