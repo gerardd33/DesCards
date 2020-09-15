@@ -2,7 +2,6 @@ package generator.config;
 
 import generator.api.dto.GeneratorRequestDto;
 import generator.model.GeneratorRequest;
-import generator.model.Verbosity;
 import generator.util.api.mapper.GeneratorRequestDtoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -29,7 +28,6 @@ public class TestMessageSender implements CommandLineRunner {
 				.deckId(1L)
 				.query("jeff bezos age")
 				.specialFields(Collections.emptyList())
-				.verbosity(Verbosity.BRIEF)
 				.build();
 
 		sendRequest(generatorRequest);
@@ -38,7 +36,6 @@ public class TestMessageSender implements CommandLineRunner {
 				.deckId(1L)
 				.query("huayna capac")
 				.specialFields(Collections.emptyList())
-				.verbosity(Verbosity.VERBOSE)
 				.build();
 
 		sendRequest(generatorRequest);

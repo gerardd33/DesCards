@@ -9,8 +9,8 @@ import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class GeneratorRequestDto {
 
 	private Long deckId;
@@ -18,6 +18,4 @@ public class GeneratorRequestDto {
 	private String query;
 
 	private List<String> specialFields;
-
-	private String verbosity;
 }

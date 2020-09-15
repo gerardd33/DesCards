@@ -18,6 +18,4 @@ public class GeneratorRequest {
 	private String query;
 
 	private List<String> specialFields;
-
-	private Verbosity verbosity;
 }
