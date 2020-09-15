@@ -52,14 +52,47 @@ public class DataLoader implements ApplicationRunner {
 	}
 
 	private void loadCategories() {
-		Category category1 = new Category("Historical event");
-		Category category2 = new Category("Person");
 
-		category1.getSpecialFields().addAll(Arrays.asList("Date", "Who", "Where"));
-		category2.getSpecialFields().addAll(Arrays.asList("Nationality", "Date of death"));
+		Category historicalEvent = new Category("Historical event");
+		historicalEvent.getSpecialFields().addAll(Arrays.asList(
+				"Known for", "When", "Where"
+		));
 
-		categoryRepository.save(category1);
-		categoryRepository.save(category2);
+		Category historicalPerson = new Category("Historical person");
+		historicalPerson.getSpecialFields().addAll(Arrays.asList(
+				"Known for", "Born/died", "Reign dates", "Place of birth", "Nationality"
+		));
+
+		Category battle = new Category("Battle");
+		battle.getSpecialFields().addAll(Arrays.asList(
+				"Known for", "When", "Who fought", "Result"
+		));
+
+		Category place = new Category("Place");
+		place.getSpecialFields().addAll(Arrays.asList(
+				"Known for", "Where", "Which country"
+		));
+
+		Category bookOrWorkOfArt = new Category("Book or work of art");
+		bookOrWorkOfArt.getSpecialFields().addAll(Arrays.asList(
+				"Known for", "Created date", "Author", "Original title"
+		));
+
+		Category language = new Category("Language");
+		language.getSpecialFields().addAll(Arrays.asList(
+				"Number of native speakers", "Countries spoken", "Language family"
+		));
+
+		Category livingPerson = new Category("Living person");
+		livingPerson.getSpecialFields().addAll(Arrays.asList(
+				"Known for", "Date of birth", "Age", "Nationality", "Place of birth"
+		));
+
+		Collection<Category> categories = Stream.of(
+				historicalEvent, historicalPerson, battle, place,
+				bookOrWorkOfArt, language, livingPerson
+		).collect(Collectors.toList());
+		categoryRepository.saveAll(categories);
 	}
 
 	private void loadDummyData() {
@@ -73,7 +106,7 @@ public class DataLoader implements ApplicationRunner {
 		ApplicationUser user = new ApplicationUser();
 		Deck historyDeck = new Deck("History deck", user);
 
-		Collection<Flashcard> flashcards = Stream.of(card1).collect(Collectors.toSet());
+		Collection<Flashcard> flashcards = Stream.of(card1, card2).collect(Collectors.toSet());
 		historyDeck.getCards().addAll(flashcards);
 		historyDeck.getCards().forEach(card -> card.setDeck(historyDeck));
 		historyDeck.setUser(user);
