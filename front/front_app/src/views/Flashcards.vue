@@ -37,11 +37,7 @@ export default {
   data: function() {
     return {
       deck_name: '',
-      flashcards: [ // TODO zmienić domyślną wartość
-        {id: 1, name: 'History Deck', front:'asdf', back:'12345678901234567890123456789012345678901234567890123456789012345678901234567890', interval: {current: 213}},
-        {id: 2, name: 'Science Deck', front:'dwa', back:'fdsa', interval: {current: 213}},
-				{id: 2, name: 'Computer Science Deck', front:'dwa', back:'fdsa', interval: {current: 213}},
-      ],
+      flashcards: [],
       flashcard_componenet: Flashcard,
       cardsInDeck: 0,
       page: 0,

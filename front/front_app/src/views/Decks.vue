@@ -20,11 +20,7 @@ export default {
   name: 'Decks',
   data: function() {
     return {
-      decks: [
-        {id: 1, name: 'History Deck'},
-        {id: 2, name: 'Science Deck'},
-				{id: 3, name: 'Computer Science Deck'}
-      ],
+      decks: [],
       deck_component: Deck,
       addButton,
       showAddForm: false

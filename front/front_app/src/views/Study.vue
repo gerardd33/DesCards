@@ -30,7 +30,7 @@ export default {
   name: 'Study',
   data: function() {
     return {
-      flashcards: [{front: 'front', back: 'back'}],
+      flashcards: [],
       prevFlashcards: [],
       removedIds: [],
       prevRemovedIds: [],
@@ -131,18 +131,18 @@ export default {
 <style scoped>
 .flashcard {
   width: 80%;
-  height: 80vh;
+  height: 76vh;
   margin: auto;
   text-align: center;
-  line-height: 80vh;
+  line-height: 76vh;
 }
 
 .back {
   width: 80%;
-  height: 40vh;
+  height: 38vh;
   margin: auto;
   text-align: center;
-  line-height: 40vh;
+  line-height: 38vh;
 }
 
 .text {
@@ -151,5 +151,6 @@ export default {
 button {
   width: 200px;
   height: 50px;
+  margin: 0px 12px;
 }
 </style>

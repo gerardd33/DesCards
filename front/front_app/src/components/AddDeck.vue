@@ -25,8 +25,6 @@ export default {
     add: function () {
       axios.post('/api/add_deck', {name: this.deckName})
     }
-  },
-  created: function () {
   }
 }
 </script>
