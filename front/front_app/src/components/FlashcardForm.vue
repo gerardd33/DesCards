@@ -6,7 +6,7 @@
     <label for="back">{{ backLabel }}</label><br>
     <input id="back" :value="flashcard.back" @input="update('back', $event.target.value)">
     <br>
-    <button @click="$emit('hide')">Zapisz</button>
+    <button @click="$emit('hide')">Save</button>
   </div>
 </template>
 
