@@ -13,7 +13,7 @@
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
-        @xd="update_flashcard"
+        @update-card="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
       <button @click="save">{{ refreshButton }}</button><br>

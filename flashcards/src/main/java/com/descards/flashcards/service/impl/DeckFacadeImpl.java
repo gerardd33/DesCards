@@ -14,6 +14,7 @@ import com.descards.flashcards.util.service.DeckInfoRetriever;
 import com.descards.flashcards.util.api.mapper.*;
 import com.google.common.base.CaseFormat;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class DeckFacadeImpl implements DeckFacade {
@@ -126,6 +128,10 @@ public class DeckFacadeImpl implements DeckFacade {
 			throw new NoSuchElementException();
 		}
 
+		log.info("Received request to update cards: ");
+		cardsToUpdateDtos.forEach(dto -> log.info("Dto: " + dto));
+
+		List<Flashcard> cardsToSave = new ArrayList<>();
 		for (FlashcardDto cardDto : cardsToUpdateDtos) {
 			flashcardRepository.findById(cardDto.getId()).ifPresent(card -> {
 				if (card.getDeck().getId() != deckId) {
@@ -140,9 +146,11 @@ public class DeckFacadeImpl implements DeckFacade {
 							.orElseThrow(NoSuchElementException::new));
 				}
 
-				flashcardRepository.save(card);
+				cardsToSave.add(card);
 			});
 		}
+
+		flashcardRepository.saveAll(cardsToSave);
 	}
 
 	@Override
