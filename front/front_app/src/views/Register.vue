@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/LoginForm.vue'
-import { registerTitle, accountCreated, registerError, usernameAlreadyTaken } from '@/consts/messages.js'
+import { registerPageTitle, accountCreated, registerError, usernameAlreadyTaken } from '@/consts/messages.js'
 import axios from 'axios'
 
 export default {
@@ -18,7 +18,7 @@ export default {
     return {
       test: 0,
       message: '',
-      title: registerTitle
+      title: registerPageTitle
     }
   },
   components: {

@@ -1,13 +1,12 @@
 <template>
   <div class="flashcard" v-bind:class="{deleted: deleted}">
-    <span class="field">{{ entry.id }}</span>
-    <span class="field">{{ entry.front }}</span>
-    <span class="back" :title="entry.back">{{ backShort }}</span>
-    <span class="field">{{ interval }}</span>
-    <span class="field">
+		<div class="field front"><span>{{ frontShort }}</span></div>
+		<div class="field back"><span :title="entry.back">{{ backShort }}</span></div>
+		<div class="field"><span>{{ interval }}</span></div>
+    <div class="field">
       <button @click="$emit('edit', index)">{{ editButton }}</button>
       <button @click="remove">{{ deleteButton }}</button>
-    </span>
+    </div>
   </div>
 </template>
 
@@ -31,12 +30,19 @@ export default {
       return parseInterval(this.entry.interval.current)
     },
     backShort: function () {
-      if (this.entry.back.length > 42) {
-        return this.entry.back.substr(0, 42) + '...'
+      if (this.entry.back.length > 40) {
+        return this.entry.back.substr(0, 40) + '...'
       } else {
         return this.entry.back
       }
-    }
+    },
+		frontShort: function () {
+			if (this.entry.front.length > 35) {
+				return this.entry.front.substr(0, 35) + '...'
+			} else {
+				return this.entry.front
+			}
+		}
   },
   methods: {
     remove: function () {
@@ -51,14 +57,36 @@ export default {
 .flashcard {
   display: flex;
   justify-content: space-between;
+	width: 850px;
 }
 .deleted {
-  background-color: red;
+  background-color: darksalmon;
+	opacity: 0.75;
+}
+.front {
+	width: 15%;
+}
+.front span {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 0 15px 10px;
 }
 .back {
   width: 50%;
 }
-span {
-  line-height: 50px;
+.flashcard {
+	border: 2px solid mediumspringgreen;
+	border-radius: 30px;
+	padding: 5px 10px;
+	margin: 5px;
+}
+.field {
+	margin: 5px 0;
+}
+.field span {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+	margin-top: 18px;
 }
 </style>

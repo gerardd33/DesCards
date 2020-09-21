@@ -1,7 +1,7 @@
 <template>
   <div class="flashcards-container">
     <div class="list">
-      {{ deck_name }}<br>
+			<span class="deck-name">{{ deck_name }}</span><br>
       <list :list="flashcards"
         :component="flashcard_componenet"
         @edit="edit"
@@ -13,7 +13,7 @@
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
-        @xd="update_flashcard"
+        @update-card="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
       <button @click="save">{{ refreshButton }}</button><br>
@@ -173,5 +173,12 @@ a {
 button {
   width: 200px;
   height: 50px;
+}
+
+.deck-name {
+	display: inline-block;
+	font-size: 30px;
+	font-weight: bold;
+	margin: 10px;
 }
 </style>
