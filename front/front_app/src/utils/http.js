@@ -41,9 +41,4 @@ export var commitChanges = async function (flashcards, removedIds=null, interval
       return null
     }
   })
-  .then(function () {console.log('zapisano zmiany')})
-  .catch(function () {
-    // some error message,
-    console.log('nie udało się zapisać zmian')
-  })
 }

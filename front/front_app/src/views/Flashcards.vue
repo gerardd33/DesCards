@@ -62,7 +62,6 @@ export default {
       var difference = this.added - this.removed
       var l = Math.floor((this.cardsInDeck - 1 + difference) / this.perPage) 
       if (l < 0) { l = 0 }
-      console.log(l)
       return l 
     }
   },
@@ -73,7 +72,6 @@ export default {
   methods: {
     update_flashcard: function (updated_flashcard) {
       this.flashcards[this.edited_key] = updated_flashcard
-      console.log('updated', this.flashcards[this.edited_key])
     },
     onAdded: function () {
       this.added++
@@ -86,7 +84,6 @@ export default {
     },
     remove: function (key) {
       this.removed_indexes.push(key)
-      // console.log(this.removed_indexes)
     },
     applyChanges: function () {
       var vm = this
@@ -103,7 +100,6 @@ export default {
           deckId: vm.flashcards[index].deckId
         }
       }
-      console.log(vm.edited_indexes)
       var updated = vm.edited_indexes.map(mapForUpdate)
       vm.edited_indexes = [0]
 
@@ -117,7 +113,6 @@ export default {
       })
     },
     next: function () {
-      console.log(this.cardsInDeck, this.removed, this.lastPage, this.added)
       var vm = this
       var promise = this.applyChanges()
       if (this.page < this.lastPage) {
@@ -128,7 +123,6 @@ export default {
       })
     },
     prev: function () {
-      console.log(this.cardsInDeck, this.removed, this.lastPage, this.added)
       var vm = this
       var promise = this.applyChanges()
       if (this.page > 0) {
@@ -146,7 +140,6 @@ export default {
     axios.get('/api/deck_info', {params: {deckId}})
     .then(function (response) {
       vm.cardsInDeck = response.data.totalCards
-      console.log(vm.cardsInDeck, response)
     })
     this.deck_name = window.localStorage.getItem('deck')
   },

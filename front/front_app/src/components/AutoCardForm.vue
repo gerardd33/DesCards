@@ -32,7 +32,6 @@ import { addButton, frontLabel } from '@/consts/messages.js'
 
 export default {
   name: 'AutoCardForm',
-//  props: ['entry', 'index'],
   data: function () {
     return {
       categories: [{id:1, name:"kategoria"}],
@@ -53,7 +52,6 @@ export default {
   },
   methods: {
     add: function () {
-      console.log(this.selected)
       var specialFields = []
       for (var field of this.selected.specialFields) {
         if (field.checked) {
@@ -81,14 +79,12 @@ export default {
         })
         if (vm.categories.length > 0) {
           vm.selected = vm.categories[0]
-          // TODO choose last category
         }
       }
     })
   },
   watch: {
     selectedId: function (to) {
-      console.log('zmiana', to)
       window.localStorage.setItem('last-category', to.toString())
     }
   }

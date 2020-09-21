@@ -35,7 +35,6 @@ export default {
     axios.get('/api/user_decks')
     .then(function (response) {
       if (response.status === 200) {
-        console.log(response)
         vm.decks = response.data
       }
     })

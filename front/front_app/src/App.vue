@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+      <router-link to="/">Login</router-link> |
       <router-link to="/decks">Home</router-link> |
       <router-link to="/">
         <span @click="logout">Logout</span>
@@ -18,7 +19,13 @@ export default {
   methods: {
     logout: function () {
       axios.post('/api/logout')
+      window.localStorage.removeItem('login')
     }
+  },
+  created: function () {
+    window.addEventListener('beforeunload', function () {
+      window.localStorage.removeItem('login')
+    })
   }
 }
 </script>

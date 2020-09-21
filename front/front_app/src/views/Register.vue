@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/LoginForm.vue'
-import { registerPageTitle, accountCreated, registerError } from '@/consts/messages.js'
+import { registerPageTitle, accountCreated, registerError, usernameAlreadyTaken } from '@/consts/messages.js'
 import axios from 'axios'
 
 export default {
@@ -37,9 +37,12 @@ export default {
             vm.message = registerError
           }
       })
-      .catch(function () {
-        vm.message = registerError
-        // TODO more specific error(username already taken)
+      .catch(function (error) {
+        if (error.response.status === 409) {
+          vm.message = usernameAlreadyTaken
+        } else {
+          vm.message = registerError
+        }
       })
     }
   }

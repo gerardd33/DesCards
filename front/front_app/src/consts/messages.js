@@ -9,6 +9,7 @@ export const registerPrompt = "Don't have an account? Register here."
 export const registerPageTitle = 'Register'
 export const accountCreated = 'Account created'
 export const registerError = 'Failed to register account'
+export const usernameAlreadyTaken = 'Username already taken'
 
 // Flashcard.vue
 export const editButton = 'Edit'

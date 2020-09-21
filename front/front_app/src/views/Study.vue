@@ -23,7 +23,6 @@
 
 <script>
 // @ is an alias to /src
-// import axios from 'axios'
 import { getFlashcards, commitChanges } from '@/utils/http.js'
 
 export default {
@@ -64,21 +63,16 @@ export default {
       var updated = editedIndexes.map(mapForUpdate)
       this.editedIndexes = []
       
-      // TODO update intervals
-      // console.log(this.flashcards, this.prevFlashcards)
-      console.log('study', cards)
       var intervals = cards.map(function (card) {return {id: card.id, strength: card.strength}})
       .filter(function (value) {
         var str = value.strength
         return (str === 'easy' || str === 'ok' || str === 'hard' || str === 'again')
       })
 
-      console.log('study', intervals)
       commitChanges(updated, removedIds, intervals)
     },
     getCurrentFlashcard: function () {
       var id = this.currentFlashcardId
-      console.log(id)
       if (id >= 0 && id < this.flashcards.length) {
         return this.flashcards[id]
       } else if (id < 0 && -id <= this.prevFlashcards.length) {
@@ -87,7 +81,6 @@ export default {
     },
     next: function () {
       this.isFront = true
-      console.log(this.currentFlashcardId, this.prevFlashcards.length, this.flashcards.length)
       if (this.currentFlashcardId < this.flashcards.length - 1) {
         this.currentFlashcardId++
       } else {
@@ -100,13 +93,11 @@ export default {
         this.editedIndexes = []
   
         getFlashcards(this, 0, this.bufferSize)
-        // TODO how errors work
 
         this.currentFlashcardId = 0
       }
     },
     prev: function () {
-      console.log(this.currentFlashcardId, this.prevFlashcards.length, this.flashcards.length)
       if (-this.currentFlashcardId < this.prevFlashcards.length) {
         this.currentFlashcardId--
       }
@@ -149,6 +140,7 @@ export default {
 	height: 30vh;
   margin: auto;
   text-align: center;
+  line-height: 38vh;
 }
 
 .text-front {
