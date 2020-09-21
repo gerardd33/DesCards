@@ -34,7 +34,9 @@ export default {
                  password})
       .then(function (response) {
           if (response.status === 200) {
+            // Successful authentication
             vm.$router.push('/decks')
+            window.localStorage.setItem('login', 'true')
           } else {
             vm.message = loginError
           }

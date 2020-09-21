@@ -19,7 +19,13 @@ export default {
   methods: {
     logout: function () {
       axios.post('/api/logout')
+      window.localStorage.removeItem('login')
     }
+  },
+  created: function () {
+    window.addEventListener('beforeunload', function () {
+      window.localStorage.removeItem('login')
+    })
   }
 }
 </script>
