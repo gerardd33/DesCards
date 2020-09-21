@@ -8,6 +8,7 @@ export const loginError = 'Logowanie nie powiodło się'
 export const registerTitle = 'Załóż konto'
 export const accountCreated = 'Konto zostało utworzone'
 export const registerError = 'Nie udało się utworzyć konta'
+export const usernameAlreadyTaken = 'Konto o podanej nazwie już istnieje'
 
 // Flashcard.vue
 export const editButton = 'Edytuj'

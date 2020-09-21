@@ -93,7 +93,6 @@ export default {
         this.editedIndexes = []
   
         getFlashcards(this, 0, this.bufferSize)
-        // TODO how errors work
 
         this.currentFlashcardId = 0
       }

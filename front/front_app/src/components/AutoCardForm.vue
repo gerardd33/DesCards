@@ -32,7 +32,6 @@ import { addButton, frontLabel } from '@/consts/messages.js'
 
 export default {
   name: 'AutoCardForm',
-//  props: ['entry', 'index'],
   data: function () {
     return {
       categories: [{id:1, name:"kategoria"}],
@@ -75,7 +74,6 @@ export default {
         })
         if (vm.categories.length > 0) {
           vm.selected = vm.categories[0]
-          // TODO choose last category
         }
       }
     })
