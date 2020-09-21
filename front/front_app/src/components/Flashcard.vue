@@ -28,7 +28,6 @@ export default {
   },
   computed: {
     interval: function () {
-      console.log(this.entry.interval)
       return parseInterval(this.entry.interval.current)
     },
     backShort: function () {

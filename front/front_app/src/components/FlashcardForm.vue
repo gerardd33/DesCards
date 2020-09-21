@@ -26,7 +26,6 @@ export default {
   methods: {
     update: function (key, value) {
       var a = { ...this.flashcard, [key]: value }
-      console.log(a)
       this.$emit('xd', a) 
     }
   },
@@ -34,9 +33,6 @@ export default {
     local() {
       return this.flashcard ? this.flashcard : {}
     },
-  },
-  created: function () {
-    console.log(this.flashcard)
   }
 }
 </script>

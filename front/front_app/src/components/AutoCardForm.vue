@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     add: function () {
-      console.log(this.selected)
       var specialFields = []
       for (var field of this.selected.specialFields) {
         if (field.checked) {
@@ -83,7 +82,6 @@ export default {
   },
   watch: {
     selectedId: function (to) {
-      console.log('zmiana', to)
       window.localStorage.setItem('last-category', to.toString())
     }
   }
