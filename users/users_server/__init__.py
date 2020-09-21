@@ -1,11 +1,12 @@
 from flask import Flask
+import secrets
 
 
 def create_app():
     app = Flask(__name__)
 
     app.config.from_mapping(
-        JWT_SECRET='secret',  # TODO make it better
+        JWT_SECRET=secrets.token_hex(32),
         JWT_ALGORITHM='HS256',
     )
 
