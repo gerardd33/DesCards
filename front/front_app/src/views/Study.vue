@@ -140,7 +140,6 @@ export default {
 	height: 30vh;
   margin: auto;
   text-align: center;
-  line-height: 38vh;
 }
 
 .text-front {
