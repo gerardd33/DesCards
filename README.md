@@ -1,16 +1,17 @@
-# DesCards – Flashcard generator
+# DesCards – flashcard generator
 
-Microservice application for fast and easy-to-use automatic generation of flashcards to learn important facts more efficiently. Supports creating flashcards automatically/manually, maintaining own flashcard libraries, SRS reviewing and exporting to third-party apps like Anki. Deployed in a Kubernetes cluster on Google Cloud.
+Microservice application for fast and easy automatic generation of flashcards to optimise learning of important facts. Supports creating flashcards automatically and manually, maintaining own flashcard libraries, SRS reviewing and exporting to third-party applications like Anki. Deployed in a Kubernetes cluster on Google Cloud.
 
 More information about the functionality, architecture and flow of the application is available in DesCards.pdf.
 
 ## Technologies
+
 - Java, Spring Boot
 - Python, Flask
 - Vue.js, Vuetify, JavaScript
 - RabbitMQ, Docker, Kubernetes, Google Cloud Platform (GKE)
 - PostgreSQL, Selenium
-- Hibernate, Maven, Lombok, JUnit, Mockito.
+- Hibernate, Maven, Lombok, JUnit, Mockito
 
 
 ## Running locally
