@@ -59,7 +59,9 @@ export default {
 }
 
 button {
-  width: 200px;
-  height: 50px;
+  width: 225px;
+  height: 65px;
+  font-size: 22px;
 }
+
 </style>

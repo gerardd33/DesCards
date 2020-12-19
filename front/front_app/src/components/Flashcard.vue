@@ -60,7 +60,8 @@ export default {
 .flashcard {
   display: flex;
   justify-content: space-between;
-	width: 850px;
+	width: 1200px;
+  height: 80px;
 }
 .deleted {
   background-color: darksalmon;
@@ -80,8 +81,10 @@ export default {
 .flashcard {
 	border: 2px solid mediumspringgreen;
 	border-radius: 30px;
-	padding: 5px 10px;
-	margin: 5px;
+	padding: 10px 15px;
+	margin: 10px 5px 10px 5px;
+  font-size: 20px;
+  text-align: left;
 }
 .field {
 	margin: 5px 0;
@@ -91,5 +94,9 @@ export default {
 	vertical-align: middle;
 	text-align: left;
 	margin-top: 18px;
+}
+.field button {
+  font-size: 20px;
+  padding: 7px 14px 7px 14px;
 }
 </style>

@@ -93,32 +93,37 @@ export default {
 
 <style scoped>
 .query > * {
-  margin: 12px;
+  margin: 15px;
 }
 
 .query > input {
-  width: 550px;
-  height: 40px;
-	font-size: 22px;
-	padding: 5px 10px;
+  width: 700px;
+  height: 50px;
+	font-size: 27px;
+	padding: 7px 14px;
 }
 
 .add {
-	width: 200px;
-	height: 50px;
-	margin: 20px;
-	font-size: 20px;
+	width: 250px;
+	height: 60px;
+	margin: 25px;
+	font-size: 25px;
 }
 
 .category {
-	font-size: 16px;
-	padding: 5px;
-	margin-bottom: 5px;
+	font-size: 20px;
+	padding: 7px;
+	margin-bottom: 7px;
 }
 
 .special-fields {
 	text-align: left;
-	margin-left: 375px;
+	margin-left: 500px;
+  font-size: 20px;
+}
+
+.query {
+  font-size: 20px;
 }
 
 </style>

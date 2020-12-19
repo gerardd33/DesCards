@@ -7,7 +7,7 @@
         @edit="edit"
         @delete="remove">
       </list>
-      {{ pageName }}{{ page + 1 }}<br>
+      <div class="page-number">{{ pageName }}{{ page + 1 }}</div>
       <button v-on:click="prev">{{ prevButton }}</button>
       <button v-on:click="next">{{ nextButton }}</button>
     </div>
@@ -171,14 +171,22 @@ a {
 }
 
 button {
-  width: 200px;
-  height: 50px;
+  width: 225px;
+  height: 65px;
+  font-size: 22px;
 }
 
 .deck-name {
-	display: inline-block;
-	font-size: 30px;
-	font-weight: bold;
-	margin: 10px;
+  display: inline-block;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 15px;
 }
+
+.page-number {
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-top: 30px;
+}
+
 </style>

@@ -51,8 +51,9 @@ export default {
 
 <style scoped>
 button {
-  width: 150px;
-  height: 30px;
-  margin: 12px;
+  width: 200px;
+  height: 40px;
+  margin: 15px;
+  font-size: 20px;
 }
 </style>

@@ -166,15 +166,16 @@ a {
 }
 
 button {
-  width: 200px;
-  height: 50px;
+  width: 225px;
+  height: 65px;
+  font-size: 22px;
 }
 
 .deck-name {
 	display: inline-block;
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
-	margin: 10px;
+	margin: 15px;
 }
 
 </style>

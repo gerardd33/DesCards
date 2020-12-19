@@ -159,8 +159,9 @@ export default {
 }
 
 button {
-  width: 200px;
-  height: 50px;
-  margin: 6px 12px;
+  width: 225px;
+  height: 65px;
+  font-size: 22px;
 }
+
 </style>

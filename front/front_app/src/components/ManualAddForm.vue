@@ -50,20 +50,25 @@ table {
 }
 
 td > input {
-  margin: 6px 12px 6px 12px;
+  margin: 7px 14px 7px 14px;
 }
 
 .add {
-  width: 200px;
-  height: 50px;
-  font-size: 20px;
+  width: 250px;
+  height: 65px;
+  font-size: 25px;
 }
 
 input {
-  height: 25px;
-  width: 500px;
-  font-size: 20px;
-	margin: 20px;
-	padding: 5px 10px;
+  height: 30px;
+  width: 625px;
+  font-size: 25px;
+	margin: 25px;
+	padding: 7px 14px;
 }
+
+[for="back"], [for="front"] {
+  font-size: 20px;
+}
+
 </style>
