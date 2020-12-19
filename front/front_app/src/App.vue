@@ -21,11 +21,6 @@ export default {
       axios.post('/api/logout')
       window.localStorage.removeItem('login')
     }
-  },
-  created: function () {
-    window.addEventListener('beforeunload', function () {
-      window.localStorage.removeItem('login')
-    })
   }
 }
 </script>
@@ -47,10 +42,6 @@ export default {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 
 button, input {

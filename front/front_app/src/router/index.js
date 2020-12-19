@@ -44,20 +44,12 @@ const router = createRouter({
   routes
 })
 
-/*
 router.beforeEach(function (to, from, next) {
-  if (to.path !== '/' && to.path !== '/register') {
-    // check auth
-    console.log(window.localStorage.getItem('login'))
-    if (window.localStorage.getItem('login') == 'true') {
-      next()
-    } else {
-      next('/')
-    }
+  if (to.path !== '/' && to.path !== '/register' && window.localStorage.getItem('login') !== 'true') {
+    next('/')
   } else {
     next()
   }
 })
-*/
 
 export default router
