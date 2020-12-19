@@ -2,7 +2,7 @@
   <div class="deck">
     <span>{{}}</span>
     <span class="deck-name">{{ entry.name }}</span>
-    <button @click="choose">{{ chooseLabel }}</button>
+    <button v-on:click="choose">{{ chooseLabel }}</button>
   </div>
 </template>
 

@@ -2,8 +2,8 @@
   <div class="login">
     <h3>{{ title }}</h3><br>
     <input type="text" v-model="username"><br>
-    <input type="password" v-model="password"><br>
-    <input type="submit" v-on:click="$emit('login', username, password)"><br>
+    <input type="password" v-model="password" v-on:keyup.enter="submitLogin"><br>
+    <input type="submit" v-on:click="submitLogin"><br>
     <span class="message">{{ message }}</span>
   </div>
 </template>
@@ -16,6 +16,11 @@ export default {
     return {
       username: '',
       password: ''
+    }
+  },
+  methods: {
+    submitLogin: function() {
+      this.$emit('login', this.username, this.password)
     }
   }
 }

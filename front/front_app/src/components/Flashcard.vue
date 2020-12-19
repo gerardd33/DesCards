@@ -4,8 +4,8 @@
 		<div class="field back"><span :title="entry.back">{{ backShort }}</span></div>
 		<div class="field"><span>{{ interval }}</span></div>
     <div class="field">
-      <button @click="$emit('edit', index)">{{ editButton }}</button>
-      <button @click="remove">{{ deleteButton }}</button>
+      <button v-on:click="edit">{{ editButton }}</button>
+      <button v-on:click="remove">{{ deleteButton }}</button>
     </div>
   </div>
 </template>
@@ -48,6 +48,9 @@ export default {
     remove: function () {
       this.deleted = true
       this.$emit('delete', this.index)
+    },
+    edit: function () {
+      this.$emit('edit', this.index)
     }
   }
 }

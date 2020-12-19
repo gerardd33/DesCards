@@ -8,17 +8,17 @@
         @delete="remove">
       </list>
       {{ pageName }}{{ page + 1 }}<br>
-      <button @click="prev">{{ prevButton }}</button>
-      <button @click="next">{{ nextButton }}</button>
+      <button v-on:click="prev">{{ prevButton }}</button>
+      <button v-on:click="next">{{ nextButton }}</button>
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
         @update-card="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
-      <button @click="save">{{ refreshButton }}</button><br>
-      <button @click="$router.push('/study')">{{ studyButton }}</button><br>
-      <button @click="$router.push('/deck')">{{ addButton }}</button><br>
+      <button v-on:click="save">{{ refreshButton }}</button><br>
+      <button v-on:click="$router.push('/study')">{{ studyButton }}</button><br>
+      <button v-on:click="$router.push('/deck')">{{ addButton }}</button><br>
     </div>
   </div>
 </template>

@@ -10,8 +10,8 @@
         @update-card="update_flashcard"
         @hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
-      <button @click="$router.push('/study')">{{ studyButton }}</button><br>
-      <button @click="$router.push('/flashcards')">{{ manageButton }}</button><br>
+      <button v-on:click="$router.push('/study')">{{ studyButton }}</button><br>
+      <button v-on:click="$router.push('/flashcards')">{{ manageButton }}</button><br>
     </div>
   </div>
 </template>

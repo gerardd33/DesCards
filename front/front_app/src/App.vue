@@ -4,7 +4,7 @@
       <router-link to="/">Login</router-link> |
       <router-link to="/decks">Home</router-link> |
       <router-link to="/">
-        <span @click="logout">Logout</span>
+        <span v-on:click="logout">Logout</span>
       </router-link> 
     </div>
     <router-view/>

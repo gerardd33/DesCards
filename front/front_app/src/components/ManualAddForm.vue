@@ -1,17 +1,17 @@
 <template>
-  <div class="flashcard-form">
+  <div class="flashcard-form" v-on:keyup.enter="add">
     <table>
       <tr>
         <td><label for="front">{{ frontLabel }}</label></td>
-        <td><input v-model="front"></td>
+        <td><input id="front" v-model="front"></td>
       </tr>
       <tr>
         <td><label for="back">{{ backLabel }}</label></td>
-        <td><input class="back" v-model="back"></td>
+        <td><input id="back" class="back" v-model="back"></td>
       </tr>
     </table>
     <br>
-    <button class="add" @click="add">{{ addButton }}</button>
+    <button class="add" v-on:click="add">{{ addButton }}</button>
   </div>
 </template>
 

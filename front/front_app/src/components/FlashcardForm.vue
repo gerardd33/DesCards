@@ -1,12 +1,12 @@
 <template>
-  <div class="flashcard-form">
+  <div class="flashcard-form" v-on:keyup.enter="$emit('hide')">
     <label for="front">{{ frontLabel }}</label><br>
     <input id="front" :value="flashcard.front" @input="update('front', $event.target.value)">
     <br>
     <label for="back">{{ backLabel }}</label><br>
     <input id="back" :value="flashcard.back" @input="update('back', $event.target.value)">
     <br>
-    <button @click="$emit('hide')">Save</button>
+    <button v-on:click="$emit('hide')">Save</button>
   </div>
 </template>
 

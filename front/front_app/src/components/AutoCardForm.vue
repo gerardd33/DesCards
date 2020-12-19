@@ -1,5 +1,5 @@
 <template>
-  <div class="auto-card-create-form">
+  <div class="auto-card-create-form" v-on:keyup.enter="add">
     <div class="query">
       <label for="query">{{ frontLabel }}</label>
       <input v-model="query" id="query"><br>
@@ -22,7 +22,7 @@
       <br>
     </div>
     <br>
-    <button class="add" @click="add">{{ addButton }}</button>
+    <button class="add" v-on:click="add">{{ addButton }}</button>
   </div>
 </template>
 

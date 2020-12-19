@@ -1,7 +1,7 @@
 <template>
   <div class="add-card">
-    <button @click="setManual">Manual</button>
-    <button @click="setAuto">Automatic</button>
+    <button v-on:click="setManual">Manual</button>
+    <button v-on:click="setAuto">Automatic</button>
     <br>
     <component v-bind:is="form"
       @add-manual="manual"
