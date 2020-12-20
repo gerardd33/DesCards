@@ -1,17 +1,17 @@
 <template>
-  <div class="flashcard-form">
+  <div class="flashcard-form" v-on:keyup.enter="add">
     <table>
       <tr>
         <td><label for="front">{{ frontLabel }}</label></td>
-        <td><input v-model="front"></td>
+        <td><input id="front" v-model="front"></td>
       </tr>
       <tr>
         <td><label for="back">{{ backLabel }}</label></td>
-        <td><input class="back" v-model="back"></td>
+        <td><input id="back" class="back" v-model="back"></td>
       </tr>
     </table>
     <br>
-    <button class="add" @click="add">{{ addButton }}</button>
+    <button class="add" v-on:click="add">{{ addButton }}</button>
   </div>
 </template>
 
@@ -50,20 +50,25 @@ table {
 }
 
 td > input {
-  margin: 6px 12px 6px 12px;
+  margin: 7px 14px 7px 14px;
 }
 
 .add {
-  width: 200px;
-  height: 50px;
-  font-size: 20px;
+  width: 250px;
+  height: 65px;
+  font-size: 25px;
 }
 
 input {
-  height: 25px;
-  width: 500px;
-  font-size: 20px;
-	margin: 20px;
-	padding: 5px 10px;
+  height: 30px;
+  width: 625px;
+  font-size: 25px;
+	margin: 25px;
+	padding: 7px 14px;
 }
+
+[for="back"], [for="front"] {
+  font-size: 20px;
+}
+
 </style>

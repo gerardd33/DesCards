@@ -1,12 +1,12 @@
 <template>
-  <div class="flashcard-form">
+  <div class="flashcard-form" v-on:keyup.enter="$emit('hide')">
     <label for="front">{{ frontLabel }}</label><br>
-    <input id="front" :value="flashcard.front" @input="update('front', $event.target.value)">
+    <input id="front" :value="flashcard.front" v-on:input="update('front', $event.target.value)">
     <br>
     <label for="back">{{ backLabel }}</label><br>
-    <input id="back" :value="flashcard.back" @input="update('back', $event.target.value)">
+    <input id="back" :value="flashcard.back" v-on:input="update('back', $event.target.value)">
     <br>
-    <button @click="$emit('hide')">Save</button>
+    <button v-on:click="$emit('hide')">Save</button>
   </div>
 </template>
 
@@ -40,11 +40,23 @@ export default {
 <style scoped>
 
 input#front, input#back {
-	height: 30px;
-	width: 175px;
-	font-size: 18px;
+	height: 40px;
+	width: 350px;
+	font-size: 20px;
 	margin: 5px;
 	padding: 3px 5px;
+}
+
+button {
+  margin-top: 10px;
+  height: 40px;
+  width: 90px;
+  font-size: 20px;
+  padding: 5px;
+}
+
+[for="back"], [for="front"] {
+  font-size: 20px;
 }
 
 </style>

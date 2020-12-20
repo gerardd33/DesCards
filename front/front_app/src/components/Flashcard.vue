@@ -4,8 +4,8 @@
 		<div class="field back"><span :title="entry.back">{{ backShort }}</span></div>
 		<div class="field"><span>{{ interval }}</span></div>
     <div class="field">
-      <button @click="$emit('edit', index)">{{ editButton }}</button>
-      <button @click="remove">{{ deleteButton }}</button>
+      <button v-on:click="edit">{{ editButton }}</button>
+      <button v-on:click="remove">{{ deleteButton }}</button>
     </div>
   </div>
 </template>
@@ -48,45 +48,77 @@ export default {
     remove: function () {
       this.deleted = true
       this.$emit('delete', this.index)
+    },
+    edit: function () {
+      this.$emit('edit', this.index)
     }
   }
 }
 </script>
 
 <style scoped>
+
 .flashcard {
   display: flex;
   justify-content: space-between;
-	width: 850px;
+	width: 1200px;
+  height: 80px;
 }
+
 .deleted {
   background-color: darksalmon;
 	opacity: 0.75;
 }
+
 .front {
 	width: 15%;
 }
+
 .front span {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0 0 15px 10px;
 }
+
 .back {
   width: 50%;
 }
+
 .flashcard {
 	border: 2px solid mediumspringgreen;
 	border-radius: 30px;
-	padding: 5px 10px;
-	margin: 5px;
+	padding: 10px 15px;
+	margin: 10px 5px 10px 5px;
+  font-size: 20px;
+  text-align: left;
 }
+
 .field {
 	margin: 5px 0;
 }
+
 .field span {
 	display: inline-block;
 	vertical-align: middle;
 	text-align: left;
 	margin-top: 18px;
 }
+
+.field button {
+  font-size: 20px;
+  padding: 7px 14px 7px 14px;
+}
+
+@media (min-width: 1500px) and (max-width: 1700px) {
+  .flashcard {
+    width: 1100px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .flashcard {
+    width: 800px;
+  }
+}
+
 </style>

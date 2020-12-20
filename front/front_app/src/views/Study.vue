@@ -10,14 +10,14 @@
       {{ getCurrentFlashcard().back }}
       </span>
     </div>
-    <button @click="prev">Previous</button>
-    <button @click="isFront = !isFront">Show</button>
-    <button @click="next">Next</button>
+    <button v-on:click="prev">Previous</button>
+    <button v-on:click="show">Show</button>
+    <button v-on:click="next">Next</button>
     <br>
-    <button @click="setStrength('again')">Again</button>
-    <button @click="setStrength('hard')">Hard</button>
-    <button @click="setStrength('ok')">Ok</button>
-    <button @click="setStrength('easy')">Easy</button>
+    <button v-on:click="setStrength('again')">Again</button>
+    <button v-on:click="setStrength('hard')">Hard</button>
+    <button v-on:click="setStrength('ok')">Ok</button>
+    <button v-on:click="setStrength('easy')">Easy</button>
   </div>
 </template>
 
@@ -102,6 +102,9 @@ export default {
         this.currentFlashcardId--
       }
     },
+    show: function () {
+      this.isFront = !this.isFront
+    },
     addStrengthField: function () {
       this.flashcards = this.flashcards.map(function (card) {return {...card, strength: ''}})
     },
@@ -156,8 +159,9 @@ export default {
 }
 
 button {
-  width: 200px;
-  height: 50px;
-  margin: 6px 12px;
+  width: 225px;
+  height: 65px;
+  font-size: 22px;
 }
+
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <div class="add-deck">
+  <div class="add-deck" v-on:keyup.enter="add">
     <label for="front">{{ deckNameLabel }}</label><br>
     <input id="front" v-model="deckName">
     <br>
-    <button @click="add">{{ saveButton }}</button>
+    <button v-on:click="add">{{ saveButton }}</button>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
   methods: {
     add: function () {
       axios.post('/api/add_deck', {name: this.deckName})
+      window.location.reload()
     }
   }
 }

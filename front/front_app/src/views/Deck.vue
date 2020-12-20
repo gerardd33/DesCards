@@ -7,11 +7,11 @@
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
-        @update-card="update_flashcard"
-        @hide="showEditForm=false"
+        v-on:update-card="update_flashcard"
+        v-on:hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
-      <button @click="$router.push('/study')">{{ studyButton }}</button><br>
-      <button @click="$router.push('/flashcards')">{{ manageButton }}</button><br>
+      <button v-on:click="$router.push('/study')">{{ studyButton }}</button><br>
+      <button v-on:click="$router.push('/flashcards')">{{ manageButton }}</button><br>
     </div>
   </div>
 </template>
@@ -166,15 +166,16 @@ a {
 }
 
 button {
-  width: 200px;
-  height: 50px;
+  width: 225px;
+  height: 65px;
+  font-size: 22px;
 }
 
 .deck-name {
 	display: inline-block;
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
-	margin: 10px;
+	margin: 15px;
 }
 
 </style>

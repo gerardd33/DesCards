@@ -4,7 +4,7 @@
       <router-link to="/">Login</router-link> |
       <router-link to="/decks">Home</router-link> |
       <router-link to="/">
-        <span @click="logout">Logout</span>
+        <span v-on:click="logout">Logout</span>
       </router-link> 
     </div>
     <router-view/>
@@ -21,11 +21,6 @@ export default {
       axios.post('/api/logout')
       window.localStorage.removeItem('login')
     }
-  },
-  created: function () {
-    window.addEventListener('beforeunload', function () {
-      window.localStorage.removeItem('login')
-    })
   }
 }
 </script>
@@ -42,15 +37,12 @@ export default {
 
 #nav {
   padding: 30px;
+  font-size: 22px;
 }
 
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 
 button, input {
@@ -63,10 +55,6 @@ button {
 	border-radius: 30px;
 	padding: 5px 10px;
 	font-size: 16px;
-}
-
-#nav {
-	font-size: 18px;
 }
 
 </style>

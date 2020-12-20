@@ -2,7 +2,7 @@
   <div class="deck">
     <span>{{}}</span>
     <span class="deck-name">{{ entry.name }}</span>
-    <button @click="choose">{{ chooseLabel }}</button>
+    <button v-on:click="choose">{{ chooseLabel }}</button>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
 span, button {
 	display: inline-block;
 	margin: 10px;
-	font-size: 16px;
+	font-size: 22px;
 }
 
 .deck {

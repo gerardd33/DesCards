@@ -1,10 +1,11 @@
 <template>
-  <div class="auto-card-create-form">
+  <div class="auto-card-create-form" v-on:keyup.enter="add">
     <div class="query">
       <label for="query">{{ frontLabel }}</label>
       <input v-model="query" id="query"><br>
     </div>
-    <select class="category" v-model="selectedId">
+    <div class="category-box">
+    <select class="category-selection" v-model="selectedId">
       <option v-for="(category, index) in categories"
         :key="index"
         :value="index">
@@ -21,8 +22,9 @@
       <label :for="index">{{ field.name }}</label>
       <br>
     </div>
+    </div>
     <br>
-    <button class="add" @click="add">{{ addButton }}</button>
+    <button class="add" v-on:click="add">{{ addButton }}</button>
   </div>
 </template>
 
@@ -93,32 +95,41 @@ export default {
 
 <style scoped>
 .query > * {
-  margin: 12px;
+  margin: 15px;
 }
 
 .query > input {
-  width: 550px;
-  height: 40px;
-	font-size: 22px;
-	padding: 5px 10px;
+  width: 700px;
+  height: 50px;
+	font-size: 27px;
+	padding: 7px 14px;
 }
 
 .add {
-	width: 200px;
-	height: 50px;
-	margin: 20px;
-	font-size: 20px;
+	width: 250px;
+	height: 60px;
+	margin: 25px;
+	font-size: 25px;
 }
 
-.category {
-	font-size: 16px;
-	padding: 5px;
-	margin-bottom: 5px;
+.category-selection {
+	font-size: 20px;
+	padding: 7px;
+	margin-bottom: 7px;
 }
 
 .special-fields {
-	text-align: left;
-	margin-left: 375px;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.category-box {
+  display: inline-block;
+  text-align: left;
+}
+
+.query {
+  font-size: 20px;
 }
 
 </style>

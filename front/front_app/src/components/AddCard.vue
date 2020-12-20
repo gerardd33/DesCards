@@ -1,7 +1,7 @@
 <template>
   <div class="add-card">
-    <button @click="setManual">Manual</button>
-    <button @click="setAuto">Automatic</button>
+    <button v-on:click="setManual">Manual</button>
+    <button v-on:click="setAuto">Automatic</button>
     <br>
     <component v-bind:is="form"
       @add-manual="manual"
@@ -51,8 +51,9 @@ export default {
 
 <style scoped>
 button {
-  width: 150px;
-  height: 30px;
-  margin: 12px;
+  width: 200px;
+  height: 50px;
+  margin: 10px 15px;
+  font-size: 22px;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="decks-container">
     <list class="list" :list="decks" :component="deck_component"></list>
     <div class="sidebar">
-      <button @click="showAddForm=!showAddForm">{{ addButton }}</button>
+      <button v-on:click="showAddForm=!showAddForm">{{ addButton }}</button>
       <add-deck v-if="showAddForm"></add-deck>    
     </div>
   </div>
@@ -59,7 +59,9 @@ export default {
 }
 
 button {
-  width: 200px;
-  height: 50px;
+  width: 225px;
+  height: 65px;
+  font-size: 22px;
 }
+
 </style>
