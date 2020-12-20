@@ -12,13 +12,14 @@ More information about the functionality, architecture and flow of the applicati
 - Vue.js, JavaScript
 - RabbitMQ, Docker, Kubernetes, Google Cloud Platform (GKE)
 - PostgreSQL, Selenium
-- Hibernate, Maven, Lombok, JUnit, Mockito
+- Hibernate, Maven, Lombok, JWT
 
 
 ## Contributors
 
 - [Gerard Dróżdż](https://github.com/gerardd33): Flashcards, Generator, improvements to Front
 - [Artur Matyjasek](https://github.com/Jaskier234): Front, Users, deployment configuration
+
 
 ## Running locally
 
@@ -48,4 +49,5 @@ If you have run DesCards locally and don't need it anymore, remember to clean up
 ```
 sudo docker rm $(docker ps -aq --filter "name=descards*")
 sudo docker rmi $(docker images -q "descards*")
+sudo docker image prune
 ```
