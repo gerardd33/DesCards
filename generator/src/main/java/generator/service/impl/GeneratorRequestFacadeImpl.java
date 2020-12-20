@@ -13,11 +13,6 @@ public class GeneratorRequestFacadeImpl implements GeneratorRequestFacade {
 
 	@Override
 	public void processRequest(GeneratorRequestDto generatorRequestDto) {
-		generatorRequestManager.getSemaphore().tryAcquire();
-
-		generatorRequestManager.setGeneratorRequest(
-				GeneratorRequestDtoMapper.mapFromDto(generatorRequestDto)
-		);
-		generatorRequestManager.processRequest();
+		generatorRequestManager.processRequest(GeneratorRequestDtoMapper.mapFromDto(generatorRequestDto));
 	}
 }
