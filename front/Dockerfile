@@ -12,7 +12,7 @@ CMD ["flask", "run", "--host=0.0.0.0"]
 
 FROM node AS node-base
 WORKDIR /usr/src/app/vue_app
-COPY ./front_app/package.json ./front_app/package-lock.json ./
+COPY ./front_app/package.json ./
 RUN ["npm", "install"]
 COPY ./front_app/vue.config.js ./
 COPY ./front_app/.eslintrc.js ./
