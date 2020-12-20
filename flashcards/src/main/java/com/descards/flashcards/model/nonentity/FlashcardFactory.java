@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class FlashcardFactory {
 
-	private RepetitionInterval repetitionInterval;
+  private final IntervalFactory intervalFactory;
 
-	public Flashcard getObject(String front, String back) {
-		return new Flashcard(repetitionInterval, front, back);
-	}
+  public Flashcard getObject(String front, String back) {
+    return new Flashcard(intervalFactory.getObject(), front, back);
+  }
 }

@@ -11,6 +11,11 @@ public class FlashcardDtoMapper {
 
 	private static FlashcardFactory flashcardFactory;
 
+	@Autowired
+	public void setFlashcardFactory(FlashcardFactory flashcardFactory) {
+		FlashcardDtoMapper.flashcardFactory = flashcardFactory;
+	}
+
 	public static FlashcardDto mapToDto(Flashcard flashcard) {
 		return FlashcardDto.builder()
 				.id(flashcard.getId())
@@ -26,10 +31,5 @@ public class FlashcardDtoMapper {
 		return flashcardFactory.getObject(
 				flashcardDto.getFront(), flashcardDto.getBack()
 		);
-	}
-
-	@Autowired
-	public void setFlashcardFactory(FlashcardFactory flashcardFactory) {
-		FlashcardDtoMapper.flashcardFactory = flashcardFactory;
 	}
 }
