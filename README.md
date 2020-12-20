@@ -15,6 +15,11 @@ More information about the functionality, architecture and flow of the applicati
 - Hibernate, Maven, Lombok, JUnit, Mockito
 
 
+## Contributors
+
+- [Gerard Dróżdż](https://github.com/gerardd33): Flashcards, Generator, improvements to Front
+- [Artur Matyjasek](https://github.com/Jaskier234): Front, Users, deployment configuration
+
 ## Running locally
 
 ### Setup
