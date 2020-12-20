@@ -49,7 +49,7 @@ public class TestResource extends ExternalResource {
   private void createMockCategory() {
     category = new Category("Historical event");
     category.setId(1L);
-    category.setSpecialFields(Stream.of("Date", "Who").collect(Collectors.toList()));
+    category.setSpecialFields(Stream.of("Date", "Who", "When").collect(Collectors.toList()));
   }
 
   private void createMockFlashcards() {
@@ -79,7 +79,6 @@ public class TestResource extends ExternalResource {
         .of(flashcard1, flashcard2, flashcard3, flashcard4, flashcard5)
         .collect(Collectors.toSet());
     flashcardMocks.setAll(allFlashcards);
-    flashcardMocks.setRandom(allFlashcards.stream().findAny().orElse(flashcard1));
 
     addFlashcardsToDeck();
   }

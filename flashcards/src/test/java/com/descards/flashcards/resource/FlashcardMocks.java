@@ -13,8 +13,6 @@ public class FlashcardMocks {
 
   private Collection<Flashcard> all;
 
-  private Flashcard random;
-
   private Flashcard firstAdded;
 
   private Flashcard lastAdded;
@@ -22,4 +20,8 @@ public class FlashcardMocks {
   private Flashcard withSmallestInterval;
 
   private Flashcard withGreatestInterval;
+
+  public Flashcard getRandom() {
+    return all.stream().findAny().orElse(firstAdded);
+  }
 }
