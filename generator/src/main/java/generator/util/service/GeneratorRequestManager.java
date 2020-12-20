@@ -17,15 +17,11 @@ public class GeneratorRequestManager {
 
 	private static final String EN_DASH_SPACE = " \u2013 ";
 
-	private GeneratorRequest generatorRequest;
-
 	private InformationFinder informationFinder;
 
 	private FlashcardCreationRequestDispatcher flashcardCreationRequestDispatcher;
 
-	private Semaphore semaphore;
-
-	public void processRequest() {
+	public synchronized void processRequest(GeneratorRequest generatorRequest) {
 		log.info("Processing: " + generatorRequest);
 
 		generatorRequest.getSpecialFields().forEach(fieldLabel -> {
@@ -38,8 +34,6 @@ public class GeneratorRequestManager {
 		String cardFront = generatorRequest.getQuery();
 		String cardBack = informationFinder.findInformation(generatorRequest.getQuery());
 		createFlashcard(generatorRequest.getDeckId(), cardFront, cardBack);
-
-		this.semaphore.release();
 	}
 
 	private void createFlashcard(long deckId, String cardFront, String cardBack) {
