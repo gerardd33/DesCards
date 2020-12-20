@@ -2,7 +2,8 @@
   <div class="login-container">
     <login-form v-on:login="login"
       v-bind:message="message"
-      v-bind:title="title"/>
+      v-bind:title="title"
+    />
     <router-link to="/register">{{ registerPrompt }}</router-link>
   </div>
 </template>

@@ -4,8 +4,8 @@
 			<span class="deck-name">{{ deck_name }}</span><br>
       <list :list="flashcards"
         :component="flashcard_componenet"
-        @edit="edit"
-        @delete="remove">
+        v-on:edit="edit"
+        v-on:delete="remove">
       </list>
       <div class="page-number">{{ pageName }}{{ page + 1 }}</div>
       <button v-on:click="prev">{{ prevButton }}</button>
@@ -13,8 +13,8 @@
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
-        @update-card="update_flashcard"
-        @hide="showEditForm=false"
+        v-on:update-card="update_flashcard"
+        v-on:hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
       <button v-on:click="save">{{ refreshButton }}</button><br>
       <button v-on:click="$router.push('/study')">{{ studyButton }}</button><br>
@@ -187,6 +187,12 @@ button {
   font-size: 20px;
   margin-bottom: 5px;
   margin-top: 30px;
+}
+
+@media (max-width: 1200px) {
+  .sidebar button {
+    display: none;
+  }
 }
 
 </style>

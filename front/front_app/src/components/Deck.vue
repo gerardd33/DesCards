@@ -36,7 +36,7 @@ export default {
 span, button {
 	display: inline-block;
 	margin: 10px;
-	font-size: 16px;
+	font-size: 22px;
 }
 
 .deck {

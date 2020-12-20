@@ -4,7 +4,8 @@
       <label for="query">{{ frontLabel }}</label>
       <input v-model="query" id="query"><br>
     </div>
-    <select class="category" v-model="selectedId">
+    <div class="category-box">
+    <select class="category-selection" v-model="selectedId">
       <option v-for="(category, index) in categories"
         :key="index"
         :value="index">
@@ -20,6 +21,7 @@
         v-model="field.checked">
       <label :for="index">{{ field.name }}</label>
       <br>
+    </div>
     </div>
     <br>
     <button class="add" v-on:click="add">{{ addButton }}</button>
@@ -110,16 +112,20 @@ export default {
 	font-size: 25px;
 }
 
-.category {
+.category-selection {
 	font-size: 20px;
 	padding: 7px;
 	margin-bottom: 7px;
 }
 
 .special-fields {
-	text-align: left;
-	margin-left: 500px;
   font-size: 20px;
+  padding-left: 10px;
+}
+
+.category-box {
+  display: inline-block;
+  text-align: left;
 }
 
 .query {

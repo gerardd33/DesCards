@@ -57,27 +57,33 @@ export default {
 </script>
 
 <style scoped>
+
 .flashcard {
   display: flex;
   justify-content: space-between;
 	width: 1200px;
   height: 80px;
 }
+
 .deleted {
   background-color: darksalmon;
 	opacity: 0.75;
 }
+
 .front {
 	width: 15%;
 }
+
 .front span {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0 0 15px 10px;
 }
+
 .back {
   width: 50%;
 }
+
 .flashcard {
 	border: 2px solid mediumspringgreen;
 	border-radius: 30px;
@@ -86,17 +92,33 @@ export default {
   font-size: 20px;
   text-align: left;
 }
+
 .field {
 	margin: 5px 0;
 }
+
 .field span {
 	display: inline-block;
 	vertical-align: middle;
 	text-align: left;
 	margin-top: 18px;
 }
+
 .field button {
   font-size: 20px;
   padding: 7px 14px 7px 14px;
 }
+
+@media (min-width: 1500px) and (max-width: 1700px) {
+  .flashcard {
+    width: 1100px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .flashcard {
+    width: 800px;
+  }
+}
+
 </style>

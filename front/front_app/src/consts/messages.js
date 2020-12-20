@@ -22,6 +22,7 @@ export const addButton = 'Add'
 export const studyButton = 'Study'
 export const refreshButton = 'Refresh'
 export const manageButton = 'Browse'
+export const submitButton = 'Submit'
 export const pageName = 'Page '
 export const chooseLabel = 'Choose'
 

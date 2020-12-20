@@ -37,6 +37,7 @@ export default {
 
 #nav {
   padding: 30px;
+  font-size: 22px;
 }
 
 #nav a {
@@ -54,10 +55,6 @@ button {
 	border-radius: 30px;
 	padding: 5px 10px;
 	font-size: 16px;
-}
-
-#nav {
-	font-size: 18px;
 }
 
 </style>

@@ -7,8 +7,8 @@
     </div>
     <div class="sidebar">
       <flashcard-form :flashcard="flashcards[edited_key]" 
-        @update-card="update_flashcard"
-        @hide="showEditForm=false"
+        v-on:update-card="update_flashcard"
+        v-on:hide="showEditForm=false"
         v-if="showEditForm"></flashcard-form>
       <button v-on:click="$router.push('/study')">{{ studyButton }}</button><br>
       <button v-on:click="$router.push('/flashcards')">{{ manageButton }}</button><br>
