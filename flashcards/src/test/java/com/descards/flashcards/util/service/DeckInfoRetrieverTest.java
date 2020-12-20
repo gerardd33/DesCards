@@ -22,7 +22,10 @@ class DeckInfoRetrieverTest {
     RepetitionInterval smallestInterval = deckInfoRetriever.getSmallestInterval();
 
     // then
-    assertEquals(25, smallestInterval.getCurrent().toMinutes());
+    long expectedMinutes = TEST_RESOURCE.getFlashcardMocks().getWithSmallestInterval()
+        .getInterval().getCurrent().toMinutes();
+    long actualMinutes = smallestInterval.getCurrent().toMinutes();
+    assertEquals(expectedMinutes, actualMinutes);
   }
 
   @Test
@@ -32,10 +35,13 @@ class DeckInfoRetrieverTest {
     deckInfoRetriever.setDeck(TEST_RESOURCE.getDeck());
 
     // when
-    RepetitionInterval smallestInterval = deckInfoRetriever.getGreatestInterval();
+    RepetitionInterval greatestInterval = deckInfoRetriever.getGreatestInterval();
 
     // then
-    assertEquals(243 * 24 * 60, smallestInterval.getCurrent().toMinutes());
+    long expectedMinutes = TEST_RESOURCE.getFlashcardMocks().getWithGreatestInterval()
+        .getInterval().getCurrent().toMinutes();
+    long actualMinutes = greatestInterval.getCurrent().toMinutes();
+    assertEquals(expectedMinutes, actualMinutes);
   }
 
   @Test
@@ -48,7 +54,12 @@ class DeckInfoRetrieverTest {
     LocalDateTime lastAdditionTime = deckInfoRetriever.getLastAddition();
 
     // then
-    assertEquals(TEST_RESOURCE.getLastAddedFlashcard().getCreatedTime(), lastAdditionTime);
-    assertNotEquals(lastAdditionTime, TEST_RESOURCE.getFirstAddedFlashcard().getCreatedTime());
+    LocalDateTime expectedLastAdditionTime = TEST_RESOURCE.getFlashcardMocks().getLastAdded()
+        .getCreatedTime();
+    LocalDateTime expectedFirstAdditionTime = TEST_RESOURCE.getFlashcardMocks().getFirstAdded()
+        .getCreatedTime();
+
+    assertEquals(expectedLastAdditionTime, lastAdditionTime);
+    assertNotEquals(expectedFirstAdditionTime, lastAdditionTime);
   }
 }

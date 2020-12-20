@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FlashcardMocksData {
+public class FlashcardMocks {
 
   private Collection<Flashcard> all;
 
@@ -18,4 +18,8 @@ public class FlashcardMocksData {
   private Flashcard firstAdded;
 
   private Flashcard lastAdded;
+
+  private Flashcard withSmallestInterval;
+
+  private Flashcard withGreatestInterval;
 }

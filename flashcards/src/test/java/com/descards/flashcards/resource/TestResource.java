@@ -27,7 +27,7 @@ public class TestResource extends ExternalResource {
 
   private ApplicationUser user;
 
-  private FlashcardMocksData flashcardMocksData;
+  private FlashcardMocks flashcardMocks = new FlashcardMocks();
 
   public TestResource() {
     createMockUser();
@@ -62,33 +62,34 @@ public class TestResource extends ExternalResource {
     Flashcard flashcard4 = flashcardFactory.getObject("Conquest of Granada – date", "1492");
     Flashcard flashcard5 = flashcardFactory.getObject("Peace of Augsburg – date", "1555");
 
-    flashcard1.getInterval().setCurrent(Duration.ofDays(4));
-    flashcard2.getInterval().setCurrent(Duration.ofDays(14));
-    flashcard3.getInterval().setCurrent(Duration.ofDays(59));
+    flashcard1.getInterval().setCurrent(Duration.ofHours(59));
+    flashcard2.getInterval().setCurrent(Duration.ofDays(253));
+    flashcard3.getInterval().setCurrent(Duration.ofDays(4));
     flashcard4.getInterval().setCurrent(Duration.ofMinutes(25));
-    flashcard5.getInterval().setCurrent(Duration.ofDays(243));
+    flashcard5.getInterval().setCurrent(Duration.ofDays(14));
+    flashcardMocks.setWithSmallestInterval(flashcard4);
+    flashcardMocks.setWithGreatestInterval(flashcard2);
 
     flashcard1.setCreatedTime(LocalDateTime.now().minusMinutes(10));
     flashcard5.setCreatedTime(LocalDateTime.now().plusMinutes(10));
-    flashcardMocksData.setLastAdded(flashcard5);
-    flashcardMocksData.setFirstAdded(flashcard1);
-
-    flashcardMocksData.setRandom(flashcardMocksData.getAll().stream().findAny().orElse(flashcard1));
+    flashcardMocks.setLastAdded(flashcard5);
+    flashcardMocks.setFirstAdded(flashcard1);
 
     Set<Flashcard> allFlashcards = Stream
         .of(flashcard1, flashcard2, flashcard3, flashcard4, flashcard5)
         .collect(Collectors.toSet());
-    flashcardMocksData.setAll(allFlashcards);
+    flashcardMocks.setAll(allFlashcards);
+    flashcardMocks.setRandom(allFlashcards.stream().findAny().orElse(flashcard1));
 
     addFlashcardsToDeck();
   }
 
   void addFlashcardsToDeck() {
     AtomicLong index = new AtomicLong();
-    flashcardMocksData.getAll().forEach(card -> {
+    flashcardMocks.getAll().forEach(card -> {
       card.setDeck(deck);
       card.setId(index.incrementAndGet());
     });
-    deck.getCards().addAll(flashcardMocksData.getAll());
+    deck.getCards().addAll(flashcardMocks.getAll());
   }
 }
