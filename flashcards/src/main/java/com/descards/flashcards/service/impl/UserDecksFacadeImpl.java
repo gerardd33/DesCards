@@ -8,15 +8,11 @@ import com.descards.flashcards.repository.DeckRepository;
 import com.descards.flashcards.repository.FlashcardRepository;
 import com.descards.flashcards.service.facade.UserDecksFacade;
 import com.descards.flashcards.util.api.mapper.DeckDtoMapper;
-import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.support.AbstractPlatformTransactionManager;
-
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
