@@ -27,7 +27,7 @@ More information about the functionality, architecture and flow of the applicati
 
 *Please keep in mind that the application is still an early version and work in progress. The basic functionality is available, but there are still major bugs and issues to be fixed, improvements to be made as well as new features to be added in the near future.*
 
-To run it locally, first make sure you have Docker installed. Once you do this, clone this repository and enter the *DesCards* folder:
+To run it locally, first make sure you have ``docker`` and ``docker-compose`` installed and the [Docker daemon running](https://docs.docker.com/config/daemon/systemd/#start-manually). Once you do this, clone this repository and enter the *DesCards* folder:
 
 ```
 git clone https://github.com/gerardd33/DesCards
