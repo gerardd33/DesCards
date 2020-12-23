@@ -1,7 +1,7 @@
 FROM python:3.7-slim as base
 
 RUN pip install flask
-RUN pip install pyjwt
+RUN pip install pyjwt==1.7.1
 RUN pip install psycopg2-binary
 RUN pip install cerberus
 RUN pip install bcrypt
