@@ -2,11 +2,11 @@ version: "3.4"
 
 services:
   front-server:
-    build: 
+    build:
       context: ./front
       target: prod
-#   volumes:
-#     - ./front/:/usr/src/app/
+      #volumes:
+      #- ./front/:/usr/src/app/
     ports:
       - 5000:5000
     stop_signal: SIGINT
