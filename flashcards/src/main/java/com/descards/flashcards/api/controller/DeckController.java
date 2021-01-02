@@ -16,7 +16,7 @@ import java.util.Set;
 @RequestMapping("/deck")
 public class DeckController {
 
-	DeckFacade deckFacade;
+	private final DeckFacade deckFacade;
 
 	@GetMapping("/{deckId}")
 	ResponseEntity<?> getCardPortion(@PathVariable long deckId, @RequestBody FlashcardPortionRequestDto requestDto) {

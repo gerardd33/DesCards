@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class CategoryController {
 
-	CategoryFacade categoryFacade;
+	private final CategoryFacade categoryFacade;
 
 	@GetMapping("/categories")
 	ResponseEntity<?> getAllCategories() {

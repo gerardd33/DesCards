@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user-decks")
 public class UserDecksController {
 
-	UserDecksFacade userDecksFacade;
+	private final UserDecksFacade userDecksFacade;
 
 	@GetMapping("/{userId}")
 	ResponseEntity<?> getDeckList(@PathVariable long userId) {
