@@ -15,7 +15,7 @@ import java.util.stream.StreamSupport;
 @AllArgsConstructor
 public class CategoryFacadeImpl implements CategoryFacade {
 
-	CategoryRepository categoryRepository;
+	private final CategoryRepository categoryRepository;
 
 	@Override
 	public List<CategoryDto> getAllCategories() {

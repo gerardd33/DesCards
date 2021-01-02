@@ -18,11 +18,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserDecksFacadeImpl implements UserDecksFacade {
 
-	ApplicationUserRepository applicationUserRepository;
+	private final ApplicationUserRepository applicationUserRepository;
 
-	DeckRepository deckRepository;
+	private final DeckRepository deckRepository;
 
-	FlashcardRepository flashcardRepository;
+	private final FlashcardRepository flashcardRepository;
 
 	@Override
 	public List<DeckDto> getDeckList(long userId) {

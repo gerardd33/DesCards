@@ -29,11 +29,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class DeckFacadeImpl implements DeckFacade {
 
-	DeckRepository deckRepository;
+	private final DeckRepository deckRepository;
 
-	FlashcardRepository flashcardRepository;
+	private final FlashcardRepository flashcardRepository;
 
-	DeckInfoRetriever deckInfoRetriever;
+	private final DeckInfoRetriever deckInfoRetriever;
 
 	@Override
 	public List<FlashcardDto> getCardPortion(long deckId, FlashcardPortionRequestDto requestDto) {
