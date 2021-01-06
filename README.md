@@ -50,4 +50,5 @@ If you have run DesCards locally and don't need it anymore, remember to clean up
 sudo docker rm $(docker ps -aq --filter "name=descards*")
 sudo docker rmi $(docker images -q "descards*")
 sudo docker image prune
+sudo docker network prune
 ```
