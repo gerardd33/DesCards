@@ -30,7 +30,7 @@ More information about the functionality, architecture and flow of the applicati
 To run it locally, first make sure you have ``docker`` and ``docker-compose`` installed and the [Docker daemon running](https://docs.docker.com/config/daemon/systemd/#start-manually). Once you do this, clone this repository and enter the *DesCards* folder:
 
 ```
-git clone https://github.com/gerardd33/DesCards
+git clone https://github.com/gerardd33/DesCards.git
 cd DesCards
 ```
 
