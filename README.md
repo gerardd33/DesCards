@@ -1,6 +1,6 @@
 # DesCards – flashcard generator
 
-Microservice application for fast and easy automatic generation of flashcards to optimise learning of important facts. Supports creating flashcards automatically and manually, maintaining own flashcard libraries, SRS reviewing and exporting to third-party applications like Anki. Deployed in a Kubernetes cluster on Google Cloud.
+Microservice application for fast and easy automatic generation of flashcards to optimize learning of important facts. Supports creating flashcards automatically and manually, maintaining own flashcard libraries, SRS reviewing and exporting to third-party applications like Anki. Deployed in a Kubernetes cluster on Google Cloud.
 
 More information about the functionality, architecture and flow of the application is available in DesCards.pdf.
 
